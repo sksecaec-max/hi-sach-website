@@ -1,0 +1,8 @@
+# robots.txt — Hi-Sach
+# Placeholder: allow all crawlers. Update the Sitemap URL to your
+# production domain before going live.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://hi-sach.in/sitemap.xml

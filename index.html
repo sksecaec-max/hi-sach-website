@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#05070D" />
+
+  <!-- Primary SEO -->
+  <title>Hi-Sach | Technology Support, Web &amp; App Development</title>
+  <meta name="description" content="Hi-Sach provides technology support, web development, mobile app development, automation and custom digital solutions for businesses and organizations." />
+  <meta name="author" content="Hi-Sach" />
+  <meta name="keywords" content="Hi-Sach, technology support, web development, web applications, mobile app development, business automation, AI integration, software solutions, technical consulting" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://hi-sach.in/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hi-Sach" />
+  <meta property="og:title" content="Hi-Sach | Technology That Makes Your Business Smarter" />
+  <meta property="og:description" content="Technology support, modern web &amp; app development, automation and custom software solutions." />
+  <meta property="og:url" content="https://hi-sach.in/" />
+  <meta property="og:image" content="https://hi-sach.in/og-image.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hi-Sach | Technology That Makes Your Business Smarter" />
+  <meta name="twitter:description" content="Technology support, modern web &amp; app development, automation and custom software solutions." />
+  <meta name="twitter:image" content="https://hi-sach.in/og-image.png" />
+
+  <!-- Favicon: H/S circuit monogram (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><defs><linearGradient id='g' x1='0' y1='0' x2='48' y2='48' gradientUnits='userSpaceOnUse'><stop stop-color='%2322D3EE'/><stop offset='1' stop-color='%238B5CF6'/></linearGradient></defs><rect x='4' y='4' width='40' height='40' rx='11' fill='%23080B12' stroke='url(%23g)' stroke-width='2.5'/><g fill='none' stroke='url(%23g)' stroke-width='3' stroke-linecap='round'><path d='M17 14V34'/><path d='M31 14V34'/><path d='M31 18C22 18 22 24 24 24C26 24 26 30 17 30'/></g></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ============================================================
+       LOADING SCREEN
+       ============================================================ -->
+  <div id="loader" class="loader" role="status" aria-live="polite" aria-label="Loading Hi-Sach">
+    <div class="loader__inner">
+      <svg class="loader__logo" viewBox="0 0 48 48" width="72" height="72" aria-hidden="true">
+        <defs><linearGradient id="lg-loader" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+        <rect x="4" y="4" width="40" height="40" rx="12" fill="none" stroke="url(#lg-loader)" stroke-width="2"/>
+        <g fill="none" stroke="url(#lg-loader)" stroke-width="3" stroke-linecap="round">
+          <path d="M17 14V34"/><path d="M31 14V34"/><path d="M31 18C22 18 22 24 24 24C26 24 26 30 17 30"/>
+        </g>
+      </svg>
+      <div class="loader__title">HI-SACH</div>
+      <div class="loader__msg">INITIALIZING DIGITAL EXPERIENCE<span class="loader__dots" aria-hidden="true"></span></div>
+      <div class="loader__track"><span class="loader__fill"></span></div>
+    </div>
+  </div>
+
+  <!-- Custom cursor (desktop pointer devices only; activated by JS) -->
+  <div class="cursor cursor--dot" aria-hidden="true"></div>
+  <div class="cursor cursor--ring" aria-hidden="true"></div>
+
+  <!-- Accessibility: skip straight to main content -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================================================
+       HEADER / STICKY NAVIGATION
+       ============================================================ -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+      <!-- Brand / logo: H+S circuit monogram -->
+      <a class="brand" href="#home" aria-label="Hi-Sach — home">
+        <svg class="brand__mark" viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
+          <defs><linearGradient id="lg-brand" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+          <rect x="4" y="4" width="40" height="40" rx="12" fill="rgba(255,255,255,.02)" stroke="url(#lg-brand)" stroke-width="2"/>
+          <g fill="none" stroke="url(#lg-brand)" stroke-width="3" stroke-linecap="round">
+            <path d="M17 14V34"/><path d="M31 14V34"/><path d="M31 18C22 18 22 24 24 24C26 24 26 30 17 30"/>
+          </g>
+          <g fill="#22D3EE"><circle cx="17" cy="14" r="1.7"/><circle cx="31" cy="34" r="1.7"/></g>
+        </svg>
+        <span class="brand__name">Hi<span class="brand__sep">-</span>Sach</span>
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a href="#home" class="nav__link is-active">Home</a></li>
+          <li><a href="#services" class="nav__link">Services</a></li>
+          <li><a href="#solutions" class="nav__link">Solutions</a></li>
+          <li><a href="#process" class="nav__link">Process</a></li>
+          <li><a href="#projects" class="nav__link">Projects</a></li>
+          <li><a href="#about" class="nav__link">About</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="#contact" class="btn btn--primary btn--sm" data-magnetic>Get Started</a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile navigation overlay -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a href="#home" class="mobile-menu__link">Home</a>
+      <a href="#services" class="mobile-menu__link">Services</a>
+      <a href="#solutions" class="mobile-menu__link">Solutions</a>
+      <a href="#process" class="mobile-menu__link">Process</a>
+      <a href="#projects" class="mobile-menu__link">Projects</a>
+      <a href="#about" class="mobile-menu__link">About</a>
+      <a href="#contact" class="mobile-menu__link">Contact</a>
+      <a href="#contact" class="btn btn--primary mobile-menu__cta">Get Started</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section id="home" class="hero section">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+        <span class="grid-glow"></span>
+      </div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="eyebrow" data-reveal><span class="eyebrow__dot"></span>Technology Solutions &amp; Digital Development Studio</p>
+          <h1 class="hero__title" data-reveal>Technology That Makes Your <span class="grad-text">Business Smarter.</span></h1>
+          <p class="hero__lead" data-reveal>Tech Support. Websites. Apps. Digital Solutions.</p>
+          <p class="hero__desc" data-reveal>Hi-Sach helps businesses transform ideas into reliable digital products through technology support, modern web development, mobile applications and smart software solutions.</p>
+          <div class="hero__actions" data-reveal>
+            <a href="#contact" class="btn btn--primary" data-magnetic>Start a Project</a>
+            <a href="#services" class="btn btn--ghost" data-magnetic>Explore Services</a>
+          </div>
+          <ul class="hero__meta" data-reveal>
+            <li><strong>End-to-end</strong> delivery</li>
+            <li><strong>Modern</strong> engineering</li>
+            <li><strong>Long-term</strong> support</li>
+          </ul>
+        </div>
+
+        <!-- Interactive 3D scene (Three.js). Falls back gracefully without WebGL. -->
+        <div class="hero__visual" data-reveal>
+          <div class="scene" id="heroScene" role="img" aria-label="Interactive 3D visualization of a connected technology network">
+            <canvas class="scene__canvas" id="heroCanvas"></canvas>
+            <div class="scene__fallback" aria-hidden="true"><span class="scene__fallback-orb"></span></div>
+            <!-- Floating capability labels -->
+            <span class="chip chip--float" style="--x:8%;  --y:15%; --d:0s">WEB</span>
+            <span class="chip chip--float" style="--x:73%; --y:7%;  --d:.6s">APP</span>
+            <span class="chip chip--float" style="--x:85%; --y:50%; --d:1.2s">AI</span>
+            <span class="chip chip--float" style="--x:60%; --y:83%; --d:.9s">CLOUD</span>
+            <span class="chip chip--float" style="--x:3%;  --y:64%; --d:1.5s">SUPPORT</span>
+            <span class="chip chip--float" style="--x:30%; --y:93%; --d:.3s">API</span>
+            <!-- Floating glass HUD panel -->
+            <div class="hud" aria-hidden="true">
+              <span class="hud__dot"></span>
+              <div class="hud__text"><b>System status</b><small>All services operational</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <a href="#intro" class="scroll-cue" aria-label="Scroll to content">
+        <span class="scroll-cue__mouse"><span></span></span>
+        <span class="scroll-cue__txt">Scroll</span>
+      </a>
+    </section>
+
+    <!-- ============================================================
+         TRUST / INTRODUCTION
+         ============================================================ -->
+    <section id="intro" class="intro section">
+      <div class="container intro__inner">
+        <div class="intro__lead">
+          <h2 class="h2" data-reveal>Technology should solve problems — <span class="grad-text">not create them.</span></h2>
+          <p class="muted" data-reveal>At Hi-Sach, we combine technical expertise, modern design and practical problem-solving to build digital solutions that actually work.</p>
+        </div>
+        <div class="intro__stats">
+          <article class="stat glass tilt" data-reveal>
+            <span class="stat__no">01</span>
+            <span class="stat__num" data-count="6" data-suffix="+">0</span>
+            <p class="stat__label">Digital Solutions</p>
+            <p class="stat__sub">Support, web, apps, automation, AI &amp; custom software.</p>
+          </article>
+          <article class="stat glass tilt" data-reveal>
+            <span class="stat__no">02</span>
+            <span class="stat__num" data-count="100" data-suffix="%">0</span>
+            <p class="stat__label">Web &amp; App Development</p>
+            <p class="stat__sub">Responsive, modern and built to scale.</p>
+          </article>
+          <article class="stat glass tilt" data-reveal>
+            <span class="stat__no">03</span>
+            <span class="stat__num" data-count="24" data-suffix="/7">0</span>
+            <p class="stat__label">Technical Support</p>
+            <p class="stat__sub">Ongoing help that grows with your business.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES
+         ============================================================ -->
+    <section id="services" class="services section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Services</p>
+          <h2 class="h2">What We Do</h2>
+          <p class="muted">From solving technical problems to building complete digital products.</p>
+        </header>
+        <div class="services__grid">
+
+          <article class="service glass" data-reveal data-tilt>
+            <div class="service__top">
+              <span class="service__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4.5" height="6.5" rx="1.6"/><rect x="17" y="13" width="4.5" height="6.5" rx="1.6"/><path d="M20 19.5a4 4 0 0 1-4 3h-2.2"/></svg></span>
+              <span class="service__no">01</span>
+            </div>
+            <h3 class="service__title">Technical Support</h3>
+            <p class="service__desc">Practical technology support to diagnose problems, optimize systems and keep your digital operations running smoothly.</p>
+            <a href="#contact" class="service__link"><span>Learn more</span><svg class="arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="service__glow" aria-hidden="true"></span>
+          </article>
+
+          <article class="service glass" data-reveal data-tilt>
+            <div class="service__top">
+              <span class="service__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5.5l-3 13"/></svg></span>
+              <span class="service__no">02</span>
+            </div>
+            <h3 class="service__title">Web Development</h3>
+            <p class="service__desc">Fast, responsive and modern websites designed around your business goals.</p>
+            <a href="#contact" class="service__link"><span>Learn more</span><svg class="arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="service__glow" aria-hidden="true"></span>
+          </article>
+
+          <article class="service glass" data-reveal data-tilt>
+            <div class="service__top">
+              <span class="service__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.4"/><path d="M3 9h18M8 9v11"/></svg></span>
+              <span class="service__no">03</span>
+            </div>
+            <h3 class="service__title">Web Applications</h3>
+            <p class="service__desc">Custom web applications that turn complex business processes into simple digital workflows.</p>
+            <a href="#contact" class="service__link"><span>Learn more</span><svg class="arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="service__glow" aria-hidden="true"></span>
+          </article>
+
+          <article class="service glass" data-reveal data-tilt>
+            <div class="service__top">
+              <span class="service__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></svg></span>
+              <span class="service__no">04</span>
+            </div>
+            <h3 class="service__title">Mobile App Development</h3>
+            <p class="service__desc">Modern Android and iOS applications designed for performance, usability and scalability.</p>
+            <a href="#contact" class="service__link"><span>Learn more</span><svg class="arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="service__glow" aria-hidden="true"></span>
+          </article>
+
+          <article class="service glass" data-reveal data-tilt>
+            <div class="service__top">
+              <span class="service__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.9 1.9M16.7 16.7l1.9 1.9M18.6 5.4l-1.9 1.9M7.3 16.7l-1.9 1.9"/></svg></span>
+              <span class="service__no">05</span>
+            </div>
+            <h3 class="service__title">Business Automation</h3>
+            <p class="service__desc">Automate repetitive tasks and streamline business operations with smart digital solutions.</p>
+            <a href="#contact" class="service__link"><span>Learn more</span><svg class="arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="service__glow" aria-hidden="true"></span>
+          </article>
+
+          <article class="service glass" data-reveal data-tilt>
+            <div class="service__top">
+              <span class="service__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2.4"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></span>
+              <span class="service__no">06</span>
+            </div>
+            <h3 class="service__title">AI &amp; Technology Solutions</h3>
+            <p class="service__desc">Explore practical AI integrations, intelligent tools and emerging technologies for your business.</p>
+            <a href="#contact" class="service__link"><span>Learn more</span><svg class="arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="service__glow" aria-hidden="true"></span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INTERACTIVE 3D — DIGITAL ECOSYSTEM
+         ============================================================ -->
+    <section class="ecosystem section">
+      <div class="container ecosystem__inner">
+        <header class="section-head section-head--center" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Digital Architecture</p>
+          <h2 class="h2">We Build Digital Experiences</h2>
+          <p class="muted">A connected ecosystem of web, apps, cloud and intelligence — drag to explore it.</p>
+        </header>
+        <div class="ecosystem__stage" data-reveal>
+          <div class="scene scene--eco" id="ecoScene" role="img" aria-label="Rotating 3D diagram of an interconnected digital ecosystem. Drag to rotate.">
+            <canvas class="scene__canvas" id="ecoCanvas"></canvas>
+            <div class="scene__fallback" aria-hidden="true"><span class="scene__fallback-orb scene__fallback-orb--violet"></span></div>
+          </div>
+          <ul class="ecosystem__legend">
+            <li>WEB</li><li>APP</li><li>CLOUD</li><li>AI</li><li>API</li><li>DATA</li><li>SECURITY</li>
+          </ul>
+          <p class="ecosystem__hint" aria-hidden="true">Drag to rotate · auto-rotates when idle</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SOLUTIONS
+         ============================================================ -->
+    <section id="solutions" class="solutions section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Solutions</p>
+          <h2 class="h2">Solutions Built Around <span class="grad-text">Your Needs</span></h2>
+          <p class="muted">Whatever stage your business is at, there is a path that fits.</p>
+        </header>
+        <div class="solutions__grid">
+
+          <article class="solution glass" data-reveal>
+            <div class="solution__head">
+              <span class="solution__tier">START</span>
+              <span class="solution__for">For individuals &amp; small businesses</span>
+            </div>
+            <ul class="solution__list">
+              <li>Business websites</li>
+              <li>Landing pages</li>
+              <li>Portfolio websites</li>
+              <li>Basic technical support</li>
+            </ul>
+          </article>
+
+          <article class="solution glass" data-reveal>
+            <div class="solution__head">
+              <span class="solution__tier">GROW</span>
+              <span class="solution__for">For growing businesses</span>
+            </div>
+            <ul class="solution__list">
+              <li>Web applications</li>
+              <li>Mobile applications</li>
+              <li>Business automation</li>
+              <li>Database solutions</li>
+            </ul>
+          </article>
+
+          <article class="solution glass" data-reveal>
+            <div class="solution__head">
+              <span class="solution__tier">SCALE</span>
+              <span class="solution__for">For organizations</span>
+            </div>
+            <ul class="solution__list">
+              <li>Custom software</li>
+              <li>Enterprise applications</li>
+              <li>System integration</li>
+              <li>Technical consulting</li>
+            </ul>
+          </article>
+
+          <article class="solution glass solution--custom" data-reveal>
+            <div class="solution__head">
+              <span class="solution__tier">CUSTOM</span>
+              <span class="solution__for">For unique requirements</span>
+            </div>
+            <p class="solution__text">Tell us what you need. We design the technology around your problem.</p>
+            <a href="#contact" class="link-arrow" data-magnetic>Discuss Your Requirement <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROCESS
+         ============================================================ -->
+    <section id="process" class="process section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Process</p>
+          <h2 class="h2">How We Work</h2>
+          <p class="muted">A clear, collaborative path from first conversation to launch — and beyond.</p>
+        </header>
+        <ol class="timeline">
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__no">01</span>
+            <div class="timeline__body glass">
+              <h3 class="timeline__title">Discover</h3>
+              <p>Understand your business and technical requirements.</p>
+            </div>
+          </li>
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__no">02</span>
+            <div class="timeline__body glass">
+              <h3 class="timeline__title">Plan</h3>
+              <p>Define architecture, features and the development roadmap.</p>
+            </div>
+          </li>
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__no">03</span>
+            <div class="timeline__body glass">
+              <h3 class="timeline__title">Design</h3>
+              <p>Create the user experience and technical design.</p>
+            </div>
+          </li>
+
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__no">04</span>
+            <div class="timeline__body glass">
+              <h3 class="timeline__title">Build</h3>
+              <p>Develop, integrate and test the solution.</p>
+            </div>
+          </li>
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__no">05</span>
+            <div class="timeline__body glass">
+              <h3 class="timeline__title">Launch</h3>
+              <p>Deploy, monitor and provide ongoing support.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS / WORK SHOWCASE (representative concepts)
+         ============================================================ -->
+    <section id="projects" class="projects section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Work</p>
+          <h2 class="h2">Ideas Into <span class="grad-text">Digital Products</span></h2>
+          <p class="muted">Representative concepts that show how we approach real product challenges.</p>
+        </header>
+        <div class="projects__grid">
+
+          <article class="project glass" data-reveal data-tilt>
+            <div class="project__visual" aria-hidden="true">
+              <div class="mock mock--browser">
+                <div class="mock__bar"><span></span><span></span><span></span><i class="mock__url"></i></div>
+                <div class="mock__screen">
+                  <div class="mock__block mock__block--hero"></div>
+                  <div class="mock__cols"><span></span><span></span><span></span></div>
+                  <div class="mock__lines"><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="project__meta">
+              <span class="project__cat">Web Development</span>
+              <h3 class="project__title">Business Website</h3>
+              <p class="project__desc">A fast, responsive marketing site that turns visitors into enquiries.</p>
+              <a href="#contact" class="project__btn">View Project <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project glass" data-reveal data-tilt>
+            <div class="project__visual" aria-hidden="true">
+              <div class="mock mock--browser">
+                <div class="mock__bar"><span></span><span></span><span></span><i class="mock__url"></i></div>
+                <div class="mock__shop">
+                  <div class="mock__prod"></div><div class="mock__prod"></div>
+                  <div class="mock__prod"></div><div class="mock__prod"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project__meta">
+              <span class="project__cat">Web Application</span>
+              <h3 class="project__title">E-Commerce Platform</h3>
+              <p class="project__desc">Product catalogue, cart and checkout flows built for conversion.</p>
+              <a href="#contact" class="project__btn">View Project <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project glass" data-reveal data-tilt>
+            <div class="project__visual" aria-hidden="true">
+              <div class="mock mock--phone">
+                <span class="mock__notch"></span>
+                <div class="mock__app">
+                  <div class="mock__appbar"></div>
+                  <div class="mock__tiles"><span></span><span></span><span></span><span></span></div>
+                  <div class="mock__pill"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project__meta">
+              <span class="project__cat">Mobile App</span>
+              <h3 class="project__title">Mobile Application</h3>
+              <p class="project__desc">A cross-platform app with a clean, tap-friendly interface.</p>
+              <a href="#contact" class="project__btn">View Project <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project glass" data-reveal data-tilt>
+            <div class="project__visual" aria-hidden="true">
+              <div class="mock mock--dash">
+                <div class="mock__stats"><span></span><span></span><span></span></div>
+                <div class="mock__chart"><i style="--h:45%"></i><i style="--h:72%"></i><i style="--h:58%"></i><i style="--h:90%"></i><i style="--h:66%"></i><i style="--h:80%"></i></div>
+              </div>
+            </div>
+            <div class="project__meta">
+              <span class="project__cat">Web Application</span>
+              <h3 class="project__title">Business Dashboard</h3>
+              <p class="project__desc">Live metrics and reporting inside a floating glass panel.</p>
+              <a href="#contact" class="project__btn">View Project <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project glass" data-reveal data-tilt>
+            <div class="project__visual" aria-hidden="true">
+              <div class="mock mock--flow">
+                <svg viewBox="0 0 240 140" class="flow" preserveAspectRatio="xMidYMid meet">
+                  <defs><linearGradient id="fl-1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+                  <path d="M46 34H120V70H194" fill="none" stroke="url(#fl-1)" stroke-width="2" opacity=".55"/>
+                  <path d="M46 106H120V70" fill="none" stroke="url(#fl-1)" stroke-width="2" opacity=".55"/>
+                  <g fill="#0B0F18" stroke="url(#fl-1)" stroke-width="2">
+                    <circle cx="46" cy="34" r="10"/><circle cx="46" cy="106" r="10"/><circle cx="120" cy="70" r="12"/><circle cx="194" cy="70" r="10"/>
+                  </g>
+                  <circle r="3.5" fill="#22D3EE"><animateMotion dur="3.2s" repeatCount="indefinite" path="M46 34H120V70H194"/></circle>
+                </svg>
+              </div>
+            </div>
+            <div class="project__meta">
+              <span class="project__cat">Automation</span>
+              <h3 class="project__title">Automation System</h3>
+              <p class="project__desc">Connected steps that remove repetitive manual work.</p>
+              <a href="#contact" class="project__btn">View Project <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project glass" data-reveal data-tilt>
+            <div class="project__visual" aria-hidden="true">
+              <div class="mock mock--ai">
+                <span class="mock__orb"></span>
+                <span class="bubble bubble--in"></span>
+                <span class="bubble bubble--out"></span>
+                <span class="bubble bubble--type"><i></i><i></i><i></i></span>
+              </div>
+            </div>
+            <div class="project__meta">
+              <span class="project__cat">AI &amp; Technology</span>
+              <h3 class="project__title">AI Assistant</h3>
+              <p class="project__desc">A conversational helper wired into your tools and data.</p>
+              <a href="#contact" class="project__btn">View Project <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TECHNOLOGY
+         ============================================================ -->
+    <section class="tech section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Stack</p>
+          <h2 class="h2">Technologies We Can Work With</h2>
+          <p class="muted">A practical, evolving toolkit chosen to fit each project — not buzzwords.</p>
+        </header>
+        <div class="tech__grid">
+          <article class="tech__cat glass" data-reveal>
+            <h3 class="tech__cat-title">Frontend</h3>
+            <ul class="tech__tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li></ul>
+          </article>
+          <article class="tech__cat glass" data-reveal>
+            <h3 class="tech__cat-title">Backend</h3>
+            <ul class="tech__tags"><li>Node.js</li><li>Python</li><li>APIs</li><li>Databases</li></ul>
+          </article>
+          <article class="tech__cat glass" data-reveal>
+            <h3 class="tech__cat-title">Mobile</h3>
+            <ul class="tech__tags"><li>Android</li><li>iOS</li><li>Cross-platform</li></ul>
+          </article>
+          <article class="tech__cat glass" data-reveal>
+            <h3 class="tech__cat-title">Cloud &amp; DevOps</h3>
+            <ul class="tech__tags"><li>Cloud</li><li>Git</li><li>CI/CD</li><li>Deployment</li></ul>
+          </article>
+          <article class="tech__cat glass" data-reveal>
+            <h3 class="tech__cat-title">AI</h3>
+            <ul class="tech__tags"><li>LLMs</li><li>AI APIs</li><li>Automation</li><li>Intelligent apps</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHY HI-SACH
+         ============================================================ -->
+    <section class="why section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Why us</p>
+          <h2 class="h2">Why Choose Hi-Sach?</h2>
+          <p class="muted">Practical technology, delivered with care — and support that lasts.</p>
+        </header>
+        <div class="why__grid">
+          <article class="why__card glass" data-reveal>
+            <span class="why__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></span>
+            <h3 class="why__title">Technology With Purpose</h3>
+            <p>We focus on solving real business problems rather than adding unnecessary complexity.</p>
+          </article>
+          <article class="why__card glass" data-reveal>
+            <span class="why__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l5-5 4 4 7-8"/><path d="M16 6h5v5"/></svg></span>
+            <h3 class="why__title">Modern &amp; Scalable</h3>
+            <p>Solutions are designed with future growth in mind.</p>
+          </article>
+          <article class="why__card glass" data-reveal>
+            <span class="why__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15a3 3 0 0 1-3 3H9l-5 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/></svg></span>
+            <h3 class="why__title">Transparent Communication</h3>
+            <p>Clear communication throughout the development process.</p>
+          </article>
+          <article class="why__card glass" data-reveal>
+            <span class="why__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9.3 12l1.9 1.9 3.5-3.9"/></svg></span>
+            <h3 class="why__title">Long-Term Support</h3>
+            <p>We don't disappear after deployment. Technical support can continue as your business grows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT
+         ============================================================ -->
+    <section id="about" class="about section">
+      <div class="about__circuit" aria-hidden="true">
+        <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" class="circuit">
+          <defs><linearGradient id="lg-circuit" x1="0" y1="0" x2="600" y2="400" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+          <g fill="none" stroke="url(#lg-circuit)" stroke-width="1.4" opacity=".45">
+            <path d="M20 60H160V140H300"/><path d="M300 140V240H460V320"/>
+            <path d="M60 340H220V220"/><path d="M420 40V120H540"/>
+          </g>
+          <g class="circuit__nodes" fill="#22D3EE"><circle cx="160" cy="60" r="3"/><circle cx="300" cy="140" r="3"/><circle cx="460" cy="320" r="3"/><circle cx="220" cy="220" r="3"/><circle cx="540" cy="120" r="3"/></g>
+        </svg>
+      </div>
+      <div class="container about__inner">
+        <div class="about__left" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>About</p>
+          <h2 class="about__wordmark">Hi-Sach</h2>
+          <p class="about__tagline">Building practical technology for real-world problems.</p>
+          <p class="about__kicker">Technology. Creativity. Problem Solving.</p>
+        </div>
+        <div class="about__right" data-reveal>
+          <p class="about__text">Hi-Sach is a technology-focused digital solutions business helping individuals, startups and organizations turn ideas into functional digital products.</p>
+          <p class="about__label">What we do</p>
+          <ul class="about__tags">
+            <li>Technical Support</li>
+            <li>Web Development</li>
+            <li>App Development</li>
+            <li>Automation</li>
+            <li>AI Solutions</li>
+            <li>Custom Software</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA  (contact details are placeholders — replace before launch)
+         ============================================================ -->
+    <section class="cta section">
+      <div class="cta__scene" aria-hidden="true">
+        <canvas id="ctaCanvas"></canvas>
+        <div class="scene__fallback"><span class="scene__fallback-orb"></span></div>
+      </div>
+      <div class="container cta__inner">
+        <h2 class="cta__title" data-reveal>Have an Idea? <span class="grad-text">Let's Build It.</span></h2>
+        <p class="cta__text" data-reveal>Whether you need technical support, a new website, a mobile application or a custom digital solution, let's discuss your requirement.</p>
+        <div class="cta__actions" data-reveal>
+          <a href="#contact" class="btn btn--primary" data-magnetic>Start a Conversation</a>
+          <a href="#contact" class="btn btn--ghost" data-magnetic>Request a Quote</a>
+        </div>
+        <div class="cta__cards" data-reveal>
+          <a class="contact-card glass" href="mailto:hello@hi-sach.com">
+            <span class="contact-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <span class="contact-card__label">Email</span>
+            <span class="contact-card__val">hello@hi-sach.com</span>
+          </a>
+          <a class="contact-card glass" href="tel:+91XXXXXXXXXX">
+            <span class="contact-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h3l1.5 5-2 1.5a11 11 0 0 0 5 5l1.5-2 5 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5a2 2 0 0 1 2-2z"/></svg></span>
+            <span class="contact-card__label">Phone</span>
+            <span class="contact-card__val">+91 XXXXX XXXXX</span>
+          </a>
+          <a class="contact-card glass" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">
+            <span class="contact-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M8.6 8.6c0 4 2.8 6.8 6.8 6.8.8 0 1.3-.9.8-1.5l-1.2-1.1-1.5.8a5 5 0 0 1-2.9-2.9l.8-1.5-1.1-1.2c-.6-.5-1.5-.1-1.5.8z"/></svg></span>
+            <span class="contact-card__label">WhatsApp</span>
+            <span class="contact-card__val">+91 XXXXX XXXXX</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT FORM  (front-end only — see NOTE to connect a backend)
+         ============================================================ -->
+    <section id="contact" class="contact section">
+      <div class="container contact__inner">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Contact</p>
+          <h2 class="h2">Start a Conversation</h2>
+          <p class="muted">Tell us about your requirement and we'll get back to you with next steps.</p>
+        </header>
+        <!-- NOTE: This form is front-end only. Connect it to your backend / form service
+             inside handleSubmit() in script.js (search for "BACKEND INTEGRATION POINT"). -->
+        <form class="contact-form glass" id="contactForm" novalidate data-reveal>
+          <div class="field">
+            <label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="cf-name-err" placeholder="Your name" />
+            <small class="field__error" id="cf-name-err" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="cf-email-err" placeholder="you@company.com" />
+            <small class="field__error" id="cf-email-err" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="cf-phone">Phone</label>
+            <input id="cf-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="cf-phone-err" placeholder="+91 XXXXX XXXXX" />
+            <small class="field__error" id="cf-phone-err" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="cf-company">Company / Organization</label>
+            <input id="cf-company" name="company" type="text" autocomplete="organization" placeholder="Optional" />
+          </div>
+
+          <div class="field">
+            <label for="cf-service">Service Required <span class="req" aria-hidden="true">*</span></label>
+            <div class="select">
+              <select id="cf-service" name="service" required aria-required="true" aria-describedby="cf-service-err">
+                <option value="" disabled selected>Choose a service…</option>
+                <option>Technical Support</option>
+                <option>Website Development</option>
+                <option>Web Application</option>
+                <option>Mobile App</option>
+                <option>Automation</option>
+                <option>AI Solution</option>
+                <option>Custom Software</option>
+                <option>Other</option>
+              </select>
+              <svg class="select__chevron" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <small class="field__error" id="cf-service-err" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="cf-budget">Project Budget</label>
+            <div class="select">
+              <select id="cf-budget" name="budget">
+                <option value="" disabled selected>Select a range (optional)</option>
+                <option>Not sure yet</option>
+                <option>Under ₹25,000</option>
+                <option>₹25,000 – ₹1,00,000</option>
+                <option>₹1,00,000 – ₹5,00,000</option>
+                <option>₹5,00,000+</option>
+              </select>
+              <svg class="select__chevron" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="field field--full">
+            <label for="cf-message">Message <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="cf-message" name="message" rows="4" required aria-required="true" aria-describedby="cf-message-err" placeholder="Tell us a little about your project or problem…"></textarea>
+            <small class="field__error" id="cf-message-err" aria-live="polite"></small>
+          </div>
+          <div class="field field--full contact-form__submit">
+            <button type="submit" class="btn btn--primary" data-magnetic>Send Request</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="footer__glow" aria-hidden="true"></div>
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="brand" href="#home" aria-label="Hi-Sach — home">
+          <svg class="brand__mark" viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
+            <defs><linearGradient id="lg-foot" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+            <rect x="4" y="4" width="40" height="40" rx="12" fill="rgba(255,255,255,.02)" stroke="url(#lg-foot)" stroke-width="2"/>
+            <g fill="none" stroke="url(#lg-foot)" stroke-width="3" stroke-linecap="round"><path d="M17 14V34"/><path d="M31 14V34"/><path d="M31 18C22 18 22 24 24 24C26 24 26 30 17 30"/></g>
+          </svg>
+          <span class="brand__name">Hi<span class="brand__sep">-</span>Sach</span>
+        </a>
+        <p class="footer__tag">Technology that works for you.</p>
+      </div>
+      <nav class="footer__col" aria-label="Company">
+        <h3 class="footer__h">Company</h3>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-label="Services">
+        <h3 class="footer__h">Services</h3>
+        <ul>
+          <li><a href="#services">Tech Support</a></li>
+          <li><a href="#services">Web Development</a></li>
+          <li><a href="#services">App Development</a></li>
+          <li><a href="#services">Automation</a></li>
+          <li><a href="#services">AI Solutions</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Resources">
+        <h3 class="footer__h">Resources</h3>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </nav>
+      <div class="footer__social">
+        <h3 class="footer__h">Follow</h3>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Hi-Sach on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H19v-5.4c0-1.29 0-2.95-1.8-2.95s-2.07 1.4-2.07 2.85V21H11z"/></svg></a>
+          <a href="#" class="social" aria-label="Hi-Sach on Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="social" aria-label="Hi-Sach on YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.3-.42-4.88a2.55 2.55 0 0 0-1.8-1.8C19.2 5 12 5 12 5s-7.2 0-8.78.32a2.55 2.55 0 0 0-1.8 1.8C1 8.7 1 12 1 12s0 3.3.42 4.88c.24.87.93 1.56 1.8 1.8C4.8 19 12 19 12 19s7.2 0 8.78-.32a2.55 2.55 0 0 0 1.8-1.8C23 15.3 23 12 23 12zM9.75 15.02V8.98L15.5 12z"/></svg></a>
+          <a href="#" class="social" aria-label="Hi-Sach on GitHub"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" class="social" aria-label="Hi-Sach on X"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3l-7.1 8.1L22 21h-6.5l-4.4-5.7L5.9 21H2.9l7.6-8.7L2 3h6.6l4 5.3L17.5 3zm-1.1 16h1.7L7.7 4.8H5.9z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2026 Hi-Sach. All rights reserved.</p>
+      <p class="footer__made">Designed &amp; engineered by Hi-Sach.</p>
+    </div>
+  </footer>
+
+  <!-- Three.js (classic global build so the page also works from file://). -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <!-- Site logic (loader, nav, cursor, reveals, counters, 3D scenes, form). -->
+  <script src="script.js" defer></script>
+</body>
+</html>
