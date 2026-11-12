@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+  <defs>
+    <!-- Soft shadow -->
+    <radialGradient id="sinkShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0284C7" stop-opacity="0.25"/>
+      <stop offset="65%" stop-color="#0284C7" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Shiny Chrome Faucet -->
+    <linearGradient id="chromeTap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CBD5E1"/>
+      <stop offset="35%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+    <!-- Water stream -->
+    <linearGradient id="waterStream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#7DD3FC" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.95"/>
+    </linearGradient>
+    <!-- Skin tone for hands -->
+    <linearGradient id="skinHands" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="50%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <!-- Soap Bubbles -->
+    <radialGradient id="soapBubble" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#E0F2FE"/>
+      <stop offset="85%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="120" cy="216" rx="80" ry="14" fill="url(#sinkShadow)"/>
+
+  <!-- Faucet Pipe & Spout -->
+  <path d="M120 18 L120 48 C120 62, 116 72, 98 72 L86 72" fill="none" stroke="url(#chromeTap)" stroke-width="16" stroke-linecap="round"/>
+  <!-- Faucet Head Spout -->
+  <rect x="76" y="66" width="14" height="12" rx="3" fill="#64748B"/>
+
+  <!-- Clear Fresh Water Flowing -->
+  <path d="M79 78 C81 100, 83 130, 85 152" fill="none" stroke="url(#waterStream)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M85 78 C87 100, 89 130, 91 152" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- Two Hands Washing (Gentle clasp gesture under water) -->
+  <!-- Left Hand -->
+  <g transform="translate(68, 140) rotate(-15)">
+    <rect x="0" y="0" width="46" height="32" rx="14" fill="#FBBF24"/>
+    <!-- Fingers -->
+    <rect x="36" y="2" width="24" height="7" rx="3.5" fill="#FBBF24"/>
+    <rect x="38" y="10" width="25" height="7" rx="3.5" fill="#F59E0B"/>
+    <rect x="36" y="18" width="23" height="7" rx="3.5" fill="#D97706"/>
+    <rect x="30" y="26" width="20" height="6" rx="3" fill="#B45309"/>
+  </g>
+  <!-- Right Hand -->
+  <g transform="translate(142, 138) rotate(165) scale(1, -1)">
+    <rect x="0" y="0" width="46" height="32" rx="14" fill="#F59E0B"/>
+    <rect x="36" y="2" width="24" height="7" rx="3.5" fill="#FBBF24"/>
+    <rect x="38" y="10" width="25" height="7" rx="3.5" fill="#FBBF24"/>
+    <rect x="36" y="18" width="23" height="7" rx="3.5" fill="#F59E0B"/>
+    <rect x="30" y="26" width="20" height="6" rx="3" fill="#D97706"/>
+  </g>
+
+  <!-- Foamy Soap Bubbles -->
+  <circle cx="106" cy="148" r="14" fill="url(#soapBubble)" opacity="0.92"/>
+  <circle cx="126" cy="142" r="12" fill="url(#soapBubble)" opacity="0.88"/>
+  <circle cx="118" cy="162" r="16" fill="url(#soapBubble)" opacity="0.95"/>
+  <circle cx="94" cy="158" r="10" fill="url(#soapBubble)" opacity="0.85"/>
+  <circle cx="138" cy="158" r="11" fill="url(#soapBubble)" opacity="0.85"/>
+  <!-- Little Floating Foam Dots -->
+  <circle cx="88" cy="138" r="5" fill="#FFFFFF"/>
+  <circle cx="146" cy="136" r="6" fill="#FFFFFF"/>
+  <circle cx="112" cy="132" r="4.5" fill="#FFFFFF"/>
+  <circle cx="128" cy="180" r="5" fill="url(#soapBubble)"/>
+  <circle cx="98" cy="178" r="4" fill="url(#soapBubble)"/>
+
+  <!-- Sparkling Clean Stars -->
+  <path d="M168 88 L170 94 L176 96 L170 98 L168 104 L166 98 L160 96 L166 94 Z" fill="#FACC15"/>
+  <path d="M54 116 L55 120 L59 121 L55 122 L54 126 L53 122 L49 121 L53 120 Z" fill="#38BDF8"/>
+</svg>

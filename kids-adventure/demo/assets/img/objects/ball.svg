@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft Realistic Ground Drop Shadow -->
+    <radialGradient id="ballGroundShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F172A" stop-opacity="0.38"/>
+      <stop offset="60%" stop-color="#0F172A" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 3D Volumetric Sphere Shading -->
+    <radialGradient id="soccerSphere" cx="32%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="45%" stop-color="#F8FAFC"/>
+      <stop offset="75%" stop-color="#CBD5E1"/>
+      <stop offset="92%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </radialGradient>
+
+    <!-- Rich Leather Black Patch Gradient -->
+    <radialGradient id="leatherPatch" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="45%" stop-color="#1E293B"/>
+      <stop offset="85%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Contact Shadow -->
+  <ellipse cx="100" cy="180" rx="72" ry="15" fill="url(#ballGroundShadow)"/>
+
+  <!-- Main Ball Sphere Base -->
+  <circle cx="100" cy="105" r="64" fill="url(#soccerSphere)"/>
+
+  <!-- ================= Classic Curved Soccer Leather Panels ================= -->
+  <!-- Center Curved Pentagon -->
+  <path d="M100 80 Q112 88 120 94 Q116 108 112 118 Q100 118 88 118 Q84 108 80 94 Q88 88 100 80 Z"
+        fill="url(#leatherPatch)"/>
+
+  <!-- Connecting Stitched Leather Patches conforming to sphere curvature -->
+  <!-- Top Patch -->
+  <path d="M100 45 Q114 54 116 62 Q108 72 100 80 Q92 72 84 62 Q86 54 100 45 Z"
+        fill="url(#leatherPatch)"/>
+
+  <!-- Top-Right Patch -->
+  <path d="M120 94 Q138 88 152 90 Q158 104 156 112 Q142 120 134 118 Q126 108 120 94 Z"
+        fill="url(#leatherPatch)"/>
+
+  <!-- Bottom-Right Patch -->
+  <path d="M112 118 Q134 118 140 126 Q136 142 126 150 Q112 152 104 146 Q108 132 112 118 Z"
+        fill="url(#leatherPatch)"/>
+
+  <!-- Bottom-Left Patch -->
+  <path d="M88 118 Q92 132 96 146 Q88 152 74 150 Q64 142 60 126 Q66 118 88 118 Z"
+        fill="url(#leatherPatch)"/>
+
+  <!-- Top-Left Patch -->
+  <path d="M80 94 Q74 108 66 118 Q58 120 44 112 Q42 104 48 90 Q62 88 80 94 Z"
+        fill="url(#leatherPatch)"/>
+
+  <!-- Realistic Stitched Panel Seams (Embossed Grooves) -->
+  <g stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.65">
+    <path d="M100 80 L100 62"/>
+    <path d="M120 94 L134 102"/>
+    <path d="M112 118 L122 132"/>
+    <path d="M88 118 L78 132"/>
+    <path d="M80 94 L66 102"/>
+    <!-- Outer perimeter connecting seams -->
+    <path d="M116 62 Q136 74 152 90"/>
+    <path d="M84 62 Q64 74 48 90"/>
+    <path d="M156 112 Q148 120 140 126"/>
+    <path d="M44 112 Q52 120 60 126"/>
+    <path d="M104 146 Q100 156 96 146"/>
+  </g>
+
+  <!-- Embossed Panel Highlight Grooves -->
+  <g stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.4">
+    <path d="M99 81 L99 63"/>
+    <path d="M119 95 L133 103"/>
+    <path d="M111 119 L121 133"/>
+    <path d="M87 119 L77 133"/>
+    <path d="M79 95 L65 103"/>
+  </g>
+
+  <!-- Spherical Specular Light Glare (Glossy Synthetic Leather Sheen) -->
+  <ellipse cx="78" cy="72" rx="26" ry="16" transform="rotate(-32 78 72)" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="90" cy="68" r="6" fill="#FFFFFF" opacity="0.6"/>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="van-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="van-top" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F5F5F5"/>
+      <stop offset="100%" stop-color="#E0E0E0"/>
+    </linearGradient>
+    <linearGradient id="van-bottom" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="40%" stop-color="#00ACC1"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <linearGradient id="van-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="40%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#26C6DA"/>
+    </linearGradient>
+    <radialGradient id="wheel-rim" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#CFD8DC"/>
+      <stop offset="100%" stop-color="#78909C"/>
+    </radialGradient>
+    <radialGradient id="wheel-tire" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#616161"/>
+      <stop offset="60%" stop-color="#37474F"/>
+      <stop offset="100%" stop-color="#212121"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="100" cy="178" rx="80" ry="14" fill="url(#van-shadow)"/>
+
+  <!-- Van Upper Body (White vintage camper roof) -->
+  <path d="M30 102 C30 75 48 64 80 64 L152 64 C165 64 175 75 178 92 L180 102 Z" fill="url(#van-top)"/>
+
+  <!-- Van Lower Body (Teal/Cyan 3D) -->
+  <path d="M22 102 L180 102 L182 144 C182 152 176 155 168 155 L156 155 C156 142 142 142 142 155 L82 155 C82 142 68 142 68 155 L32 155 C24 155 20 148 20 140 Z" fill="url(#van-bottom)"/>
+
+  <!-- Front Windshield & Side Windows -->
+  <!-- Front windshield slanted -->
+  <path d="M36 100 L44 74 C50 72 65 72 68 74 L62 100 Z" fill="url(#van-glass)"/>
+  <path d="M40 94 L46 76" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Side Window 1 -->
+  <rect x="74" y="74" width="34" height="26" rx="4" fill="url(#van-glass)"/>
+  <line x1="78" y1="78" x2="88" y2="78" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Side Window 2 -->
+  <rect x="114" y="74" width="34" height="26" rx="4" fill="url(#van-glass)"/>
+  <!-- Rear Window corner -->
+  <path d="M154 74 L168 74 C172 74 174 82 175 90 L154 90 Z" fill="url(#van-glass)"/>
+
+  <!-- Chrome Trim Beltline -->
+  <rect x="20" y="100" width="162" height="4" fill="#ECEFF1"/>
+
+  <!-- Front Headlight (Round vintage chrome) -->
+  <circle cx="25" cy="116" r="8" fill="#ECEFF1"/>
+  <circle cx="25" cy="116" r="6" fill="#FFF59D"/>
+  <circle cx="24" cy="114" r="2" fill="#FFFFFF"/>
+
+  <!-- Front Bumper & Rear Bumper -->
+  <rect x="15" y="142" width="12" height="10" rx="4" fill="#CFD8DC"/>
+  <rect x="176" y="142" width="10" height="10" rx="4" fill="#CFD8DC"/>
+
+  <!-- Door line & handle -->
+  <line x1="108" y1="74" x2="108" y2="152" stroke="#006064" stroke-width="2"/>
+  <rect x="100" y="112" width="6" height="3" rx="1.5" fill="#ECEFF1"/>
+
+  <!-- Wheels (Front & Rear) -->
+  <!-- Front Wheel (Left) -->
+  <g transform="translate(55, 154)">
+    <circle cx="0" cy="0" r="18" fill="url(#wheel-tire)"/>
+    <circle cx="0" cy="0" r="11" fill="url(#wheel-rim)"/>
+    <circle cx="0" cy="0" r="4.5" fill="#B0BEC5"/>
+  </g>
+
+  <!-- Rear Wheel (Right) -->
+  <g transform="translate(149, 154)">
+    <circle cx="0" cy="0" r="18" fill="url(#wheel-tire)"/>
+    <circle cx="0" cy="0" r="11" fill="url(#wheel-rim)"/>
+    <circle cx="0" cy="0" r="4.5" fill="#B0BEC5"/>
+  </g>
+</svg>

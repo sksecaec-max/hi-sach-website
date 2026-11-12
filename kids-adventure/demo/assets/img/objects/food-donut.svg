@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Kido original: a sprinkled donut (What's That Animal? silly decoy — "a donut") -->
+  <defs>
+    <radialGradient id="dn-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.38"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="dn-dough" cx="40%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFE0A8"/>
+      <stop offset="50%" stop-color="#E5A55C"/>
+      <stop offset="100%" stop-color="#A9672A"/>
+    </radialGradient>
+    <radialGradient id="dn-icing" cx="38%" cy="28%" r="75%">
+      <stop offset="0%" stop-color="#FFC1DA"/>
+      <stop offset="45%" stop-color="#FF77AA"/>
+      <stop offset="100%" stop-color="#D23C7C"/>
+    </radialGradient>
+    <linearGradient id="dn-spec" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="176" rx="64" ry="12" fill="url(#dn-shadow)"/>
+
+  <!-- Dough ring -->
+  <ellipse cx="100" cy="112" rx="74" ry="56" fill="url(#dn-dough)"/>
+  <!-- Icing with drips -->
+  <path d="M30 104 C30 70 64 50 100 50 C136 50 170 70 170 104 C170 116 162 122 156 118 C150 132 140 128 138 120 C126 132 112 126 110 118 C98 130 84 128 82 118 C70 130 56 126 56 116 C46 126 30 120 30 104 Z" fill="url(#dn-icing)"/>
+  <!-- Hole -->
+  <ellipse cx="100" cy="98" rx="22" ry="14" fill="#A9672A"/>
+  <ellipse cx="100" cy="101" rx="18" ry="10" fill="#7A4518"/>
+
+  <!-- Sprinkles -->
+  <rect x="58" y="78" width="12" height="4" rx="2" fill="#FFEB3B" transform="rotate(-30 58 78)"/>
+  <rect x="82" y="64" width="12" height="4" rx="2" fill="#4FC3F7" transform="rotate(20 82 64)"/>
+  <rect x="118" y="66" width="12" height="4" rx="2" fill="#FFFFFF" transform="rotate(-15 118 66)"/>
+  <rect x="140" y="86" width="12" height="4" rx="2" fill="#81C784" transform="rotate(35 140 86)"/>
+  <rect x="128" y="104" width="12" height="4" rx="2" fill="#FFEB3B" transform="rotate(-40 128 104)"/>
+  <rect x="64" y="104" width="12" height="4" rx="2" fill="#7E57C2" transform="rotate(25 64 104)"/>
+  <rect x="96" y="76" width="10" height="4" rx="2" fill="#FF7043" transform="rotate(5 96 76)"/>
+
+  <!-- Gloss -->
+  <ellipse cx="66" cy="70" rx="18" ry="6" transform="rotate(-25 66 70)" fill="url(#dn-spec)"/>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft 3D Floor Shadow -->
+    <radialGradient id="cylFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2E1065" stop-opacity="0.36"/>
+      <stop offset="65%" stop-color="#2E1065" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#2E1065" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Top Cap Gradient (Sunlit) -->
+    <linearGradient id="cylTopCap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E8FF"/>
+      <stop offset="45%" stop-color="#D8B4FE"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+
+    <!-- Lateral Tubular Shading (Cylinder Lighting) -->
+    <linearGradient id="cylLateralGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9333EA"/>
+      <stop offset="22%" stop-color="#C084FC"/>
+      <stop offset="38%" stop-color="#FAF5FF"/>
+      <stop offset="65%" stop-color="#7E22CE"/>
+      <stop offset="85%" stop-color="#581C87"/>
+      <stop offset="100%" stop-color="#6B21A8"/>
+    </linearGradient>
+
+    <!-- Vertical Specular Glare Strip -->
+    <linearGradient id="cylGlare" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="176" rx="64" ry="14" fill="url(#cylFloorShadow)"/>
+
+  <!-- Cylinder Lateral Body -->
+  <path d="M 42 54
+           L 42 146
+           A 58 18 0 0 0 158 146
+           L 158 54
+           Z"
+        fill="url(#cylLateralGrad)"/>
+
+  <!-- Specular Glare Vertical Line -->
+  <rect x="76" y="54" width="8" height="92" fill="url(#cylGlare)"/>
+
+  <!-- Cylinder Top Cap (Elliptical Lid) -->
+  <ellipse cx="100" cy="54" rx="58" ry="18" fill="url(#cylTopCap)"/>
+
+  <!-- Top Rim Bevel Highlight -->
+  <ellipse cx="100" cy="54" rx="58" ry="18" fill="none" stroke="#FAF5FF" stroke-width="2" opacity="0.85"/>
+
+  <!-- Bottom Rim Outline Accent -->
+  <path d="M 42 146 A 58 18 0 0 0 158 146" fill="none" stroke="#581C87" stroke-width="2"/>
+</svg>

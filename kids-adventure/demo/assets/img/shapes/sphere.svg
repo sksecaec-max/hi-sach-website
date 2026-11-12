@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft 3D Floor Shadow -->
+    <radialGradient id="sphereFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#431407" stop-opacity="0.38"/>
+      <stop offset="65%" stop-color="#431407" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#431407" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 3D Volumetric Spherical Radial Shading -->
+    <radialGradient id="sphereShading" cx="35%" cy="32%" r="68%" fx="28%" fy="26%">
+      <stop offset="0%" stop-color="#FFEDD5"/>
+      <stop offset="18%" stop-color="#FDBA74"/>
+      <stop offset="50%" stop-color="#EA580C"/>
+      <stop offset="82%" stop-color="#9A3412"/>
+      <stop offset="100%" stop-color="#431407"/>
+    </radialGradient>
+
+    <!-- Ambient Rim Reflection (Bounce Light from floor) -->
+    <radialGradient id="sphereRimBounce" cx="65%" cy="85%" r="45%">
+      <stop offset="0%" stop-color="#FED7AA" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#9A3412" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Crisp Specular Glare -->
+    <radialGradient id="sphereGloss" cx="32%" cy="26%" r="22%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Contact Shadow -->
+  <ellipse cx="100" cy="178" rx="60" ry="14" fill="url(#sphereFloorShadow)"/>
+
+  <!-- 3D Volumetric Sphere Body -->
+  <circle cx="100" cy="98" r="72" fill="url(#sphereShading)"/>
+
+  <!-- Subtle Rim Light -->
+  <circle cx="100" cy="98" r="72" fill="url(#sphereRimBounce)"/>
+
+  <!-- Specular Light Spot -->
+  <circle cx="100" cy="98" r="72" fill="url(#sphereGloss)"/>
+
+  <!-- Extra Fine Glare Highlight -->
+  <circle cx="76" cy="74" r="5" fill="#FFFFFF" opacity="0.85"/>
+  <circle cx="86" cy="64" r="2.5" fill="#FFFFFF" opacity="0.95"/>
+</svg>

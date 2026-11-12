@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft Table Ground Shadow -->
+    <radialGradient id="matchShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.36"/>
+      <stop offset="70%" stop-color="#1E293B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Left Puzzle Tile: Royal Indigo -->
+    <linearGradient id="puzzleLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="40%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#3730A3"/>
+    </linearGradient>
+
+    <!-- Right Puzzle Tile: Golden Amber -->
+    <linearGradient id="puzzleRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="40%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <!-- Gold Foil Letter Gradient -->
+    <linearGradient id="goldLetter" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="35%" stop-color="#FEF08A"/>
+      <stop offset="75%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </linearGradient>
+
+    <!-- Apple Gradient -->
+    <radialGradient id="appleBody" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#F87171"/>
+      <stop offset="40%" stop-color="#EF4444"/>
+      <stop offset="85%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Contact Shadow -->
+  <ellipse cx="100" cy="176" rx="84" ry="16" fill="url(#matchShadow)"/>
+
+  <!-- ================= Left Puzzle Piece (Letter A) ================= -->
+  <g id="left-piece" transform="translate(18, 38)">
+    <!-- Base Jigsaw Shape: 70x96 with an outward circular tab on the right edge -->
+    <!-- Drop Shadow of Left Piece -->
+    <path d="M12 8 L70 8 L70 38 C79 32, 92 42, 92 56 C92 70, 79 80, 70 74 L70 104 L12 104 C6 104, 2 100, 2 94 L2 18 C2 12, 6 8, 12 8 Z" fill="#1E1B4B" opacity="0.3" transform="translate(0, 4)"/>
+
+    <!-- Left Piece Tile Body -->
+    <path d="M12 8 L70 8 L70 38 C79 32, 92 42, 92 56 C92 70, 79 80, 70 74 L70 104 L12 104 C6 104, 2 100, 2 94 L2 18 C2 12, 6 8, 12 8 Z" fill="url(#puzzleLeft)"/>
+
+    <!-- 3D Bevel Top & Left Highlight -->
+    <path d="M3 94 L3 18 C3 13, 7 9, 12 9 L69 9" fill="none" stroke="#A5B4FC" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- 3D Bevel Bottom & Tab Shadow -->
+    <path d="M3 94 C3 99, 7 103, 12 103 L69 103" fill="none" stroke="#1E1B4B" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Embossed Capital Letter 'A' -->
+    <text x="36" y="60" font-family="'Fredoka', 'Baloo 2', sans-serif" font-weight="900" font-size="44" fill="#1E1B4B" opacity="0.4" text-anchor="middle" dominant-baseline="central" transform="translate(0, 2)">A</text>
+    <text x="36" y="60" font-family="'Fredoka', 'Baloo 2', sans-serif" font-weight="900" font-size="44" fill="url(#goldLetter)" text-anchor="middle" dominant-baseline="central">A</text>
+  </g>
+
+  <!-- ================= Right Puzzle Piece (Matching 'a' + Apple) ================= -->
+  <g id="right-piece" transform="translate(90, 38)">
+    <!-- Base Jigsaw Shape: 70x96 with an inward circular socket on the left edge -->
+    <!-- Drop Shadow of Right Piece -->
+    <path d="M0 8 L60 8 C66 8, 70 12, 70 18 L70 94 C70 100, 66 104, 60 104 L0 104 L0 74 C11 80, 22 70, 22 56 C22 42, 11 32, 0 38 Z" fill="#451A03" opacity="0.25" transform="translate(0, 4)"/>
+
+    <!-- Right Piece Tile Body -->
+    <path d="M0 8 L60 8 C66 8, 70 12, 70 18 L70 94 C70 100, 66 104, 60 104 L0 104 L0 74 C11 80, 22 70, 22 56 C22 42, 11 32, 0 38 Z" fill="url(#puzzleRight)"/>
+
+    <!-- 3D Bevel Top & Right Highlight -->
+    <path d="M1 9 L59 9 C64 9, 69 13, 69 18 L69 94" fill="none" stroke="#FDE68A" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Socket Bevel Shadow -->
+    <path d="M0 38 C11 32, 21 42, 21 56 C21 70, 11 80, 0 74" fill="none" stroke="#78350F" stroke-width="2"/>
+
+    <!-- Embossed Lowercase Letter 'a' -->
+    <text x="44" y="44" font-family="'Fredoka', 'Baloo 2', sans-serif" font-weight="900" font-size="34" fill="#78350F" opacity="0.3" text-anchor="middle" dominant-baseline="central" transform="translate(0, 2)">a</text>
+    <text x="44" y="44" font-family="'Fredoka', 'Baloo 2', sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">a</text>
+
+    <!-- Mini 3D Juicy Apple underneath 'a' -->
+    <g transform="translate(44, 76)">
+      <!-- Leaf & Stem -->
+      <path d="M0 -12 Q3 -17 8 -16" fill="none" stroke="#78350F" stroke-width="2" stroke-linecap="round"/>
+      <path d="M2 -14 Q10 -20 12 -13 Q8 -10 2 -14 Z" fill="#22C55E"/>
+      <!-- Apple Fruit Body -->
+      <path d="M-12 -6 C-14 -12, -4 -13, 0 -8 C4 -13, 14 -12, 12 -6 C14 4, 8 13, 0 13 C-8 13, -14 4, -12 -6 Z" fill="url(#appleBody)"/>
+      <ellipse cx="-4" cy="-4" rx="3" ry="5" fill="#FFFFFF" opacity="0.45" transform="rotate(-20 -4 -4)"/>
+    </g>
+  </g>
+
+  <!-- ================= Golden Interlocking Magic Spark ================= -->
+  <g transform="translate(99, 94)">
+    <circle cx="0" cy="0" r="14" fill="#FEF08A" opacity="0.4"/>
+    <!-- 4-Point Star -->
+    <path d="M0 -14 L3 -4 L13 0 L3 4 L0 14 L-3 4 L-13 0 L-3 -4 Z" fill="#FDE047"/>
+    <circle cx="0" cy="0" r="3" fill="#FFFFFF"/>
+    <!-- Small sparks -->
+    <circle cx="-10" cy="-10" r="1.5" fill="#FEF08A"/>
+    <circle cx="10" cy="-8" r="2" fill="#FEF08A"/>
+    <circle cx="9" cy="11" r="1.5" fill="#FEF08A"/>
+  </g>
+</svg>

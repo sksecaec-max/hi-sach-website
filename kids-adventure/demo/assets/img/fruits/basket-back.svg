@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <!-- Interior Depth Gradient -->
+    <radialGradient id="basketInterior" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4A2608"/>
+      <stop offset="60%" stop-color="#331A05"/>
+      <stop offset="100%" stop-color="#1F0F03"/>
+    </radialGradient>
+
+    <!-- Handle Gradient -->
+    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C28A4A"/>
+      <stop offset="25%" stop-color="#E5AF6E"/>
+      <stop offset="60%" stop-color="#A1692E"/>
+      <stop offset="100%" stop-color="#6B3F11"/>
+    </linearGradient>
+
+    <!-- Back Rim Gradient -->
+    <linearGradient id="backRimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#804D1B"/>
+      <stop offset="100%" stop-color="#4A2608"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Big Arched Woven Handle in Back -->
+  <path d="M40 90 C40 10, 200 10, 200 90" stroke="url(#handleGrad)" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M40 90 C40 10, 200 10, 200 90" stroke="#FFF2D6" stroke-width="2.5" fill="none" stroke-dasharray="8 6" opacity="0.45"/>
+
+  <!-- Basket Interior Cavity (Dark void where fruits sit) -->
+  <path d="M30 80 C28 80, 52 165, 65 170 C85 174, 155 174, 175 170 C188 165, 212 80, 210 80 Z" fill="url(#basketInterior)"/>
+
+  <!-- Back Rim Lip -->
+  <ellipse cx="120" cy="80" rx="90" ry="22" fill="url(#backRimGrad)"/>
+  <ellipse cx="120" cy="81" rx="84" ry="18" fill="#2E1604"/>
+</svg>

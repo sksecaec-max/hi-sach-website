@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Kido original: a burger (What's That Animal? silly decoy — "a burger") -->
+  <defs>
+    <radialGradient id="bg-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-bun" cx="38%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#FFD9A0"/>
+      <stop offset="45%" stop-color="#E9A04F"/>
+      <stop offset="100%" stop-color="#B0652A"/>
+    </radialGradient>
+    <linearGradient id="bg-bun-low" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0B266"/>
+      <stop offset="100%" stop-color="#B0652A"/>
+    </linearGradient>
+    <linearGradient id="bg-patty" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8A4B2A"/>
+      <stop offset="100%" stop-color="#4A2412"/>
+    </linearGradient>
+    <linearGradient id="bg-spec" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="182" rx="66" ry="11" fill="url(#bg-shadow)"/>
+
+  <!-- Bottom bun -->
+  <path d="M38 146 L162 146 Q164 170 140 172 L60 172 Q36 170 38 146 Z" fill="url(#bg-bun-low)"/>
+  <!-- Patty -->
+  <rect x="32" y="126" width="136" height="24" rx="12" fill="url(#bg-patty)"/>
+  <!-- Cheese -->
+  <path d="M34 122 L166 122 L158 134 L138 128 L124 142 L108 128 L88 140 L74 128 L52 136 Z" fill="#FFC93C"/>
+  <!-- Lettuce -->
+  <path d="M30 116 Q40 106 50 116 Q60 106 70 116 Q80 106 90 116 Q100 106 110 116 Q120 106 130 116 Q140 106 150 116 Q160 106 170 116 L170 124 L30 124 Z" fill="#66BB6A"/>
+  <!-- Tomato -->
+  <rect x="42" y="108" width="116" height="10" rx="5" fill="#E53935"/>
+  <!-- Top bun -->
+  <path d="M34 108 C34 62 66 40 100 40 C134 40 166 62 166 108 Z" fill="url(#bg-bun)"/>
+  <!-- Sesame seeds -->
+  <ellipse cx="72" cy="66" rx="4.5" ry="2.6" fill="#FFF6DD" transform="rotate(-20 72 66)"/>
+  <ellipse cx="96" cy="56" rx="4.5" ry="2.6" fill="#FFF6DD" transform="rotate(10 96 56)"/>
+  <ellipse cx="122" cy="62" rx="4.5" ry="2.6" fill="#FFF6DD" transform="rotate(25 122 62)"/>
+  <ellipse cx="86" cy="80" rx="4.5" ry="2.6" fill="#FFF6DD" transform="rotate(-10 86 80)"/>
+  <ellipse cx="112" cy="84" rx="4.5" ry="2.6" fill="#FFF6DD" transform="rotate(15 112 84)"/>
+  <ellipse cx="140" cy="80" rx="4.5" ry="2.6" fill="#FFF6DD" transform="rotate(-25 140 80)"/>
+  <!-- Gloss -->
+  <ellipse cx="74" cy="58" rx="18" ry="6" transform="rotate(-25 74 58)" fill="url(#bg-spec)"/>
+</svg>

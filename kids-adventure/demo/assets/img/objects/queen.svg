@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="cr-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold-base" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFB300"/>
+      <stop offset="25%" stop-color="#FFF176"/>
+      <stop offset="50%" stop-color="#FFD54F"/>
+      <stop offset="75%" stop-color="#FFA000"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="velvet-cushion" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BA68C8"/>
+      <stop offset="50%" stop-color="#8E24AA"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <radialGradient id="ruby-gem" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="45%" stop-color="#D50000"/>
+      <stop offset="100%" stop-color="#4A0000"/>
+    </radialGradient>
+    <radialGradient id="sapphire-gem" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#82B1FF"/>
+      <stop offset="45%" stop-color="#2979FF"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+    <radialGradient id="emerald-gem" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#B9F6CA"/>
+      <stop offset="45%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </radialGradient>
+    <radialGradient id="pearl-bead" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#B0BEC5"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="100" cy="178" rx="65" ry="14" fill="url(#cr-shadow)"/>
+
+  <!-- Purple Royal Velvet Interior Cushion -->
+  <path d="M52 142 C52 85 148 85 148 142 Z" fill="url(#velvet-cushion)"/>
+  <!-- Velvet fold highlights -->
+  <path d="M85 92 Q90 125 78 144" stroke="#CE93D8" stroke-width="2.5" fill="none" opacity="0.6"/>
+  <path d="M115 92 Q110 125 122 144" stroke="#CE93D8" stroke-width="2.5" fill="none" opacity="0.6"/>
+
+  <!-- Golden Crown Frame / Spikes -->
+  <path d="M42 144 L32 78 L68 108 L100 52 L132 108 L168 78 L158 144 Z" fill="url(#gold-base)"/>
+
+  <!-- Crown Base Band -->
+  <path d="M40 142 C40 134 160 134 160 142 C160 152 40 152 40 142 Z" fill="#FFA000"/>
+  <rect x="42" y="142" width="116" height="18" rx="6" fill="url(#gold-base)"/>
+
+  <!-- Ermine / Pearl base trim -->
+  <ellipse cx="50" cy="151" rx="4" ry="4" fill="url(#pearl-bead)"/>
+  <ellipse cx="70" cy="151" rx="4" ry="4" fill="url(#pearl-bead)"/>
+  <ellipse cx="90" cy="151" rx="4" ry="4" fill="url(#pearl-bead)"/>
+  <ellipse cx="110" cy="151" rx="4" ry="4" fill="url(#pearl-bead)"/>
+  <ellipse cx="130" cy="151" rx="4" ry="4" fill="url(#pearl-bead)"/>
+  <ellipse cx="150" cy="151" rx="4" ry="4" fill="url(#pearl-bead)"/>
+
+  <!-- Large Central Ruby Gemstone -->
+  <polygon points="100,105 112,122 100,138 88,122" fill="url(#ruby-gem)"/>
+  <ellipse cx="97" cy="116" rx="3" ry="2" fill="#FFFFFF" opacity="0.8"/>
+
+  <!-- Flanking Emerald & Sapphire Gemstones -->
+  <circle cx="70" cy="125" r="7.5" fill="url(#sapphire-gem)"/>
+  <ellipse cx="68" cy="122" rx="2" ry="1.5" fill="#FFFFFF" opacity="0.8"/>
+
+  <circle cx="130" cy="125" r="7.5" fill="url(#emerald-gem)"/>
+  <ellipse cx="128" cy="122" rx="2" ry="1.5" fill="#FFFFFF" opacity="0.8"/>
+
+  <!-- Pearls on Peak Tips -->
+  <circle cx="32" cy="78" r="7" fill="url(#pearl-bead)"/>
+  <circle cx="68" cy="108" r="5" fill="url(#pearl-bead)"/>
+  <circle cx="100" cy="52" r="9" fill="url(#pearl-bead)"/>
+  <circle cx="132" cy="108" r="5" fill="url(#pearl-bead)"/>
+  <circle cx="168" cy="78" r="7" fill="url(#pearl-bead)"/>
+
+  <!-- Central Cross on top peak pearl -->
+  <g fill="#FFE082" stroke="#FF8F00" stroke-width="0.8">
+    <rect x="98.5" y="32" width="3" height="13" rx="1"/>
+    <rect x="94" y="36.5" width="12" height="3" rx="1"/>
+  </g>
+
+  <!-- Sparkles -->
+  <path d="M100 48 Q100 42 104 42 Q100 42 100 36 Q100 42 96 42 Q100 42 100 48 Z" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft 3D Floor Shadow -->
+    <radialGradient id="cubeFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F172A" stop-opacity="0.36"/>
+      <stop offset="65%" stop-color="#0F172A" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Top Face (Sunlit Surface) -->
+    <linearGradient id="cubeTop3D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="45%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+
+    <!-- Left Face (Mid Tone) -->
+    <linearGradient id="cubeLeft3D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="70%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#1E40AF"/>
+    </linearGradient>
+
+    <!-- Right Face (Deep Shaded Tone) -->
+    <linearGradient id="cubeRight3D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="60%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Ground Shadow -->
+  <ellipse cx="100" cy="180" rx="66" ry="14" fill="url(#cubeFloorShadow)"/>
+
+  <!-- Left Face -->
+  <polygon points="100,102 32,68 32,136 100,170" fill="url(#cubeLeft3D)"/>
+
+  <!-- Right Face -->
+  <polygon points="100,102 168,68 168,136 100,170" fill="url(#cubeRight3D)"/>
+
+  <!-- Top Face -->
+  <polygon points="100,34 168,68 100,102 32,68" fill="url(#cubeTop3D)"/>
+
+  <!-- Beveled Highlight Ridges -->
+  <polyline points="32,68 100,102 168,68" stroke="#DBEAFE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+  <polyline points="32,68 100,34 168,68" stroke="#E0F2FE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.75"/>
+  <line x1="100" y1="102" x2="100" y2="170" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Corner Specular Dot -->
+  <circle cx="100" cy="102" r="2.8" fill="#FFFFFF"/>
+</svg>

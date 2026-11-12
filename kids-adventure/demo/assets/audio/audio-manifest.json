@@ -1,0 +1,1010 @@
+{
+  "version": 1,
+  "basePath": "assets/audio/",
+  "_readme": "Maps animal/bird keys to local sound files for Kido.AudioManager. Set a key's \"available\" to true ONLY after the real .mp3 has been added AND its license verified in AUDIO-LICENSES.md. Until then the app auto-uses the live Web-Audio synth fallback, so every game already works. Do NOT set commercialUse:true unless the license was actually verified.",
+  "_licenseDoc": "See AUDIO-LICENSES.md (per-file license) and audio-download-required.md (what to download).",
+  "_meta_template": {
+    "source": "Mixkit | Pixabay | ...",
+    "sourceUrl": "",
+    "license": "",
+    "commercialUse": null,
+    "attributionRequired": null
+  },
+  "animals": {
+    "dog": {
+      "name": "Dog",
+      "sound": "animals/dog/dog_bark.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "cat": {
+      "name": "Cat",
+      "sound": "animals/cat/cat_meow.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "lion": {
+      "name": "Lion",
+      "sound": "animals/lion/lion_roar.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "tiger": {
+      "name": "Tiger",
+      "sound": "animals/tiger/tiger_roar.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Tiger Mad.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiger_Mad.ogg",
+        "author": "Bilberryerer",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "elephant": {
+      "name": "Elephant",
+      "sound": "animals/elephant/elephant_trumpet.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "horse": {
+      "name": "Horse",
+      "sound": "animals/horse/horse_neigh.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "cow": {
+      "name": "Cow",
+      "sound": "animals/cow/cow_moo.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "goat": {
+      "name": "Goat",
+      "sound": "animals/goat/goat_bleat.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "sheep": {
+      "name": "Sheep",
+      "sound": "animals/sheep/sheep_baa.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "pig": {
+      "name": "Pig",
+      "sound": "animals/pig/pig_oink.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "chicken": {
+      "name": "Chicken",
+      "sound": "animals/chicken/chicken_cluck.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "hen": {
+      "name": "Hen",
+      "sound": "animals/hen/hen_cluck.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "rooster": {
+      "name": "Rooster",
+      "sound": "animals/rooster/rooster_crow.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "duck": {
+      "name": "Duck",
+      "sound": "animals/duck/duck_quack.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons (XC62258), recordist Jonathon Jongsma",
+        "title": "Mallard duck quacking",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_-_Mallard_XC62258.mp3",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "goose": {
+      "name": "Goose",
+      "sound": "animals/goose/goose_honk.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Red-breasted Goose call (Branta ruficollis).ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red-breasted_Goose_call_(Branta_ruficollis).ogg",
+        "author": "Grégoire Chauvot",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "monkey": {
+      "name": "Monkey",
+      "sound": "animals/monkey/monkey_call.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "frog": {
+      "name": "Frog",
+      "sound": "animals/frog/frog_croak.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Single Frog Croak.oga",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Single_Frog_Croak.oga",
+        "author": "MichaeltheFox8621",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "wolf": {
+      "name": "Wolf",
+      "sound": "animals/wolf/wolf_howl.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Wolf howls.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wolf_howls.ogg",
+        "author": "US National Park Service",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "bear": {
+      "name": "Bear",
+      "sound": "animals/bear/bear_growl.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Bear growl.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bear_growl.ogg",
+        "author": "Shizhao",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "panda": {
+      "name": "Panda",
+      "sound": "animals/panda/panda_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Giant panda twittering.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Giant_panda_twittering.ogg",
+        "author": "Myself (Wikimedia Commons)",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "rabbit": {
+      "name": "Rabbit",
+      "sound": "animals/rabbit/rabbit_squeak.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Rabbit oinks and squeaks.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rabbit_oinks_and_squeaks.wav",
+        "author": "kessir",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "donkey": {
+      "name": "Donkey",
+      "sound": "animals/donkey/donkey_bray.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "camel": {
+      "name": "Camel",
+      "sound": "animals/camel/camel_grunt.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "deer": {
+      "name": "Deer",
+      "sound": "animals/deer/deer_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Hirsch roehrt.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hirsch_roehrt.ogg",
+        "author": "Jugrü",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "giraffe": {
+      "name": "Giraffe",
+      "sound": "animals/giraffe/giraffe_hum.mp3",
+      "available": true,
+      "synth": true,
+      "note": "Known quality limitation: 0.99s acoustic snort burst at -26.7 LUFS (File:Giraffe snort.oga). Natural giraffe vocalizations are low-amplitude; nocturnal 92 Hz hum alternative (File:Giraffe Hum.oga) remains documented for future studio replacement.",
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Giraffe snort.oga",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Giraffe_snort.oga",
+        "author": "Anton Baotic, Florian Sicks and Angela S. Stoeger",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "zebra": {
+      "name": "Zebra",
+      "sound": "animals/zebra/zebra_bray.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Grévys zebra (Sound Effects).ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gr%C3%A9vys_zebra_%28Sound_Effects%29.ogg",
+        "author": "DiegoC472",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "hippo": {
+      "name": "Hippo",
+      "sound": "animals/hippo/hippo_grunt.mp3",
+      "available": false,
+      "synth": false
+    },
+    "rhino": {
+      "name": "Rhino",
+      "sound": "animals/rhino/rhino_grunt.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "snake": {
+      "name": "Snake",
+      "sound": "animals/snake/snake_hiss.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Internet Archive",
+        "title": "SFX Snake Hiss Sound Effect",
+        "sourceUrl": "https://archive.org/details/sfx-snake-hiss-sound-effect",
+        "author": "Archive.org Community",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "crocodile": {
+      "name": "Crocodile",
+      "sound": "animals/crocodile/crocodile_bellow.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Disabled duplicate file (Alligatorbellowedit.ogg is mapped to alligator). Crocodile uses honest acoustic reptile bellow synth fallback until distinct certified recording is added.",
+        "commercialUse": false,
+        "attributionRequired": false
+      }
+    },
+    "alligator": {
+      "name": "Alligator",
+      "sound": "animals/alligator/alligator_bellow.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Alligatorbellowedit.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alligatorbellowedit.ogg",
+        "author": "Borisblue",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "kangaroo": {
+      "name": "Kangaroo",
+      "sound": "animals/kangaroo/kangaroo_chuff.mp3",
+      "available": false,
+      "synth": false
+    },
+    "dolphin": {
+      "name": "Dolphin",
+      "sound": "animals/dolphin/dolphin_calls.mp3",
+      "available": true,
+      "synth": false,
+      "meta": {
+        "source": "Wikimedia Commons (Freesound user felix.blume)",
+        "title": "Dolphins calling underwater, Caribbean Sea - 8 s excerpt, high-passed, loudness-normalised",
+        "license": "Creative Commons CC0 1.0 Universal",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:161691_felixblume_dolphin-screaming-underwater-in-caribbean-sea-mexico.wav",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "whale": {
+      "name": "Whale",
+      "sound": "animals/whale/whale_song.mp3",
+      "available": true,
+      "synth": false,
+      "meta": {
+        "source": "Wikimedia Commons (US National Park Service, Glacier Bay hydrophone)",
+        "title": "Humpback whale moo - 10.5 s excerpt, band-limited, de-noised, loudness-normalised",
+        "license": "Public Domain (US federal government work)",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Humpback_whale_moo.ogg",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "bee": {
+      "name": "Bee",
+      "sound": "animals/bee/bee_buzz.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "fox": {
+      "name": "Fox",
+      "sound": "animals/fox/fox_yip.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Vulpes vulpes, at Henclová, Slovakia XC108315.mp3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vulpes_vulpes,_at_Henclov%C3%A1,_Slovakia_XC108315.mp3",
+        "author": "Alexander Kurthy",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "crow": {
+      "name": "Crow",
+      "sound": "animals/crow/crow_caw.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons (Corvus brachyrhynchos call.ogg), United States Geological Survey",
+        "title": "American crow calls",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Corvus_brachyrhynchos_call.ogg",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "peacock": {
+      "name": "Peacock",
+      "sound": "animals/peacock/peacock_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons (Denver Zoo)",
+        "title": "Indian peafowl display call",
+        "license": "Public Domain (PD-self)",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Peacock_displaying_call_at_Denver_Zoo.ogg",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "grasshopper": {
+      "name": "Grasshopper",
+      "sound": "animals/grasshopper/grasshopper_chirp.mp3",
+      "available": false,
+      "synth": false,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    }
+  },
+  "birds": {
+    "parrot": {
+      "name": "Parrot",
+      "sound": "birds/parrot/parrot_call.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "peacock": {
+      "name": "Peacock",
+      "sound": "birds/peacock/peacock_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons (Denver Zoo)",
+        "title": "Indian peafowl display call",
+        "license": "Public Domain (PD-self)",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Peacock_displaying_call_at_Denver_Zoo.ogg",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "sparrow": {
+      "name": "Sparrow",
+      "sound": "birds/sparrow/sparrow_chirp.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "crow": {
+      "name": "Crow",
+      "sound": "birds/crow/crow_caw.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons (Corvus brachyrhynchos call.ogg), United States Geological Survey",
+        "title": "American crow calls",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Corvus_brachyrhynchos_call.ogg",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "pigeon": {
+      "name": "Pigeon",
+      "sound": "birds/pigeon/pigeon_coo.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "eagle": {
+      "name": "Eagle",
+      "sound": "birds/eagle/eagle_screech.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "owl": {
+      "name": "Owl",
+      "sound": "birds/owl/owl_hoot.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "duck": {
+      "name": "Duck",
+      "sound": "birds/duck/duck_quack.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons (XC62258), recordist Jonathon Jongsma",
+        "title": "Mallard duck quacking",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_-_Mallard_XC62258.mp3",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "swan": {
+      "name": "Swan",
+      "sound": "birds/swan/swan_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Black Swan call (Cygnus atratus).ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Swan_call_(Cygnus_atratus).ogg",
+        "author": "Marc Anderson",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "penguin": {
+      "name": "Penguin",
+      "sound": "birds/penguin/penguin_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Little Penguin (Eudyptula minor).ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Little_Penguin_(Eudyptula_minor).ogg",
+        "author": "Benchill",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "hen": {
+      "name": "Hen",
+      "sound": "birds/hen/hen_cluck.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "rooster": {
+      "name": "Rooster",
+      "sound": "birds/rooster/rooster_crow.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "nightingale": {
+      "name": "Nightingale",
+      "sound": "birds/nightingale/nightingale_song.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Nightingale (Luscinia megarhynchos).ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nightingale_(Luscinia_megarhynchos).ogg",
+        "author": "Helical gear",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "woodpecker": {
+      "name": "Woodpecker",
+      "sound": "birds/woodpecker/woodpecker_peck.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Great Spotted Woodpecker drum.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Spotted_Woodpecker_drum.ogg",
+        "author": "T.Voekler",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "seagull": {
+      "name": "Seagull",
+      "sound": "birds/seagull/seagull_call.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "goose": {
+      "name": "Goose",
+      "sound": "birds/goose/goose_honk.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Red-breasted Goose call (Branta ruficollis).ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red-breasted_Goose_call_(Branta_ruficollis).ogg",
+        "author": "Grégoire Chauvot",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "robin": {
+      "name": "Robin",
+      "sound": "birds/robin/robin_song.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Erithacus rubecula - European Robin XC509375.mp3",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Erithacus_rubecula_-_European_Robin_XC509375.mp3",
+        "author": "Marie-Lan Taÿ Pamart",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "hawk": {
+      "name": "Hawk",
+      "sound": "birds/hawk/hawk_screech.mp3",
+      "available": false,
+      "synth": true,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "flamingo": {
+      "name": "Flamingo",
+      "sound": "birds/flamingo/flamingo_call.mp3",
+      "available": true,
+      "synth": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Greater flamingo call recorded in March 2005 at Mayani, Satara.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greater_flamingo_call_recorded_in_March_2005_at_Mayani,_Satara.wav",
+        "author": "Sharadapte",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "songbird": {
+      "name": "Little songbird",
+      "sound": "birds/sparrow/sparrow_chirp.mp3",
+      "available": false,
+      "synth": true,
+      "synthKey": "sparrow",
+      "_note": "Generic small-bird chirp for story characters (e.g. Tiko the bluebird). Same verified Mixkit file as the sparrow key, which stays on the synth because the clip is not sparrow-specific.",
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "cardinal": {
+      "name": "Cardinal",
+      "sound": "birds/cardinal/cardinal_song.mp3",
+      "available": false,
+      "synth": false,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "blue_jay": {
+      "name": "Blue Jay",
+      "sound": "birds/blue_jay/blue_jay_call.mp3",
+      "available": false,
+      "synth": false,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "heron": {
+      "name": "Heron",
+      "sound": "birds/heron/heron_call.mp3",
+      "available": false,
+      "synth": false,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    },
+    "pelican": {
+      "name": "Pelican",
+      "sound": "birds/pelican/pelican_chick.mp3",
+      "available": false,
+      "synth": false,
+      "meta": {
+        "note": "Built-in synthesised call (no recording bundled)."
+      }
+    }
+  },
+  "vehicles": {
+    "car": {
+      "name": "Car",
+      "sound": "vehicles/car/car.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Car Horn.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Car_Horn.wav",
+        "author": "15HPanska_Ruttner_Jan",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "taxi": {
+      "name": "Taxi",
+      "sound": "vehicles/taxi/taxi.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Car Horn.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Car_Horn.wav",
+        "author": "15HPanska_Ruttner_Jan",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false,
+        "edit": "Car horn re-pitched +2 semitones"
+      }
+    },
+    "suv": {
+      "name": "SUV",
+      "sound": "vehicles/suv/suv.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Car Horn.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Car_Horn.wav",
+        "author": "15HPanska_Ruttner_Jan",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false,
+        "edit": "Car horn re-pitched -2 semitones"
+      }
+    },
+    "van": {
+      "name": "Van",
+      "sound": "vehicles/van/van.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Car Horn.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Car_Horn.wav",
+        "author": "15HPanska_Ruttner_Jan",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false,
+        "edit": "One car-horn honk re-pitched -1 semitone"
+      }
+    },
+    "bus": {
+      "name": "Bus",
+      "sound": "vehicles/bus/bus.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "WWS CityBusMANSG220horn.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:WWS_CityBusMANSG220horn.ogg",
+        "author": "Work With Sounds / Technical Museum of Slovenia",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "truck": {
+      "name": "Truck",
+      "sound": "vehicles/truck/truck.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Leslie A200-156.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leslie_A200-156.ogg",
+        "author": "HarveyHenkelmann",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "ambulance": {
+      "name": "Ambulance",
+      "sound": "vehicles/ambulance/ambulance.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "AmbulanceSound1.wav",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:AmbulanceSound1.wav",
+        "author": "Demircimehmed",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "police": {
+      "name": "Police car",
+      "sound": "vehicles/police/police.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "American police siren i.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_police_siren_i.ogg",
+        "author": "lezer",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "firetruck": {
+      "name": "Fire truck",
+      "sound": "vehicles/firetruck/firetruck.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Whelen.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Whelen.ogg",
+        "author": "Heggyhomolit",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "bicycle": {
+      "name": "Bicycle",
+      "sound": "vehicles/bicycle/bicycle.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Bell-ring.flac",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bell-ring.flac",
+        "author": "qubodup",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false,
+        "edit": "One bell ring layered with itself 0.4 s later"
+      }
+    },
+    "motorcycle": {
+      "name": "Motorcycle",
+      "sound": "vehicles/motorcycle/motorcycle.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Motorbike 1.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Motorbike_1.ogg",
+        "author": "ezwa",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "tractor": {
+      "name": "Tractor",
+      "sound": "vehicles/tractor/tractor.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "WWS TractorUrsusC328driving.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:WWS_TractorUrsusC328driving.ogg",
+        "author": "Work With Sounds / Museum of Municipal Engineering",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "train": {
+      "name": "Train",
+      "sound": "vehicles/train/train.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Nathan P5.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nathan_P5.ogg",
+        "author": "HarveyHenkelmann",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "airplane": {
+      "name": "Airplane",
+      "sound": "vehicles/airplane/airplane.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "2011-06-05 19-32 Berlin TXL Airplane Flyover plus Wingtip Vortex.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2011-06-05_19-32_Berlin_TXL_Airplane_Flyover_plus_Wingtip_Vortex.ogg",
+        "author": "Fritz Schlüter",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "commercialUse": true,
+        "attributionRequired": true
+      }
+    },
+    "helicopter": {
+      "name": "Helicopter",
+      "sound": "vehicles/helicopter/helicopter.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Helicopter over a lake.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Helicopter_over_a_lake.ogg",
+        "author": "ezwa",
+        "license": "Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    },
+    "ship": {
+      "name": "Ship",
+      "sound": "vehicles/ship/ship.mp3",
+      "available": true,
+      "meta": {
+        "source": "Wikimedia Commons",
+        "title": "Cruise ship Albatros ship horn.ogg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cruise_ship_Albatros_ship_horn.ogg",
+        "author": "Tvabutzku1234",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "commercialUse": true,
+        "attributionRequired": false
+      }
+    }
+  },
+  "_activated": "Mixkit Free SFX License verified 2026-09-24: royalty-free, commercial use in apps permitted, no attribution, no login/paywall bypassed. Only keys with a genuine species match were activated; unmatched keys stay on synth."
+}

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+  <defs>
+    <radialGradient id="boxShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#78350F" stop-opacity="0.3"/>
+      <stop offset="65%" stop-color="#78350F" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#78350F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="basketWood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="40%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="bearFur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="50%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="120" cy="214" rx="85" ry="16" fill="url(#boxShadow)"/>
+
+  <!-- Teddy Bear sitting in basket -->
+  <g transform="translate(100, 64)">
+    <!-- Ears -->
+    <circle cx="-22" cy="18" r="14" fill="url(#bearFur)"/>
+    <circle cx="-22" cy="18" r="8" fill="#FDE68A"/>
+    <circle cx="22" cy="18" r="14" fill="url(#bearFur)"/>
+    <circle cx="22" cy="18" r="8" fill="#FDE68A"/>
+    <!-- Head -->
+    <circle cx="0" cy="34" r="28" fill="url(#bearFur)"/>
+    <!-- Snout & Nose -->
+    <ellipse cx="0" cy="42" rx="14" ry="10" fill="#FDE68A"/>
+    <ellipse cx="0" cy="38" rx="5" ry="3.5" fill="#451A03"/>
+    <path d="M0 41.5 L0 46" stroke="#451A03" stroke-width="2"/>
+    <!-- Eyes -->
+    <circle cx="-9" cy="30" r="3.5" fill="#1C1917"/>
+    <circle cx="9" cy="30" r="3.5" fill="#1C1917"/>
+    <circle cx="-8" cy="29" r="1.2" fill="#FFFFFF"/>
+    <circle cx="10" cy="29" r="1.2" fill="#FFFFFF"/>
+    <!-- Paws resting on basket rim -->
+    <circle cx="-28" cy="62" r="11" fill="url(#bearFur)"/>
+    <circle cx="28" cy="62" r="11" fill="url(#bearFur)"/>
+  </g>
+
+  <!-- Wooden Building Blocks peaking out -->
+  <!-- Blue Cube -->
+  <g transform="translate(56, 102)">
+    <rect x="0" y="0" width="28" height="28" rx="4" fill="#3B82F6"/>
+    <text x="14" y="20" font-family="'Baloo 2', sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" text-anchor="middle">A</text>
+  </g>
+  <!-- Red Block -->
+  <g transform="translate(154, 96) rotate(14)">
+    <rect x="0" y="0" width="26" height="26" rx="4" fill="#EF4444"/>
+    <text x="13" y="19" font-family="'Baloo 2', sans-serif" font-weight="900" font-size="15" fill="#FFFFFF" text-anchor="middle">B</text>
+  </g>
+  <!-- Yellow Star Ball -->
+  <circle cx="178" cy="120" r="14" fill="#FACC15"/>
+  <path d="M178 110 L181 117 L188 118 L183 123 L185 130 L178 126 L171 130 L173 123 L168 118 L175 117 Z" fill="#EAB308"/>
+
+  <!-- Tidy Wooden Toy Basket Container -->
+  <path d="M42 126 L52 196 C53 204, 187 204, 188 196 L198 126 Z" fill="url(#basketWood)"/>
+  <!-- Basket Woven Slats Texture -->
+  <path d="M44 140 L196 140" stroke="#B45309" stroke-width="3" opacity="0.6"/>
+  <path d="M47 160 L193 160" stroke="#B45309" stroke-width="3" opacity="0.6"/>
+  <path d="M50 180 L190 180" stroke="#B45309" stroke-width="3" opacity="0.6"/>
+
+  <!-- Basket Rim -->
+  <rect x="36" y="120" width="168" height="14" rx="7" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+  <!-- Handle Cutout -->
+  <rect x="100" y="148" width="40" height="12" rx="6" fill="#78350F" opacity="0.75"/>
+
+  <!-- Clean Sparkles -->
+  <path d="M44 86 L46 92 L52 94 L46 96 L44 102 L42 96 L36 94 L42 92 Z" fill="#FACC15"/>
+  <path d="M196 80 L197 84 L201 85 L197 86 L196 90 L195 86 L191 85 L195 84 Z" fill="#38BDF8"/>
+</svg>

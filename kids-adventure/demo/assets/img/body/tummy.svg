@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shadowTummy" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shirtTorso" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="35%" stop-color="#0284C7"/>
+      <stop offset="70%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+    <linearGradient id="starEmblem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="50%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+    <linearGradient id="tummySkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FFB74D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="180" rx="70" ry="14" fill="url(#shadowTummy)"/>
+
+  <!-- Neck Base -->
+  <rect x="84" y="24" width="32" height="20" rx="8" fill="#F57C00"/>
+
+  <!-- T-Shirt Body (Torso & Tummy) -->
+  <path d="M42 42 L158 42 L168 152 C168 162, 145 168, 100 168 C55 168, 32 162, 32 152 Z" fill="url(#shirtTorso)"/>
+
+  <!-- T-Shirt Collar Ribbing -->
+  <path d="M75 42 C75 56, 125 56, 125 42" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <!-- Left / Right Sleeves -->
+  <path d="M42 42 L16 80 L38 90 L52 56 Z" fill="#0284C7"/>
+  <path d="M158 42 L184 80 L162 90 L148 56 Z" fill="#0369A1"/>
+
+  <!-- Golden 3D Star on Tummy -->
+  <g transform="translate(100, 108)">
+    <polygon points="0,-32 10,-10 32,-8 15,8 20,30 0,18 -20,30 -15,8 -32,-8 -10,-10" fill="url(#starEmblem)"/>
+    <!-- Star Emboss Highlight -->
+    <polygon points="0,-32 10,-10 32,-8 15,8 0,0" fill="#FFFFFF" opacity="0.35"/>
+  </g>
+
+  <!-- T-Shirt Fabric Folds & Highlight -->
+  <path d="M54 75 Q70 120 62 148" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M146 75 Q130 120 138 148" stroke="#075985" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.6"/>
+</svg>

@@ -1,0 +1,285 @@
+/* =========================================================================
+   puzzle.css — Kido Logic & Puzzle Engine
+   A carved "thinking stone" tablet floating over Puzzle Island. Pictures sit
+   on soft round tokens that gently bob; the missing piece glows; help comes
+   from a little light.
+   ========================================================================= */
+
+.pz {
+  position: relative; min-height: 100%; overflow: hidden;
+  display: flex; justify-content: center; align-items: center;
+  background: #7FC8E8;
+}
+.pz-backdrop { position: absolute; inset: -12px; pointer-events: none; }
+.pz-backdrop svg { width: 100%; height: 100%; display: block; filter: blur(3px) saturate(1.05); transform: scale(1.04); }
+.pz-backdrop * { animation: none !important; }
+.pz::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 75% 65% at 50% 45%, rgba(255,250,235,.3) 0%, rgba(60,40,120,.28) 75%, rgba(40,26,90,.42) 100%);
+}
+.pz-stage {
+  position: relative; z-index: 2; width: 100%; max-width: 1000px;
+  display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 2vh, 16px);
+  padding: 10px 14px calc(18px + var(--kido-sa-bottom));
+}
+
+/* ---- instruction row: hear-again · question · hint light ---- */
+.pz-head { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 760px; }
+.pz-ask {
+  flex: 0 1 auto; margin: 0; text-align: center; padding: 9px 22px; border-radius: 999px;
+  background: rgba(255,253,248,.96); color: var(--ink);
+  font-size: clamp(18px, 1.6vw + 12px, 30px); font-weight: 800; line-height: 1.15;
+  box-shadow: 0 4px 0 rgba(76,50,168,.14), 0 12px 28px rgba(43,33,81,.22);
+  animation: pop-in .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.pz-round {
+  width: 56px; height: 56px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255,253,248,.96); color: var(--grape); font-size: 26px;
+  box-shadow: 0 4px 0 rgba(76,50,168,.16), 0 10px 22px rgba(43,33,81,.2);
+  transition: transform .15s cubic-bezier(.34,1.56,.64,1);
+}
+.pz-round:active { transform: scale(.92); }
+.pz-round:focus-visible, .pz-choice:focus-visible, .pz-target:focus-visible, .pz-maze:focus-visible { outline: 4px solid #FFFFFF; box-shadow: 0 0 0 9px var(--grape); }
+.pz-round .kido-icon { width: 28px; height: 28px; }
+.pz-hint:disabled { opacity: .45; }
+.pz-hint.is-offered { background: #FFF3C4; animation: pz-offer 1.3s ease-in-out infinite; }
+@keyframes pz-offer { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,194,61,.7), 0 10px 22px rgba(43,33,81,.2); } 50% { box-shadow: 0 0 0 12px rgba(255,194,61,0), 0 10px 22px rgba(43,33,81,.2); transform: scale(1.08); } }
+
+/* ---- the thinking stone ---- */
+.pz-board {
+  position: relative; width: min(100%, 940px);
+  display: flex; flex-direction: column; align-items: center; gap: clamp(12px, 2.4vh, 22px);
+  padding: clamp(14px, 3vw, 28px);
+  border-radius: 38px 32px 40px 34px;
+  background:
+    radial-gradient(ellipse 60% 40% at 25% 10%, rgba(255,255,255,.75), transparent 70%),
+    linear-gradient(160deg, #FFFDF7 0%, #F1EAFA 60%, #E3D8F2 100%);
+  border: 2px solid rgba(183,172,208,.55);
+  box-shadow: inset 0 3px 0 #FFFFFF, inset 0 -6px 14px rgba(140,120,190,.18),
+              0 0 0 6px rgba(255,255,255,.45), 0 22px 54px rgba(43,33,81,.3);
+  animation: pz-rise .5s cubic-bezier(.2,.8,.3,1.15) both;
+}
+@keyframes pz-rise { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+.pz.is-solved .pz-board { box-shadow: inset 0 3px 0 #FFFFFF, 0 0 0 6px rgba(255,214,102,.8), 0 0 60px rgba(255,214,102,.65), 0 22px 54px rgba(43,33,81,.3); }
+
+/* ---- picture tokens ---- */
+.pz-token {
+  position: relative; aspect-ratio: 1; border-radius: 50%; padding: 0; margin: 0;
+  display: grid; place-items: center; overflow: visible;
+  background: radial-gradient(circle at 38% 30%, #FFFFFF 0%, #F6F2FF 60%, #E8E0F6 100%);
+  box-shadow: 0 3px 0 rgba(76,50,168,.14), 0 10px 20px rgba(43,33,81,.16), inset 0 -3px 6px rgba(120,100,170,.12);
+  animation: pz-bob 3.4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -.45s);
+}
+@keyframes pz-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+.pz-token__art { width: 78%; height: 78%; display: grid; place-items: center; pointer-events: none; }
+.pz-token__art img, .pz-token__art .pz-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 5px rgba(43,33,81,.22)); -webkit-user-drag: none; }
+.pz-token__art svg { width: 100%; height: 100%; display: block; }
+.pz-token--photo { background: #FFFFFF; }
+.pz-token--photo .pz-token__art { width: 90%; height: 90%; border-radius: 50%; overflow: hidden; }
+.pz-token--photo .pz-token__art img { object-fit: cover; filter: none; }
+.pz-token__label {
+  position: absolute; left: 50%; bottom: -10px; translate: -50% 0; white-space: nowrap;
+  padding: 2px 10px; border-radius: 999px; background: var(--grape); color: #fff;
+  font-family: var(--font-display); font-weight: 700; font-size: 14px;
+}
+
+/* While "Here's a new challenge!" is announced the board waits (inert in JS; this covers older browsers). */
+.pz.is-announcing .pz-board { pointer-events: none; }
+
+/* ---- a row with a missing piece ---- */
+.pz-row {
+  container-type: inline-size; width: 100%;
+  /* --cols is chosen by fitRow() (puzzleTypes.js): one line, or whole pattern repeats per line.
+     A grid (not wrapping flex) keeps a shorter last line aligned under the repeat above it. */
+  display: grid; grid-template-columns: repeat(var(--cols, var(--n, 4)), auto);
+  justify-content: center; align-items: center; gap: 10px;
+  --tok-max: 108px; --tok-comfy: 52px; --tok-min: 40px;
+}
+.pz-row > * { width: min(var(--tok-max), calc((100cqw - (var(--cols, var(--n, 4)) - 1) * 10px) / var(--cols, var(--n, 4)))); }
+.pz-slot {
+  aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255,255,255,.55); border: 4px dashed #B79CFF;
+  animation: pz-slot 1.6s ease-in-out infinite;
+}
+@keyframes pz-slot { 50% { border-color: #FFB020; box-shadow: 0 0 22px rgba(255,194,61,.55); } }
+.pz-q { font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 6cqw, 46px); color: #8062E4; line-height: 1; }
+/* .slot is only there so Kido's shared drag engine can find drop targets — undo its game-screen sizing. */
+.pz-slot.slot, .pz-target.slot { min-height: 0; padding: 0; gap: 0; }
+.pz-slot.slot { display: grid; border-radius: 50%; border: 4px dashed #B79CFF; background: rgba(255,255,255,.55); }
+.pz-target.slot { display: block; border: 0; border-radius: 26px; background: #FFFFFF; }
+.pz-board--sort .pz-target.slot { background: transparent; }
+.pz-slot.is-filled { border: 4px solid #38C172; background: radial-gradient(circle at 38% 30%, #FFFFFF, #E9FBEF); animation: pz-land .45s cubic-bezier(.34,1.56,.64,1); }
+.pz-slot.is-filled .pz-token__art { width: 78%; height: 78%; }
+.pz-slot.over { border-color: #FFB020; transform: scale(1.06); }
+@keyframes pz-land { from { transform: scale(.6); } to { transform: scale(1); } }
+
+/* ---- choices tray ---- */
+.pz-tray {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(10px, 2.4vw, 18px);
+  padding: 12px 16px; border-radius: 30px; background: rgba(255,255,255,.55);
+  box-shadow: inset 0 2px 8px rgba(120,100,170,.14);
+}
+.pz-choice { width: clamp(64px, min(20vw, 15vh), 118px); cursor: pointer; transition: transform .18s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, filter .3s ease; touch-action: none; }
+.pz-choice:hover { transform: translateY(-4px) scale(1.05); }
+.pz-choice:active { transform: scale(.94); }
+.pz-choice.is-picked { box-shadow: 0 0 0 5px #FFB020, 0 14px 26px rgba(43,33,81,.25); transform: translateY(-6px) scale(1.06); }
+.pz-choice.pz-tried { opacity: .55; filter: saturate(.6); }
+.pz-choice.pz-dim { opacity: .3; }
+.pz-choice.pz-picked { box-shadow: 0 0 0 5px #38C172, 0 0 30px rgba(56,193,114,.55); }
+.pz-gone { opacity: 0 !important; transform: scale(.5) !important; pointer-events: none; transition: opacity .35s ease, transform .35s ease; }
+.pz-token.ghost { position: fixed; z-index: 60; width: 96px; pointer-events: none; margin: 0; translate: -50% -50%; animation: none; box-shadow: 0 20px 40px rgba(43,33,81,.35); }
+
+/* ---- odd one out ---- */
+.pz-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 3vw, 24px); max-width: 720px; }
+.pz-choice--big { width: clamp(84px, min(26vw, 20vh), 150px); }
+.pz-choice.pz-same { opacity: .6; }
+
+/* ---- what's missing? (Change #20) ---- */
+.pz-memory { display: flex; flex-direction: column; align-items: center; gap: clamp(14px, 3vh, 24px); width: 100%; }
+.pz-memory__grid > .pz-token, .pz-memory__slot { width: clamp(68px, min(21vw, 16vh), 124px); }
+.pz-memory__slot { aspect-ratio: 1; }
+.pz-memory__grid { transition: opacity .25s ease, transform .25s ease; }
+.pz-memory__grid.is-peek { opacity: 0; transform: scale(.92); }
+.pz-ready { min-width: 200px; font-size: 22px; }
+html.reduce-motion .pz-memory__grid { transition: none; }
+
+/* ---- match + sort targets ---- */
+.pz-pool { min-height: 40px; }
+.pz-targets { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(10px, 2.4vw, 18px); width: 100%; }
+.pz-target {
+  position: relative; width: clamp(84px, min(28vw, 20vh), 176px); aspect-ratio: .95; border-radius: 26px; overflow: hidden;
+  background: #FFFFFF; cursor: pointer; outline: none;
+  box-shadow: 0 0 0 4px rgba(255,255,255,.9), 0 12px 26px rgba(43,33,81,.22);
+  transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
+}
+.pz-target__art { position: absolute; inset: 0; display: block; }
+.pz-target__art svg { width: 100%; height: 100%; display: block; }
+/* Change #21: picture files in a target fit it (cut-outs whole, photos as a rounded card) instead of their natural size */
+.pz-target__art .pz-img { width: 100%; height: 100%; display: block; object-fit: contain; -webkit-user-drag: none; }
+.pz-target__art .pz-img[src$=".jpg"] { object-fit: cover; border-radius: 22px; }
+.pz-target__label {
+  position: absolute; left: 50%; top: 8px; translate: -50% 0; padding: 2px 10px; border-radius: 999px;
+  background: rgba(255,253,248,.94); font-family: var(--font-display); font-weight: 800; font-size: 14px; color: var(--ink); white-space: nowrap;
+  text-transform: capitalize;
+}
+.pz-target__items { position: absolute; left: 6px; right: 6px; bottom: 6px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+.pz-target.over, .pz-target:hover { transform: scale(1.04); box-shadow: 0 0 0 5px #FFB020, 0 14px 28px rgba(43,33,81,.25); }
+.pz-chip.pz-placed { width: 38px; animation: pz-land .45s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 0 0 2px #FFFFFF, 0 4px 8px rgba(0,0,0,.2); cursor: default; }
+.pz-chip.pz-placed:hover { transform: none; }
+.pz-board--sort .pz-target { background: transparent; box-shadow: none; overflow: visible; aspect-ratio: 1; }
+.pz-board--sort .pz-target.over, .pz-board--sort .pz-target:hover { box-shadow: none; transform: scale(1.06); }
+.pz-board--sort .pz-target__label { top: auto; bottom: -6px; background: var(--grape); color: #fff; }
+.pz-board--sort .pz-target__items { bottom: 30%; left: 16%; right: 16%; }
+/* Change #16 (M-3): a picked token makes the places it can go breathe gently. Sorting tubs are see-through
+   drawings, so they glow along their own shape (drop-shadow) instead of a square ring. */
+.pz-target.is-target-active { animation: pz-target-breathe 1.8s ease-in-out infinite; }
+.pz-board--sort .pz-target.is-target-active { animation-name: pz-target-breathe-sort; }
+@keyframes pz-target-breathe {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(255,255,255,.9), 0 12px 26px rgba(43,33,81,.22); }
+  50% { box-shadow: 0 0 0 6px #FFD666, 0 0 24px rgba(255,194,61,.7); transform: scale(1.03); }
+}
+@keyframes pz-target-breathe-sort {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(255,194,61,0)); }
+  50% { filter: drop-shadow(0 0 10px rgba(255,194,61,.95)); transform: scale(1.04); }
+}
+html.reduce-motion .pz-target.is-target-active { animation: none; box-shadow: 0 0 0 6px #FFD666, 0 12px 26px rgba(43,33,81,.22); }
+html.reduce-motion .pz-board--sort .pz-target.is-target-active { box-shadow: none; filter: drop-shadow(0 0 8px rgba(255,194,61,.95)); }
+@media (prefers-reduced-motion: reduce) {
+  .pz-target.is-target-active { animation: none; box-shadow: 0 0 0 6px #FFD666, 0 12px 26px rgba(43,33,81,.22); }
+  .pz-board--sort .pz-target.is-target-active { box-shadow: none; filter: drop-shadow(0 0 8px rgba(255,194,61,.95)); }
+}
+
+/* ---- feedback ---- */
+.pz-glow { animation: pz-glow 1.1s ease-in-out 3 !important; z-index: 2; }
+@keyframes pz-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,194,61,.9); } 50% { box-shadow: 0 0 0 10px rgba(255,194,61,.0), 0 0 36px rgba(255,194,61,.9); scale: 1.06; } }
+.pz-good { animation: pz-land .45s cubic-bezier(.34,1.56,.64,1); }
+
+/* ---- maze ---- */
+.pz-maze-wrap { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; width: 100%; }
+.pz-maze {
+  position: relative; display: grid; outline: none; touch-action: none;
+  grid-template-columns: repeat(var(--cols), 1fr); grid-template-rows: repeat(var(--rows), 1fr);
+  /* fit the maze, its arrow pad and the question on one screen */
+  width: min(100%, calc(var(--cols) * 84px), calc((100dvh - 360px) * var(--cols) / var(--rows)));
+  min-width: min(100%, calc(var(--cols) * 52px));
+  aspect-ratio: var(--cols) / var(--rows);
+  border-radius: 22px; overflow: hidden;
+  background: linear-gradient(160deg, #A8DE8A, #7FC46E);
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,.6), 0 10px 24px rgba(43,33,81,.2);
+}
+.pz-cell { position: relative; display: grid; place-items: center; border: 3px solid transparent; background-clip: padding-box; border-radius: 14px; background-color: #CDEFB0; }
+.pz-cell.is-alt { background-color: #C2EAA2; }
+.pz-cell svg { width: 92%; height: 92%; }
+.pz-cell--rock, .pz-cell--bush { background-color: #9FD684; cursor: not-allowed; }
+.pz-cell--goal { background-color: #FFF3C4; }
+.pz-cell--goal svg { animation: pz-bob 2.4s ease-in-out infinite; }
+.pz-cell.is-visited::after { content: ""; width: 18%; aspect-ratio: 1; border-radius: 50%; background: rgba(128,98,228,.35); }
+.pz-cell.pz-glow { background-color: #FFF0B8; }
+.pz-hero {
+  position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none;
+  width: calc(100% / var(--cols)); height: calc(100% / var(--rows));
+  display: grid; place-items: center; transition: transform .24s cubic-bezier(.3,1.3,.6,1);
+}
+.pz-hero svg { width: 76%; height: auto; padding: 6%; border-radius: 50%; background: #FFFFFF; box-shadow: 0 6px 12px rgba(43,33,81,.3); }
+.pz-hero.pz-bump svg { animation: shake .35s ease; }
+/* Change #17A: a story character as the maze hero (Biscuit) stands on the square, no token behind him. */
+.pz-hero--rig .kido-char { width: 96%; height: 100%; padding: 0; border-radius: 0; background: none; box-shadow: none; filter: drop-shadow(0 4px 4px rgba(43,33,81,.28)); overflow: visible; }
+.pz-pad { display: grid; grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(2, 60px); gap: 8px; }
+.pz-arrow { width: 60px; height: 60px; }
+.pz-arrow--up { grid-column: 2; grid-row: 1; }
+.pz-arrow--left { grid-column: 1; grid-row: 2; }
+.pz-arrow--down { grid-column: 2; grid-row: 2; }
+.pz-arrow--right { grid-column: 3; grid-row: 2; }
+
+/* ---- short landscape phones: keep everything on one screen ---- */
+@media (max-height: 460px) {
+  .pz-stage { gap: 6px; padding-top: 2px; }
+  .pz-ask { padding: 5px 16px; font-size: 18px; }
+  .pz-round { width: 48px; height: 48px; }
+  .pz-board { padding: 10px 14px; gap: 10px; }
+  .pz-row { --tok-max: 88px; --tok-comfy: 44px; }   /* one line of pieces; the question row now sits in the HUD row (Change #28) */
+  .pz-tray { padding: 6px 12px; }
+  .pz-choice { width: clamp(64px, 22vh, 96px); }   /* bigger now the question sits in the HUD row (Change #28) */
+  .pz-choice--big { width: clamp(72px, 28vh, 112px); }
+  .pz-target { width: clamp(72px, 26vh, 116px); }
+  .pz-maze { width: min(100%, calc((100dvh - var(--hud-h, 64px) - 70px) * var(--cols) / var(--rows))); min-width: 0; }   /* Change #28: below the HUD + status bar (the question is in the HUD row) */
+  .pz-pad { grid-template-columns: repeat(3, 52px); grid-template-rows: repeat(2, 52px); }
+  .pz-arrow { width: 52px; height: 52px; }
+}
+
+/* ---- short portrait phones (e.g. 320×568) ---- */
+@media (max-height: 640px) and (max-aspect-ratio: 1/1) {
+  .pz-stage { gap: 8px; }
+  .pz-board { padding: 12px; gap: 10px; }
+  .pz-maze { min-width: 0; }
+  .pz-pad { grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(2, 54px); gap: 6px; }
+  .pz-arrow { width: 54px; height: 54px; }
+  .pz-maze-wrap { gap: 10px; }
+}
+
+/* ---- reduced motion: everything still works, nothing bobs or pulses ---- */
+html.reduce-motion .pz-token, html.reduce-motion .pz-slot, html.reduce-motion .pz-board, html.reduce-motion .pz-ask,
+html.reduce-motion .pz-cell--goal svg, html.reduce-motion .pz-hint.is-offered { animation: none !important; }
+html.reduce-motion .pz-glow { animation: none !important; box-shadow: 0 0 0 5px #FFC23D !important; }
+@media (prefers-reduced-motion: reduce) {
+  .pz-token, .pz-slot, .pz-board, .pz-ask, .pz-cell--goal svg, .pz-hint.is-offered { animation: none !important; }
+  .pz-glow { animation: none !important; box-shadow: 0 0 0 5px #FFC23D !important; }
+}
+
+/* QA 2026-11-11: an order-it puzzle with 7-8 pieces (Planets in Order) put its spaces on two lines and its tray on two
+   more, so the last planet sat below a phone screen. On short screens both stay on one line. */
+@media (max-height: 460px) {
+  /* (device retest 2026-11-11: --n is the pieces per line, not the count — the count comes from the children) */
+  .pz-row--slots:has(> :nth-child(6):last-child):not(#_) { --cols: 6 !important; }
+  .pz-row--slots:has(> :nth-child(7):last-child):not(#_) { --cols: 7 !important; }
+  .pz-row--slots:has(> :nth-child(8):last-child):not(#_) { --cols: 8 !important; }
+  .pz-tray:has(> :nth-child(7)) { flex-wrap: nowrap; --tray-n: 7; }
+  .pz-tray:has(> :nth-child(8)) { --tray-n: 8; }
+  .pz-tray:has(> :nth-child(9)) { --tray-n: 9; }
+  .pz-tray:has(> :nth-child(10)) { --tray-n: 10; }
+  /* every piece in the tray (photo tokens too, not only .pz-choice) shares the width */
+  .pz-tray:has(> :nth-child(7)) > *:not(#_) { width: clamp(44px, calc((100vw - 140px) / var(--tray-n) - 12px), 86px); flex: 0 0 auto; }
+  /* the same for 7-8 answer cards (First Sounds' letters) */
+  .pz-targets:has(> :nth-child(7)) { flex-wrap: nowrap; }
+  .pz-targets:has(> :nth-child(7)) > .pz-target:not(#_) { width: clamp(52px, calc((100vw - 120px) / 8 - 12px), 96px); }
+}

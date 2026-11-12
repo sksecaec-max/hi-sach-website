@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shadowMouth" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="upperLip" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="60%" stop-color="#D32F2F"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <linearGradient id="lowerLip" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="45%" stop-color="#FF1744"/>
+      <stop offset="100%" stop-color="#C2185B"/>
+    </linearGradient>
+    <linearGradient id="teethGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="80%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <radialGradient id="mouthInterior" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#880E4F"/>
+      <stop offset="70%" stop-color="#4A0025"/>
+      <stop offset="100%" stop-color="#2D0014"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="175" rx="70" ry="14" fill="url(#shadowMouth)"/>
+
+  <!-- Mouth Cavity (Smile Shape) -->
+  <path d="M36 95 Q100 80 164 95 Q145 155 100 155 Q55 155 36 95 Z" fill="url(#mouthInterior)"/>
+
+  <!-- Sparkling Teeth -->
+  <path d="M48 94 Q100 86 152 94 Q146 122 100 122 Q54 122 48 94 Z" fill="url(#teethGrad)"/>
+  <!-- Teeth Separator Notches -->
+  <line x1="84" y1="92" x2="84" y2="114" stroke="#CBD5E1" stroke-width="2"/>
+  <line x1="100" y1="91" x2="100" y2="116" stroke="#94A3B8" stroke-width="2.5"/>
+  <line x1="116" y1="92" x2="116" y2="114" stroke="#CBD5E1" stroke-width="2"/>
+
+  <!-- Tongue -->
+  <path d="M68 135 Q100 115 132 135 Q118 152 100 153 Q82 152 68 135 Z" fill="#FF4081"/>
+
+  <!-- Upper Lip with Cupid's Bow -->
+  <path d="M30 95 C55 80, 80 72, 100 78 C120 72, 145 80, 170 95 C145 90, 120 86, 100 89 C80 86, 55 90, 30 95 Z" fill="url(#upperLip)"/>
+
+  <!-- Lower Lip Plump Contour -->
+  <path d="M34 96 C55 140, 80 165, 100 165 C120 165, 145 140, 166 96 C144 148, 120 153, 100 153 C80 153, 56 148, 34 96 Z" fill="url(#lowerLip)"/>
+
+  <!-- Glossy Lip Shimmer -->
+  <ellipse cx="100" cy="157" rx="22" ry="4.5" fill="#FFFFFF" opacity="0.6"/>
+  <ellipse cx="78" cy="84" rx="10" ry="2.5" fill="#FFFFFF" opacity="0.45"/>
+  <ellipse cx="122" cy="84" rx="10" ry="2.5" fill="#FFFFFF" opacity="0.45"/>
+</svg>

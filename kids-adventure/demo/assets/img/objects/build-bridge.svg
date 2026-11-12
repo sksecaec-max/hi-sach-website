@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Sky & River Background Gradients -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="60%" stop-color="#E0F2FE"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+
+    <linearGradient id="riverWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="45%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+
+    <!-- Riverbank Grass Gradients -->
+    <linearGradient id="grassLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="50%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </linearGradient>
+
+    <!-- Masonry Stone Pillar Gradient -->
+    <linearGradient id="stonePillar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#94A3B8"/>
+      <stop offset="30%" stop-color="#CBD5E1"/>
+      <stop offset="70%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+
+    <!-- Suspension Cable Red Vibrant Gradient -->
+    <linearGradient id="cableRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F87171"/>
+      <stop offset="40%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+
+    <!-- Bridge Roadway Deck Gradient -->
+    <linearGradient id="roadDeck" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="30%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+
+    <!-- Cute Red Car Body Gradient -->
+    <linearGradient id="carRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F87171"/>
+      <stop offset="35%" stop-color="#EF4444"/>
+      <stop offset="85%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+
+    <radialGradient id="bridgeDropShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#082F49" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#082F49" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#082F49" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground / Water Ambient Shadow -->
+  <ellipse cx="100" cy="182" rx="82" ry="14" fill="url(#bridgeDropShadow)"/>
+
+  <!-- ================= SKY & ROLLING HILLS ================= -->
+  <!-- Sky Arc Container (Circle clip/frame effect) -->
+  <rect x="12" y="16" width="176" height="168" rx="20" fill="url(#skyGrad)"/>
+
+  <!-- Fluffy White Clouds -->
+  <g fill="#FFFFFF" opacity="0.85">
+    <circle cx="48" cy="38" r="11"/>
+    <circle cx="62" cy="34" r="14"/>
+    <circle cx="76" cy="38" r="10"/>
+    <rect x="44" y="38" width="34" height="11" rx="5"/>
+
+    <circle cx="140" cy="46" r="9"/>
+    <circle cx="152" cy="42" r="12"/>
+    <circle cx="164" cy="46" r="8"/>
+    <rect x="136" y="46" width="30" height="9" rx="4"/>
+  </g>
+
+  <!-- Distant Blue Mountain Silhouettes -->
+  <path d="M12 110 L45 80 L75 106 L120 72 L160 102 L188 88 L188 120 L12 120 Z" fill="#93C5FD" opacity="0.6"/>
+  <path d="M12 118 L55 92 L95 116 L140 86 L188 114 L188 135 L12 135 Z" fill="#60A5FA" opacity="0.4"/>
+
+  <!-- ================= SPARKLING BLUE RIVER ================= -->
+  <path d="M12 128 C50 125, 150 125, 188 128 L188 184 L12 184 Z" fill="url(#riverWater)"/>
+  <!-- River Water Flow Ripples -->
+  <path d="M30 148 C45 146, 65 150, 80 148" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M110 152 C130 150, 155 154, 172 152" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M52 165 C70 163, 90 167, 115 165" fill="none" stroke="#BAE6FD" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M135 168 C150 166, 165 170, 180 168" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- ================= LUSH RIVERBANKS (Left & Right) ================= -->
+  <!-- Left Bank -->
+  <path d="M12 116 C25 116, 42 124, 46 148 C48 160, 36 172, 12 176 Z" fill="url(#grassLeft)"/>
+  <!-- Right Bank -->
+  <path d="M188 116 C175 116, 158 124, 154 148 C152 160, 164 172, 188 176 Z" fill="url(#grassLeft)"/>
+
+  <!-- ================= STONE PILLARS (Masonry Piers) ================= -->
+  <!-- Left Pier -->
+  <g id="pillar-left" transform="translate(56, 108)">
+    <rect x="-10" y="0" width="20" height="48" rx="2" fill="url(#stonePillar)"/>
+    <!-- Masonry Stone Block Seams -->
+    <line x1="-10" y1="12" x2="10" y2="12" stroke="#334155" stroke-width="1.2"/>
+    <line x1="-10" y1="24" x2="10" y2="24" stroke="#334155" stroke-width="1.2"/>
+    <line x1="-10" y1="36" x2="10" y2="36" stroke="#334155" stroke-width="1.2"/>
+    <line x1="0" y1="0" x2="0" y2="12" stroke="#334155" stroke-width="1"/>
+    <line x1="-3" y1="12" x2="-3" y2="24" stroke="#334155" stroke-width="1"/>
+    <line x1="4" y1="24" x2="4" y2="36" stroke="#334155" stroke-width="1"/>
+    <!-- Water Ripple Collar at Base -->
+    <ellipse cx="0" cy="46" rx="14" ry="4" fill="none" stroke="#E0F2FE" stroke-width="2"/>
+  </g>
+
+  <!-- Right Pier -->
+  <g id="pillar-right" transform="translate(144, 108)">
+    <rect x="-10" y="0" width="20" height="48" rx="2" fill="url(#stonePillar)"/>
+    <line x1="-10" y1="12" x2="10" y2="12" stroke="#334155" stroke-width="1.2"/>
+    <line x1="-10" y1="24" x2="10" y2="24" stroke="#334155" stroke-width="1.2"/>
+    <line x1="-10" y1="36" x2="10" y2="36" stroke="#334155" stroke-width="1.2"/>
+    <line x1="0" y1="0" x2="0" y2="12" stroke="#334155" stroke-width="1"/>
+    <line x1="3" y1="12" x2="3" y2="24" stroke="#334155" stroke-width="1"/>
+    <line x1="-4" y1="24" x2="-4" y2="36" stroke="#334155" stroke-width="1"/>
+    <ellipse cx="0" cy="46" rx="14" ry="4" fill="none" stroke="#E0F2FE" stroke-width="2"/>
+  </g>
+
+  <!-- ================= SUSPENSION BRIDGE TOWERS & CABLES ================= -->
+  <!-- Left Suspension Tower (Steel Pillar rising above deck) -->
+  <path d="M52 110 L54 60 L58 60 L60 110 Z" fill="url(#cableRed)"/>
+  <!-- Right Suspension Tower -->
+  <path d="M140 110 L142 60 L146 60 L148 110 Z" fill="url(#cableRed)"/>
+  <!-- Cross Braces -->
+  <line x1="53" y1="78" x2="59" y2="78" stroke="#FDE047" stroke-width="2"/>
+  <line x1="141" y1="78" x2="147" y2="78" stroke="#FDE047" stroke-width="2"/>
+
+  <!-- Main Catenary Suspension Cables (Sweeping Golden/Red Arcs) -->
+  <path d="M16 108 Q35 78 56 60 Q100 94 144 60 Q165 78 184 108" fill="none" stroke="#EF4444" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M16 108 Q35 78 56 60 Q100 94 144 60 Q165 78 184 108" fill="none" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Vertical Steel Suspenders Hanging from Cables to Deck -->
+  <g stroke="#FACC15" stroke-width="1.5">
+    <line x1="36" y1="88" x2="36" y2="110"/>
+    <line x1="46" y1="72" x2="46" y2="110"/>
+    <line x1="74" y1="73" x2="74" y2="110"/>
+    <line x1="88" y1="83" x2="88" y2="110"/>
+    <line x1="100" y1="86" x2="100" y2="110"/>
+    <line x1="112" y1="83" x2="112" y2="110"/>
+    <line x1="126" y1="73" x2="126" y2="110"/>
+    <line x1="154" y1="72" x2="154" y2="110"/>
+    <line x1="164" y1="88" x2="164" y2="110"/>
+  </g>
+
+  <!-- ================= BRIDGE ROADWAY DECK ================= -->
+  <!-- Under-Deck Steel Truss Girders -->
+  <rect x="14" y="112" width="172" height="6" fill="#334155"/>
+  <!-- Road Surface -->
+  <rect x="12" y="108" width="176" height="5" rx="1.5" fill="url(#roadDeck)"/>
+  <!-- Yellow Dashed Lane Divider Line -->
+  <line x1="16" y1="110.5" x2="184" y2="110.5" stroke="#FDE047" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <!-- Safety Railing Top Beam -->
+  <line x1="12" y1="104" x2="188" y2="104" stroke="#DC2626" stroke-width="2"/>
+
+  <!-- ================= CUTE RED TOY CAR DRIVING ACROSS ================= -->
+  <g id="bridge-car" transform="translate(86, 92)">
+    <!-- Car Cast Shadow on Road -->
+    <ellipse cx="14" cy="16" rx="16" ry="2.5" fill="#020617" opacity="0.6"/>
+
+    <!-- Wheels -->
+    <circle cx="4" cy="15" r="4.5" fill="#1E293B"/>
+    <circle cx="4" cy="15" r="2" fill="#E2E8F0"/>
+    <circle cx="24" cy="15" r="4.5" fill="#1E293B"/>
+    <circle cx="24" cy="15" r="2" fill="#E2E8F0"/>
+
+    <!-- Car Body -->
+    <path d="M-2 13 C-2 10, 1 8, 5 8 L8 3 C9 1, 19 1, 21 3 L25 8 C28 8, 30 10, 30 13 L30 14 L-2 14 Z" fill="url(#carRed)"/>
+    <!-- Windows -->
+    <path d="M9 4 L14 4 L14 7.5 L7 7.5 Z" fill="#BAE6FD"/>
+    <path d="M16 4 L20 4 L23 7.5 L16 7.5 Z" fill="#BAE6FD"/>
+    <!-- Headlight Beam -->
+    <circle cx="29" cy="10" r="1.5" fill="#FEF08A"/>
+    <polygon points="30,10 38,7 38,13" fill="#FEF08A" opacity="0.4"/>
+  </g>
+
+  <!-- Golden Celebration Sparkle -->
+  <polygon points="100,56 102,60 106,62 102,64 100,68 98,64 94,62 98,60" fill="#FACC15"/>
+</svg>

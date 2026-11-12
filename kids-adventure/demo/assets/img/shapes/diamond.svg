@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Vibrant 2D Diamond Gradient -->
+    <linearGradient id="diamGrad2D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="diamInnerStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Flat 2D Diamond / Rhombus Shape -->
+  <polygon points="100,24 174,100 100,176 26,100" fill="url(#diamGrad2D)" stroke="#0284C7" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Crisp Inner Border Accent -->
+  <polygon points="100,36 162,100 100,164 38,100" fill="none" stroke="url(#diamInnerStroke)" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Friendly Accent Sparkle -->
+  <circle cx="80" cy="80" r="5.5" fill="#FFFFFF" opacity="0.75"/>
+  <circle cx="90" cy="70" r="3" fill="#FFFFFF" opacity="0.9"/>
+</svg>

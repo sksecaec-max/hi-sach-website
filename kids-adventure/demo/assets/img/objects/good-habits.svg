@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft Contact Shadow -->
+    <radialGradient id="habitDropShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F172A" stop-opacity="0.35"/>
+      <stop offset="65%" stop-color="#0F172A" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Warm Golden Medal Gradient -->
+    <linearGradient id="goldMedal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="25%" stop-color="#FACC15"/>
+      <stop offset="65%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#A16207"/>
+    </linearGradient>
+
+    <!-- Golden Rim Gradient -->
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="35%" stop-color="#FDE047"/>
+      <stop offset="70%" stop-color="#CA8A04"/>
+      <stop offset="100%" stop-color="#713F12"/>
+    </linearGradient>
+
+    <!-- Soft Emerald Sunburst Gradient for Inner Disc -->
+    <radialGradient id="emeraldDisc" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="45%" stop-color="#10B981"/>
+      <stop offset="85%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </radialGradient>
+
+    <!-- Premium Award Ribbons -->
+    <linearGradient id="ribbonLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="60%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="ribbonRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="60%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+
+    <!-- Glass Specular Highlight -->
+    <linearGradient id="glassShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Drop Shadow -->
+  <ellipse cx="100" cy="180" rx="72" ry="14" fill="url(#habitDropShadow)"/>
+
+  <!-- ================= Blue Award Ribbons Behind Medal ================= -->
+  <!-- Left Ribbon Tail -->
+  <path d="M78 120 L58 174 L78 164 L96 174 L88 120 Z" fill="url(#ribbonLeft)"/>
+  <!-- Right Ribbon Tail -->
+  <path d="M122 120 L142 174 L122 164 L104 174 L112 120 Z" fill="url(#ribbonRight)"/>
+
+  <!-- ================= 3D Golden Medal Outer Body ================= -->
+  <!-- Outer Cast Shadow of Disc -->
+  <circle cx="100" cy="94" r="64" fill="#0F172A" opacity="0.25"/>
+
+  <!-- Outer Beveled Gold Rim -->
+  <circle cx="100" cy="90" r="64" fill="url(#goldRim)"/>
+  <circle cx="100" cy="90" r="61" fill="url(#goldMedal)"/>
+  <circle cx="100" cy="90" r="54" fill="#A16207"/>
+
+  <!-- Vibrant Emerald Green Enamel Inlay (Represents Health & Vitality) -->
+  <circle cx="100" cy="90" r="51" fill="url(#emeraldDisc)"/>
+
+  <!-- Specular Lens Curve Highlight -->
+  <path d="M54 75 C66 52, 134 52, 146 75 C132 60, 68 60, 54 75 Z" fill="url(#glassShine)"/>
+
+  <!-- ================= Center 3D Golden Good Habits Star & Sparkles ================= -->
+  <!-- Radiating Gentle Sunburst Rays -->
+  <g stroke="#6EE7B7" stroke-width="2" stroke-linecap="round" opacity="0.4" transform="translate(100, 90)">
+    <line x1="0" y1="-44" x2="0" y2="-38"/>
+    <line x1="31" y1="-31" x2="27" y2="-27"/>
+    <line x1="44" y1="0" x2="38" y2="0"/>
+    <line x1="31" y1="31" x2="27" y2="27"/>
+    <line x1="0" y1="44" x2="0" y2="38"/>
+    <line x1="-31" y1="31" x2="-27" y2="27"/>
+    <line x1="-44" y1="0" x2="-38" y2="0"/>
+    <line x1="-31" y1="-31" x2="-27" y2="-27"/>
+  </g>
+
+  <!-- Big 3D Beveled Golden Star -->
+  <g transform="translate(100, 90) scale(1.15)">
+    <!-- Star Drop Shadow -->
+    <path d="M0 -24 L7 -8 L24 -5 L12 7 L15 24 L0 15 L-15 24 L-12 7 L-24 -5 L-7 -8 Z" fill="#064E3B" opacity="0.4" transform="translate(0, 2)"/>
+
+    <!-- Star Facets -->
+    <!-- Top Point -->
+    <polygon points="0,0 0,-24 7,-8" fill="#FFFBEB"/>
+    <polygon points="0,0 0,-24 -7,-8" fill="#FACC15"/>
+    <!-- Top Right -->
+    <polygon points="0,0 7,-8 24,-5" fill="#FEF08A"/>
+    <polygon points="0,0 12,7 24,-5" fill="#EAB308"/>
+    <!-- Bottom Right -->
+    <polygon points="0,0 12,7 15,24" fill="#FACC15"/>
+    <polygon points="0,0 0,15 15,24" fill="#CA8A04"/>
+    <!-- Bottom Left -->
+    <polygon points="0,0 0,15 -15,24" fill="#EAB308"/>
+    <polygon points="0,0 -12,7 -15,24" fill="#CA8A04"/>
+    <!-- Top Left -->
+    <polygon points="0,0 -12,7 -24,-5" fill="#FACC15"/>
+    <polygon points="0,0 -7,-8 -24,-5" fill="#FFFBEB"/>
+
+    <!-- Center Glint -->
+    <circle cx="0" cy="0" r="3" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Sparkle Accents on Outer Rim -->
+  <polygon points="144,48 147,53 152,55 147,57 144,62 142,57 137,55 142,53" fill="#FFFFFF"/>
+  <circle cx="56" cy="132" r="2.5" fill="#FEF08A"/>
+</svg>

@@ -1,0 +1,329 @@
+/* =========================================================================
+   whats-animal.css — "What's That Animal?" world game (scene-whatsanimal)
+   Styles the SEE (Shadow) → GUESS (Circle of candidate animals) → REVEAL
+   → HEAR → REPEAT → INTERACT (Diet) → LEARN loop.
+   ========================================================================= */
+
+/* ---- Center Shadow Card (Golden Frame, Single Mystery Animal) ---- */
+.wta-shadow-card {
+  position: absolute;
+  left: 50%;
+  top: 236px;
+  transform: translate(-50%, -50%);
+  width: 252px;
+  height: 194px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 4.5px solid #FFD13B;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(255, 209, 59, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+  animation: wta-float 3.2s ease-in-out infinite;
+}
+
+.wta-shadow-card::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200px; height: 160px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 235, 150, 0.55) 0%, rgba(255, 193, 7, 0.2) 55%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: wta-glow 2.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes wta-glow {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.65; }
+  50% { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
+}
+
+@keyframes wta-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-8px); }
+}
+
+/* Crisp True Animal Silhouette (Contour Outline, No Solid Rectangle) */
+.wta-shadow-art {
+  width: 82%;
+  height: 82%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.wta-shadow-art svg,
+.wta-shadow-art .creature-sil,
+.wta-shadow-art .creature-svg,
+.wta-shadow-art .wta-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.65)) !important;
+}
+.wta-shadow-art .wta-emoji,
+.wta-shadow-art .creature-emoji {
+  font-size: 110px;
+  line-height: 1;
+  filter: brightness(0) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.65)) !important;
+}
+.wta-shadow-art.fade-out {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+/* Revealed Full-Color Real Photo / Art */
+.wta-reveal-art {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 2;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.wta-reveal-art.hidden {
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+  display: none;
+}
+.wta-reveal-art:not(.hidden) {
+  opacity: 1;
+  transform: scale(1);
+  display: flex;
+  animation: wta-reveal-pop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.wta-reveal-art img,
+.wta-reveal-art .creature-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+}
+/* a real-photo cut-out lands exactly on its shadow (same size, whole animal), not cropped like a framed photo */
+.wta-reveal-art img.creature-sil {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  border-radius: 0;
+}
+.wta-reveal-art svg,
+.wta-reveal-art .creature-svg,
+.wta-reveal-art .wta-svg {
+  width: 90%;
+  height: 90%;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+}
+.wta-reveal-art .wta-emoji,
+.wta-reveal-art .creature-emoji {
+  font-size: 110px;
+  line-height: 1;
+}
+
+@keyframes wta-reveal-pop {
+  0% { transform: scale(0.8); filter: brightness(1.6) drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
+  50% { transform: scale(1.1); filter: brightness(1.15) drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
+  100% { transform: scale(1); filter: brightness(1) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.22)); }
+}
+
+/* ---- Circular Arrangement of Animals around the Shadow ---- */
+.wta-choice-btn {
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 4.5px solid #FFFFFF;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.32),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 20;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.2s ease, opacity 0.3s ease;
+  user-select: none;
+  touch-action: manipulation;
+  animation: wta-orbit-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes wta-orbit-pop {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  70% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.wta-choice-btn:hover {
+  transform: translate(-50%, -50%) scale(1.15) !important;
+  border-color: #FACC15 !important;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 5px #FACC15,
+    0 0 25px rgba(250, 204, 21, 0.65) !important;
+}
+
+.wta-choice-btn:active {
+  transform: translate(-50%, -50%) scale(0.95) !important;
+}
+
+.wta-choice-btn.is-correct {
+  background: #DCFCE7 !important;
+  border-color: #22C55E !important;
+  box-shadow: 0 0 0 6px #22C55E, 0 0 32px rgba(34, 197, 94, 0.8) !important;
+  transform: translate(-50%, -50%) scale(1.22) !important;
+  pointer-events: none;
+}
+
+.wta-choice-btn.is-wrong {
+  animation: wta-shake 0.45s ease;
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 0 5px #EF4444, 0 8px 20px rgba(239, 68, 68, 0.45) !important;
+}
+
+.wta-choice-btn.fade-out {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0.6) !important;
+  pointer-events: none !important;
+}
+
+.wta-choice-btn img,
+.wta-choice-btn .creature-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  pointer-events: none;
+}
+/* the whole cut-out animal sits inside the circle (a cover crop cut off snake heads and parrot tails) */
+.wta-choice-btn img.creature-sil {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.wta-choice-btn svg,
+.wta-choice-btn .creature-svg,
+.wta-choice-btn .wta-svg {
+  width: 82%;
+  height: 82%;
+  display: block;
+  pointer-events: none;
+}
+
+.wta-choice-btn .wta-emoji,
+.wta-choice-btn .creature-emoji {
+  font-size: 50px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+@keyframes wta-shake {
+  0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+  25% { transform: translate(-50%, -50%) translateX(-8px) rotate(-6deg); }
+  75% { transform: translate(-50%, -50%) translateX(8px) rotate(6deg); }
+}
+
+/* Speaker button */
+.wta-speaker-btn {
+  position: absolute;
+  top: 18px; left: 18px;
+  width: 56px; height: 56px;
+  border: none; border-radius: 50%;
+  background: transparent;
+  cursor: pointer; padding: 0;
+  outline: none;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s cubic-bezier(.34, 1.56, .64, 1);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .22));
+}
+.wta-speaker-btn svg { width: 100%; height: 100%; display: block; }
+.wta-speaker-btn:hover { transform: scale(1.1); }
+.wta-speaker-btn:active { transform: scale(.92); }
+.wta-speaker-btn.is-playing { animation: pulse 0.8s ease-in-out infinite; }
+.wta-speaker-btn.is-playing .speaker-wave-1 { animation: speaker-wave 0.8s ease-in-out infinite; }
+.wta-speaker-btn.is-playing .speaker-wave-2 { animation: speaker-wave 0.8s ease-in-out infinite 0.2s; }
+@keyframes speaker-wave {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); stroke: #E67E22; }
+}
+
+/* ---- REVEAL name: big bouncy letters ---- */
+.wta-name {
+  position: absolute; top: 44px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 4px; pointer-events: none; z-index: 25;
+  font-family: "Baloo 2","Fredoka",system-ui,sans-serif; font-weight: 800;
+}
+.wta-name__l {
+  font-size: 60px; line-height: 1; letter-spacing: 2px;
+  text-shadow: 0 3px 0 rgba(255,255,255,.9), 0 6px 14px rgba(0,0,0,.22);
+  will-change: transform, opacity;
+}
+
+/* ---- INTERACT: food tray ("what does it eat?") ---- */
+.wta-tray {
+  position: absolute; left: 50%; bottom: 148px; transform: translateX(-50%);
+  display: flex; gap: 18px; padding: 14px 20px; z-index: 30;
+  background: rgba(255,255,255,.92); border-radius: 26px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.28);
+}
+.wta-tray__item {
+  width: 92px; height: 92px; border: none; border-radius: 20px;
+  background: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.16); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .12s ease, box-shadow .2s ease, opacity .3s ease;
+}
+.wta-tray__emoji { font-size: 54px; line-height: 1; }
+.wta-tray__img { width: 72px; height: 72px; object-fit: contain; pointer-events: none; -webkit-user-drag: none;
+  filter: drop-shadow(0 4px 5px rgba(43, 33, 81, .18)); }
+.scene-say__peek .wta-peek { display: block; width: 40px; height: 40px; }
+.wta-tray__item:active { transform: scale(.94); }
+.wta-tray__item.yum { animation: wta-yum .6s ease; box-shadow: 0 0 0 4px #38C172, 0 6px 16px rgba(0,0,0,.16); }
+.wta-tray__item.no  { animation: wta-shake .4s ease; box-shadow: 0 0 0 4px #E86A6A, 0 6px 16px rgba(0,0,0,.16); }
+@keyframes wta-yum { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+.wta-tray.gone {
+  opacity: 0; transform: translateX(-50%) scale(.9); pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+/* Old right sidebar removed per user request: candidate animals are placed in a circle around the shadow */
+.wta-board {
+  display: none !important;
+}
+
+/* Reduced motion & High-contrast */
+.reduce-motion .wta-shadow-card,
+.reduce-motion .wta-choice-btn,
+.reduce-motion .wta-tray__item.yum,
+.reduce-motion .wta-tray__item.no { animation: none !important; }
+
+.high-contrast .wta-choice-btn { border: 3px solid #000; }
+.high-contrast .wta-tray__item { border: 2px solid #000; color: #000; }
+.high-contrast .wta-name__l { text-shadow: 0 2px 0 #fff, 0 0 3px #000; }

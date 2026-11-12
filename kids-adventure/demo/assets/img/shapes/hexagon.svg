@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Vibrant 2D Hexagon Gradient -->
+    <linearGradient id="hexGrad2D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="hexInnerStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Flat 2D Regular Hexagon Shape -->
+  <polygon points="100,25 165,63 165,137 100,175 35,137 35,63" fill="url(#hexGrad2D)" stroke="#D97706" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Crisp Inner Border Accent -->
+  <polygon points="100,34 157,67 157,133 100,166 43,133 43,67" fill="none" stroke="url(#hexInnerStroke)" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Friendly Accent Sparkle -->
+  <circle cx="74" cy="74" r="5.5" fill="#FFFFFF" opacity="0.75"/>
+  <circle cx="84" cy="64" r="3" fill="#FFFFFF" opacity="0.9"/>
+</svg>

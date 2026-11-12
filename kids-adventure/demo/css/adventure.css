@@ -1,0 +1,179 @@
+/* =========================================================================
+   adventure.css — Today's Adventure (Change #12)
+   The card shown from Kido World, the step trail (DISCOVER → THINK →
+   STORY/EXPLORE → finish), the strip on the result screen and the progress
+   pips on the map button. Reuses the Kido World sheet (.kw-sheet), the round
+   medallions of the catalog tiles and the existing buttons / sticker reveal.
+   ========================================================================= */
+
+/* The card floats above the whole app; the world waits (inert) behind it. */
+.adv-layer { position: fixed; inset: 0; z-index: 62; }
+.adv-card { width: min(560px, 100%); text-align: center; padding-top: 18px; }
+.adv-card__title { text-align: left; }
+
+/* ---------- Momo, with one line ---------- */
+.adv-momo { display: flex; align-items: center; gap: 10px; margin: 0 2px 12px; text-align: left; }
+.adv-momo__rig.actor { position: relative; flex: 0 0 auto; }
+.adv-momo__say {
+  position: relative; margin: 0 0 0 6px; padding: 10px 16px; border-radius: 20px;
+  background: var(--grape-soft); color: var(--ink);
+  font-family: var(--font-display); font-weight: 700; font-size: 19px; line-height: 1.2;
+}
+.adv-momo__say::before {
+  content: ""; position: absolute; left: -8px; top: 50%; margin-top: -8px;
+  border-style: solid; border-width: 8px 9px 8px 0; border-color: transparent var(--grape-soft) transparent transparent;
+}
+
+/* ---------- The trail ---------- */
+.adv-trail {
+  --adv-m: 78px;
+  list-style: none; margin: 6px 0 18px; padding: 0;
+  display: flex; justify-content: center; align-items: flex-start;
+}
+.adv-step {
+  position: relative; flex: 1 1 0; min-width: 0; max-width: 136px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+/* The path from the previous medallion to this one: dotted, then green once that step is done. */
+.adv-step + .adv-step::before {
+  content: ""; position: absolute; top: calc(var(--adv-m) / 2 - 3px);
+  right: calc(50% + var(--adv-m) / 2 + 4px); width: calc(100% - var(--adv-m) - 8px); height: 6px;
+  border-radius: 3px; background: repeating-linear-gradient(90deg, #D6CBF5 0 8px, transparent 8px 14px);
+  transition: background .4s ease;
+}
+.adv-step.is-done + .adv-step::before { background: var(--leaf); }
+
+.adv-medal {
+  position: relative; width: var(--adv-m); height: var(--adv-m); flex: 0 0 auto; padding: 0;
+  border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 38% 30%, #FFFFFF 0%, #F6F2FF 60%, #E8E0F6 100%);
+  box-shadow: 0 0 0 4px #FFFFFF, 0 8px 18px rgba(43, 33, 81, .16);
+}
+.adv-medal > img, .adv-medal > .adv-medal__art {
+  width: 100%; height: 100%; border-radius: 50%; overflow: hidden; display: grid; place-items: center;
+}
+.adv-medal__img { object-fit: contain; padding: 13%; -webkit-user-drag: none; }
+.adv-medal__img.is-photo { object-fit: cover; padding: 0; }
+.adv-medal__art .kido-icon { width: 58%; height: 58%; }
+.adv-medal__art--place svg { width: 92%; height: 84%; }
+.adv-medal__art--place svg, .adv-medal__art--place svg * { animation: none !important; }
+.adv-medal__tick {
+  position: absolute; right: -5px; top: -5px; width: 30px; height: 30px;
+  filter: drop-shadow(0 2px 3px rgba(31, 138, 77, .35));
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), opacity .25s ease;
+}
+.adv-medal__tick .kido-icon { width: 100%; height: 100%; }
+button.adv-medal { cursor: pointer; transition: transform .16s cubic-bezier(.34, 1.56, .64, 1); }
+button.adv-medal:hover { transform: translateY(-3px); }
+button.adv-medal:active { transform: scale(.93); }
+.adv-medal:focus-visible { outline: 4px solid var(--grape); outline-offset: 6px; }
+
+.adv-step.is-done .adv-medal { box-shadow: 0 0 0 4px var(--leaf), 0 8px 18px rgba(31, 138, 77, .22); }
+.adv-step.is-next .adv-medal { box-shadow: 0 0 0 4px #FFB020, 0 8px 18px rgba(43, 33, 81, .16); }
+/* The suggested step breathes a soft ring — an invitation, not a lock: every step can be tapped. */
+.adv-step.is-next .adv-medal::after {
+  content: ""; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
+  border: 3px solid rgba(255, 176, 32, .55); animation: adv-ring 2.4s ease-out infinite;
+}
+.adv-medal--goal { background: radial-gradient(circle at 38% 30%, #FFF8DD 0%, #FFE38F 100%); }
+.adv-medal--goal .kido-icon { width: 58%; height: 58%; }
+.adv-step--goal:not(.is-done) .adv-medal--goal { filter: grayscale(.55) opacity(.8); }
+.adv-step--goal.is-done .adv-medal--goal { box-shadow: 0 0 0 4px #FFC23D, 0 0 24px rgba(255, 194, 61, .65); }
+
+.adv-step__role {
+  display: inline-flex; align-items: center; gap: 4px; max-width: 100%;
+  font-family: var(--font-display); font-weight: 800; font-size: 15px; line-height: 1.1; color: var(--grape-deep);
+}
+.adv-step__role .kido-icon { width: 18px; height: 18px; flex: 0 0 auto; }
+.adv-step__name {
+  max-width: 100%; padding: 0 2px; font-size: 13px; font-weight: 600; line-height: 1.2; color: var(--ink-soft);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.adv-step--goal .adv-step__role { color: #B7791F; }
+
+/* ---------- Card actions ---------- */
+.adv-card__actions { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 0 auto; }
+.adv-go .kido-icon { width: 22px; height: 22px; }
+.adv-card.is-complete .adv-momo__say { background: #FFF1C6; }
+.adv-card.is-complete .adv-momo__say::before { border-right-color: #FFF1C6; }
+
+/* ---------- Result-screen strip ---------- */
+.adv-result {
+  width: 100%; max-width: 420px; margin-top: 14px; padding: 12px 8px 10px;
+  border-radius: 24px; background: var(--surface-2); box-shadow: inset 0 0 0 2px #E4DBFB;
+}
+.adv-result__title { font-size: 20px; color: var(--grape-deep); margin-bottom: 2px; }
+.adv-result.is-complete { background: linear-gradient(180deg, #FFF9E6, #FFF0C2); box-shadow: inset 0 0 0 2px #FFD66B; }
+.adv-result.is-complete .adv-result__title { color: #9A5B00; }
+.adv-trail--compact { --adv-m: 54px; margin: 8px 0 4px; }
+.adv-trail--compact .adv-step { gap: 4px; }
+.adv-trail--compact .adv-medal__tick { width: 22px; height: 22px; right: -6px; top: -6px; }
+.adv-trail--compact .adv-step__role { font-size: 12px; }
+.adv-trail--compact .adv-step__role .kido-icon { width: 14px; height: 14px; }
+.adv-trail--compact .adv-step.is-next .adv-medal::after { inset: -7px; }
+/* The step just finished: its tick and path light up a beat after the result appears. */
+.adv-result:not(.is-lit) .adv-step.is-fresh .adv-medal__tick { opacity: 0; transform: scale(.3); }
+.adv-result:not(.is-lit) .adv-step.is-fresh + .adv-step::before { background: repeating-linear-gradient(90deg, #D6CBF5 0 8px, transparent 8px 14px); }
+.adv-result.is-lit .adv-step.is-fresh .adv-medal { animation: adv-pop .6s cubic-bezier(.34, 1.56, .64, 1); }
+.adv-result.is-complete:not(.is-lit) .adv-step--goal .adv-medal--goal { filter: grayscale(.55) opacity(.8); box-shadow: 0 0 0 4px #FFFFFF, 0 8px 18px rgba(43, 33, 81, .16); }
+.adv-result.is-complete.is-lit .adv-step--goal .adv-medal { animation: adv-pop .7s cubic-bezier(.34, 1.56, .64, 1) .12s both; }
+
+.adv-reward { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 8px 0 14px; }
+.adv-reward__msg { margin: 0; font-weight: 700; color: var(--ink-soft); }
+
+/* ---------- Map button: the next step's picture with three progress pips ---------- */
+.kw-continue--adventure .kw-continue__thumb { position: relative; }
+.kw-continue--adventure .kw-continue__thumb > img, .kw-continue--adventure .kw-continue__thumb > .adv-medal__art {
+  width: 100%; height: 100%; border-radius: 50%; overflow: hidden; display: grid; place-items: center;
+}
+.kw-continue--adventure .kw-continue__thumb .adv-medal__img { object-fit: contain; padding: 6px; }
+.kw-continue--adventure .kw-continue__thumb .adv-medal__img.is-photo { object-fit: cover; padding: 0; }
+.kw-continue--adventure .kw-continue__thumb .adv-medal__art .kido-icon { width: 62%; height: 62%; }
+.kw-continue--adventure .kw-continue__thumb > .kido-icon { width: 64%; height: 64%; }
+.kw-continue--adventure .kw-continue__text b { font-size: 19px; }
+.adv-pips {
+  position: absolute; left: 50%; bottom: 3px; translate: -50% 0;
+  display: flex; gap: 3px; padding: 2px 4px; border-radius: 999px; background: rgba(43, 33, 81, .55);
+}
+.adv-pips i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, .55); }
+.adv-pips i.on { background: #6BE39B; }
+
+/* ---------- Small and short screens ---------- */
+@media (max-width: 400px) {
+  .adv-trail { --adv-m: 62px; }
+  .adv-step__role { font-size: 13px; }
+  .adv-step__role .kido-icon { width: 15px; height: 15px; }
+  .adv-step__name { font-size: 12px; }
+  .adv-momo__say { font-size: 17px; padding: 9px 13px; }
+  .adv-medal__tick { width: 25px; height: 25px; }
+  .kw-continue--adventure .kw-continue__text b { font-size: 17px; }
+}
+@media (max-width: 340px) {
+  .adv-trail { --adv-m: 54px; }
+  .adv-trail--compact { --adv-m: 46px; }
+  .adv-momo__rig.actor { width: 52px !important; height: 62px !important; }
+  .adv-step__role span { font-size: 12px; }
+  .kw-continue--adventure .kw-continue__text b { font-size: 16px; }
+}
+@media (max-height: 480px) {
+  .adv-card { max-height: 96%; padding-top: 10px; padding-bottom: calc(12px + var(--kido-sa-bottom)); }
+  .adv-card__title { font-size: 22px; margin-bottom: 6px; }
+  .adv-momo { margin-bottom: 6px; }
+  .adv-momo__rig.actor { width: 46px !important; height: 55px !important; }
+  .adv-momo__say { font-size: 16px; padding: 7px 12px; }
+  .adv-trail { --adv-m: 56px; margin: 4px 0 10px; }
+  .adv-step__name { display: none; }
+  .adv-card__actions { flex-direction: row; max-width: 520px; }
+  .adv-card__actions .btn { min-height: 52px; font-size: 18px; padding: 0 16px; }
+}
+
+/* ---------- Motion ---------- */
+@keyframes adv-ring { 0% { transform: scale(.92); opacity: .9; } 100% { transform: scale(1.2); opacity: 0; } }
+@keyframes adv-pop { 0% { transform: scale(.82); } 55% { transform: scale(1.12); } 100% { transform: scale(1); } }
+html.reduce-motion .adv-step .adv-medal, html.reduce-motion .adv-step .adv-medal::after, html.reduce-motion .adv-medal__tick,
+html.reduce-motion .adv-step + .adv-step::before { animation: none !important; transition: none !important; }
+html.reduce-motion .adv-step.is-next .adv-medal::after { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .adv-step .adv-medal, .adv-step .adv-medal::after, .adv-medal__tick, .adv-step + .adv-step::before { animation: none !important; transition: none !important; }
+  .adv-step.is-next .adv-medal::after { display: none; }
+}

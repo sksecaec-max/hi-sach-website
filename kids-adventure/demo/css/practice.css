@@ -1,0 +1,372 @@
+/* Responsive practice scenes use screen pixels, not a scaled desktop stage. */
+.scene-root--responsive { display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; background:#f3f5e9; overflow:auto; touch-action:pan-y; padding:calc(66px + var(--kido-sa-top)) max(12px, var(--kido-sa-right)) max(12px, var(--kido-sa-bottom)) max(12px, var(--kido-sa-left)); color:#263E43; }
+.scene-root--responsive .scene-stage { width:100%; height:auto; min-height:0; flex:1 0 auto; transform:none; overflow:visible; box-shadow:none; background:none; }
+.scene-root--responsive .scene-camera, .scene-root--responsive .scene-layer--actors { position:relative; inset:auto; }
+.scene-root--responsive .scene-layer:not(.scene-layer--actors):not(.scene-layer--ui), .scene-root--responsive .scene-canvas { display:none; }
+.scene-root--responsive .scene-layer--ui { display:contents; }
+.scene-root--responsive .scene-close { position:absolute; top:calc(8px + var(--kido-sa-top)); right:max(12px, var(--kido-sa-right)); width:52px; height:52px; z-index:10; }
+.lesson-replay { position:absolute; top:calc(8px + var(--kido-sa-top)); left:max(12px, var(--kido-sa-left)); min-height:52px; padding:10px 16px; border:2px solid #bed4d0; border-radius:18px; background:#fff; color:#28474c; font:inherit; font-weight:700; cursor:pointer; }
+.scene-root--responsive .scene-progress { top:calc(26px + var(--kido-sa-top)); gap:7px; pointer-events:none; }
+.scene-root--responsive .scene-progress__pip { width:10px; height:10px; background:#9caeab; box-shadow:none; }
+.scene-root--responsive .scene-progress__pip.done { background:#25836b; }
+.scene-root--responsive .scene-progress__pip.current { background:#d79523; }
+.scene-root--responsive .scene-say { position:relative; left:auto; bottom:auto; width:min(100%, 850px); max-width:850px; margin:12px auto 0; transform:none; min-height:62px; padding:14px 20px; font-size:clamp(17px, 2.3vw, 22px); border:1px solid #d9e4dd; border-radius:20px; box-shadow:0 4px 0 #dbe2d7; justify-content:center; opacity:1; }
+.scene-root--responsive [hidden] { display:none !important; }
+.lesson { max-width:1000px; margin:0 auto; font-family:'Fredoka', sans-serif; }
+.lesson-heading { text-align:center; margin-bottom:14px; }
+.lesson-eyebrow { font-size:12px; font-weight:600; letter-spacing:2px; color:#557775; }
+.lesson-heading h1 { margin:5px 0 0; font-size:clamp(25px, 4vw, 38px); color:#294e50; line-height:1.2; }
+.lesson-body { display:grid; grid-template-columns:170px minmax(0, 650px); justify-content:center; gap:22px; align-items:center; }
+.lesson-companion { text-align:center; font-size:20px; line-height:1.4; }
+.lesson-momo { height:185px; display:flex; align-items:center; justify-content:center; }
+.lesson-momo .actor { position:relative; transform:none; left:auto; top:auto; }
+.lesson-companion p { margin:6px 0; }
+.lesson-tools { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:12px; margin:16px 0 4px; }
+.lesson-action, .lesson-tool, .garden-choices button { border:2px solid #286d69; border-radius:20px; min-height:56px; padding:12px 22px; font:inherit; font-size:18px; font-weight:500; background:#2b8274; color:#fff; cursor:pointer; box-shadow:0 4px 0 #195b54; }
+.lesson-tool { background:#fffdf3; color:#284d50; display:flex; align-items:center; gap:12px; }
+.lesson-tool svg { width:95px; height:52px; }
+.lesson button:focus-visible, .lesson-replay:focus-visible { outline:4px solid #be681d; outline-offset:4px; }
+.lesson button:disabled { cursor:default; }
+.lesson-action:disabled { opacity:.7; }
+.lesson-small { text-align:center; color:#55716f; font-size:14px; margin:10px 0 0; }
+.garden-window { position:relative; width:100%; border:6px solid #fffdf1; border-radius:32px; box-shadow:0 8px 0 #d7e2cc; overflow:hidden; }
+.garden-art { display:block; width:100%; height:auto; }
+.garden-soil-target { position:absolute; left:36%; top:66%; width:28%; min-width:80px; min-height:56px; border:2px dashed #fff1ba; border-radius:50%; background:#573a2e; color:#fff5cc; font:inherit; font-size:17px; cursor:pointer; }
+.garden-soil-target.is-over { background:#286e51; outline:5px solid #ffe49f; }
+.garden-time { position:absolute; top:12px; left:12px; right:12px; text-align:center; color:#284d50; font-size:18px; font-weight:500; text-shadow:0 1px #fff; }
+.garden-hole, .garden-seed, .garden-can, .garden-bloom, .garden-bud, .garden-leaves, .garden-water, .garden-night { opacity:0; transition:opacity .7s ease, transform 1s ease; }
+.garden-wet { opacity:calc(var(--wetness, 0) * .7); transition:opacity .25s; }
+.has-hole .garden-hole, .has-seed .garden-seed { opacity:1; }
+.is-covered .garden-hole { opacity:0; }
+.is-covered .garden-seed { opacity:.65; }
+.garden-roots path, .garden-stem { stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.3s ease; }
+.garden-leaves, .garden-bloom { transform-box:fill-box; transform-origin:50% 100%; transform:scale(.1); }
+.garden-cloud { transition:transform 1.1s ease, opacity 1.1s; }
+.has-light .garden-cloud { transform:translateX(180px); opacity:0; }
+.garden-sun { transition:filter .7s; }
+.has-light .garden-sun { filter:drop-shadow(0 0 16px #ffe099); }
+.lesson--garden[data-phase="water"] .garden-can, .is-pouring .garden-water { opacity:1; }
+.garden-water { stroke-dasharray:8 16; }
+.garden-can-tilt { transform-origin:120px 0; transition:transform .35s ease; }
+.is-pouring .garden-can-tilt { transform:rotate(-18deg); }
+.is-pouring .garden-water { animation:garden-flow .6s linear infinite; }
+@keyframes garden-flow { to { stroke-dashoffset:-48; } }
+.time-passes .garden-night { opacity:1; }
+.time-passes .garden-time { color:#fff; text-shadow:none; }
+.lesson--garden[data-growth] .garden-roots path { stroke-dashoffset:0; }
+.lesson--garden[data-growth="2"] .garden-stem, .lesson--garden[data-growth="3"] .garden-stem, .lesson--garden[data-growth="4"] .garden-stem { stroke-dashoffset:0; }
+.lesson--garden[data-growth="3"] .garden-leaves, .lesson--garden[data-growth="4"] .garden-leaves, .lesson--garden[data-growth="4"] .garden-bloom { opacity:1; transform:scale(1); }
+.lesson--garden[data-growth="3"] .garden-bud { opacity:1; }
+.lesson--garden[data-growth="4"] .garden-seed { opacity:0; }
+.garden-meter { width:180px; font-size:14px; text-align:center; }
+.garden-meter progress { display:block; width:100%; height:18px; accent-color:#287a8c; margin-top:7px; }
+.garden-choices { text-align:center; margin-top:12px; }
+.garden-choices p { margin:10px 0; }
+.garden-choices button { margin:5px; background:#fffdf3; color:#294e50; }
+.garden-seed-tool { touch-action:none; }
+.garden-keepsakes { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-top:15px; color:#527567; }
+.garden-keepsake { font-size:27px; }
+.reduce-motion .scene-root--responsive *, .reduce-motion .scene-root--responsive *::after { animation:none !important; transition:none !important; }
+.high-contrast .scene-root--responsive { color:#000; background:#fff; }
+.high-contrast .lesson button { border:3px solid #000; }
+.big-text .scene-root--responsive .scene-say { font-size:24px; }
+@media (max-width:650px) {
+  .lesson-body { grid-template-columns:minmax(0,1fr); gap:8px; }
+  .lesson-companion { display:flex; align-items:center; justify-content:center; gap:12px; font-size:16px; }
+  .lesson-momo { height:86px; width:78px; }
+  .lesson-momo .actor { width:72px !important; height:86px !important; }
+  .lesson-companion p { max-width:210px; }
+  .lesson-heading { margin-bottom:3px; }
+  .lesson-tools { margin-top:12px; }
+  .lesson-action, .lesson-tool { font-size:17px; padding:10px 16px; }
+  .garden-window { border-width:4px; }
+  .garden-time { font-size:15px; }
+  .scene-root--responsive .scene-progress { left:58%; gap:5px; }
+  .scene-root--responsive .scene-progress__pip { width:8px; height:8px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .scene-root--responsive *, .scene-root--responsive *::after { animation:none !important; transition:none !important; }
+}
+/* Momo's continuous bathroom: original inline SVG with contact-driven effects. */
+.lesson--bath { max-width:670px; }
+.bath-status { text-align:center; font-size:clamp(18px,3vw,23px); margin:8px 0 12px; color:#315e59; }
+.bath-room { position:relative; max-width:560px; margin:auto; border:5px solid #fff9e9; border-radius:32px; overflow:hidden; box-shadow:0 8px 0 #c6d8cb; touch-action:none; }
+.bath-art { display:block; width:100%; height:auto; }
+.bath-meter { display:flex; align-items:center; justify-content:center; gap:12px; margin:16px auto 0; font-size:15px; }
+.bath-meter progress { width:180px; height:14px; accent-color:#328879; }
+.bath-tool,.bath-hanger { touch-action:none; user-select:none; }
+.bath-help { display:block; margin:15px auto 0; background:#fffaf0; color:#386761; border:1px solid #94b8ac; border-radius:14px; padding:12px 16px; min-height:48px; font:inherit; cursor:pointer; }
+.bath-hanger { position:absolute; right:3%; top:28%; width:16%; height:26%; min-width:48px; min-height:48px; border:3px dashed #986024; border-radius:12px; background:transparent; cursor:grab; }
+.bath-brush-preview { position:absolute; bottom:4%; left:8%; width:30%; transform:rotate(-8deg); }
+.bath-brush-preview svg { width:100%; display:block; }
+.bath-paste,.bath-foam,.bath-wet,.bath-tooth-foam,.bath-groove,.bath-smile,.bath-rain,.bath-tap-water,.bath-spit { opacity:0; }
+.has-paste .bath-paste { opacity:1; }
+.bath-plaque { opacity:calc(1 - var(--clean,0)); transition:opacity .15s; }
+.bath-tooth-foam { opacity:calc(var(--clean,0)*.85); transition:opacity .15s; }
+.bath-foam { opacity:var(--foam,0); transition:opacity .15s; }
+.bath-wet { opacity:var(--wet,0); transition:opacity .15s; }
+.bath-tool-soap,.bath-tool-towel { display:none; }
+.bath-held-tool { pointer-events:none; }
+[data-phase="soap"] .bath-tool-soap,[data-phase="dry"] .bath-tool-towel { display:block; }
+[data-phase="soap"] .bath-tool-brush,[data-phase="dry"] .bath-tool-brush { display:none; }
+[data-surface="2"] .bath-groove { opacity:1; }
+[data-surface="1"] .bath-plaque { fill:#bb9c57; }
+.bath-time .bath-sink,.bath-time .bath-brush-preview,.teeth-done .bath-mouth,.teeth-done .bath-teeth { opacity:0; pointer-events:none; }
+.teeth-done .bath-smile { opacity:1; }
+.bath-sink { transition:opacity .5s,transform .6s; }
+.bath-time .bath-sink { transform:translateY(130px); }
+.bath-time .bath-momo { transform:translateY(15px); }
+.bath-momo { transition:transform .6s; }
+.bath-rain { stroke-dasharray:7 20; }
+.is-water .bath-rain { opacity:.85; animation:bath-flow .5s linear infinite; }
+[data-phase="tap"].is-water .bath-rain { opacity:0; }
+[data-phase="tap"].is-water .bath-tap-water { opacity:1; animation:bath-flow .6s linear infinite; }
+.is-spitting .bath-spit { opacity:1; animation:bath-flow .55s linear infinite; }
+.is-spitting .bath-head { transform:translateY(12px) rotate(4deg); transform-origin:300px 280px; }
+.bath-head { transition:transform .4s; }
+.bath-eyes { transform-origin:300px 158px; animation:bath-blink 6s infinite; }
+.bath-pupils { transition:transform .08s; }
+.bath-done .bath-momo { animation:bath-cheer .7s ease 2; }
+[data-phase="dry"].is-holding .bath-hanging-towel { opacity:0; }
+.is-holding .bath-brush-preview { opacity:0; }
+@keyframes bath-flow { to { stroke-dashoffset:-54; } }
+@keyframes bath-blink { 0%,44%,48%,100% {transform:scaleY(1)} 46% {transform:scaleY(.1)} }
+@keyframes bath-cheer { 50% {transform:translateY(2px) rotate(-2deg)} }
+@media (prefers-reduced-motion:reduce) { .lesson--bath * {animation:none!important;transition:none!important} }
+.reduce-motion .lesson--bath * {animation:none!important;transition:none!important}
+
+.bath-brush-preview {border:0;background:transparent;padding:5px;cursor:grab;touch-action:none;min-height:48px;}
+[data-phase="tap"] .bath-brush-preview {left:59%;bottom:22%;width:25%;transform:rotate(-15deg);pointer-events:none;}
+[data-phase="tap"] .bath-brush-preview .bath-paste {opacity:0;}
+.bath-done .bath-hanging-towel {opacity:1;}
+@media (min-width:650px) and (min-height:600px) {
+  .lesson--bath .bath-room {max-width:min(560px,calc((100dvh - 330px) * 1.0526));}
+}
+/* Soft character acting and enamel details. Contact stays aligned via SVG matrices. */
+.bath-head {transform-origin:300px 270px;animation:bath-breathe 4.5s ease-in-out infinite;}
+.bath-ear-left {transform-origin:226px 140px;animation:bath-ear-twitch 8s ease-in-out infinite;}
+.bath-ear-right {transform-origin:374px 140px;animation:bath-ear-twitch 8s 1.3s ease-in-out infinite;}
+.bath-tail {transform-origin:379px 382px;animation:bath-tail-sway 3.8s ease-in-out infinite;}
+.bath-brows {transform-origin:300px 130px;transition:transform .3s ease;}
+.is-scrubbing .bath-brows {transform:translateY(-3px);}
+.bath-eyes {animation:bath-blink 6.5s infinite;}
+.bath-tool-brush .bath-brush-rig {transform:translateY(14px) rotate(var(--brush-angle,-8deg));transform-origin:0 -14px;transition:transform .12s ease-out;}
+.is-scrubbing .bath-tool-brush {animation:bath-bristle-work .18s ease-in-out infinite;}
+.is-scrubbing .bath-tool-soap {animation:bath-soap-rub .28s ease-in-out infinite;transform-origin:0 0;}
+.is-scrubbing .bath-tool-towel {animation:bath-towel-rub .35s ease-in-out infinite;transform-origin:0 0;}
+.bath-tooth-spark {opacity:0;transform-box:fill-box;transform-origin:center;}
+.bath-tooth.is-clean .bath-tooth-spark {animation:bath-enamel-glint .75s ease-out both;}
+.bath-tooth-foam {opacity:calc(var(--clean,0)*.6);transform-box:fill-box;transform-origin:center;transform:scale(calc(.7 + var(--clean,0)*.3));transition:opacity .2s,transform .2s;}
+.bath-foam {transform-box:fill-box;transform-origin:center;transform:scale(calc(.65 + var(--foam,0)*.35));transition:opacity .25s,transform .25s;}
+.bath-wet {filter:drop-shadow(0 2px 1px #317e7c33);}
+.is-spitting .bath-head {animation:none;transform:translateY(12px) rotate(4deg);}
+.bath-done .bath-brows {transform:translateY(-4px);}
+@keyframes bath-breathe {0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-2px) rotate(.6deg)}}
+@keyframes bath-ear-twitch {0%,69%,77%,100%{transform:rotate(0)}72%{transform:rotate(-5deg)}75%{transform:rotate(2deg)}}
+@keyframes bath-tail-sway {0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+@keyframes bath-bristle-work {0%,100%{transform:translateY(0)}50%{transform:translateY(1.5px)}}
+@keyframes bath-soap-rub {50%{transform:rotate(-8deg) scale(1.03)}}
+@keyframes bath-towel-rub {50%{transform:rotate(5deg) scaleX(.92)}}
+@keyframes bath-enamel-glint {0%{opacity:0;transform:scale(.3) rotate(-20deg)}40%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(.6) rotate(25deg)}}
+@media(prefers-reduced-motion:reduce){.lesson--bath *{animation:none!important;transition:none!important}}
+.bath-rain {stroke-width:3;stroke:#d6f6ff;}
+.is-water .bath-rain {animation:none;}
+.is-water .bath-rain path {stroke-dasharray:9 28;animation:bath-flow .65s linear infinite;}
+.bath-time.is-water .bath-eyes {animation:bath-shower-blink 3s ease-in-out infinite;}
+@keyframes bath-shower-blink {0%,100%{transform:scaleY(.7)}50%{transform:scaleY(.25)}}
+
+/* Change #28: phones held sideways (e.g. 800x360 under a status bar). The lesson's picture takes the right
+   side at the full available height; heading, Momo, the step text and the tools stack on the left; Momo's
+   spoken line sits under them. Nothing is cut off and the picture keeps its proportions. */
+@media (orientation: landscape) and (max-height: 900px) {
+  .scene-root--responsive {
+    --lesson-top: calc(62px + var(--kido-sa-top));
+    --lesson-h: calc(100dvh - var(--lesson-top) - max(6px, var(--kido-sa-bottom)));
+    --lesson-art-w: min(50vw, calc((var(--lesson-h) - 12px) * var(--art-ratio, 1.36)));
+    padding-top: var(--lesson-top); padding-bottom: max(6px, var(--kido-sa-bottom));
+  }
+  .scene-root--responsive:has(.lesson--garden) { --art-ratio: 1.3636; }   /* garden art 600x440 */
+  .scene-root--responsive:has(.lesson--bath) { --art-ratio: 1.0526; }     /* bathroom art 600x570 */
+  .lesson { display: grid; grid-template-columns: minmax(0, 1fr) var(--lesson-art-w); grid-auto-rows: min-content;
+    column-gap: 16px; row-gap: 0; align-content: start; max-width: none; }
+  .lesson > :not(.garden-window):not(.bath-room), .lesson-body > .lesson-companion { margin-bottom: 4px; }   /* spacing on items: empty rows the picture spans add no gaps */
+  .lesson > *, .lesson-body > * { grid-column: 1; min-width: 0; }
+  .lesson-body { display: contents; }
+  .lesson::after { content: ""; grid-column: 1; height: 54px; }   /* room for Momo's spoken line below the left column */
+  .lesson .garden-window, .lesson .bath-room { grid-column: 2; grid-row: 1 / span 9; width: var(--lesson-art-w); max-width: none; margin: 0; align-self: start; }
+  .lesson-heading { margin-bottom: 0; text-align: left; }
+  .lesson-heading h1 { font-size: 20px; line-height: 1.15; }
+  .lesson-eyebrow { font-size: 10px; letter-spacing: 1.2px; }
+  .lesson-companion { display: flex; align-items: center; gap: 10px; font-size: 16px; text-align: left; }
+  .lesson-momo { height: 64px; width: 56px; flex: 0 0 auto; }
+  .lesson-momo .actor { width: 54px !important; height: 64px !important; }
+  .lesson-companion p { margin: 2px 0; }
+  .lesson-tools { justify-content: flex-start; margin: 4px 0 0; gap: 8px; }
+  .lesson-action, .lesson-tool, .garden-choices button { min-height: 48px; padding: 8px 14px; font-size: 16px; }
+  .lesson-tool svg { width: 70px; height: 40px; }
+  .garden-choices, .garden-keepsakes { text-align: left; justify-content: flex-start; margin-top: 2px; }
+  .garden-choices p { margin: 0 0 4px; }
+  .garden-choices button { margin: 2px 4px 2px 0; min-height: 44px; padding: 6px 12px; font-size: 15px; }
+  .bath-status { text-align: left; margin: 0; font-size: 18px; }
+  .bath-meter { justify-content: flex-start; margin: 2px 0 0; }
+  .bath-help { margin: 0; min-height: 44px; padding: 8px 14px; }
+  .lesson-small { text-align: left; margin: 0; font-size: 12px; }
+  /* the spoken line: bottom of the left column, clear of the picture */
+  .scene-root--responsive .scene-say {
+    position: absolute; left: max(12px, var(--kido-sa-left)); bottom: max(6px, var(--kido-sa-bottom));
+    right: calc(max(12px, var(--kido-sa-right)) + var(--lesson-art-w) + 16px);
+    width: auto; max-width: none; margin: 0; min-height: 0; padding: 5px 12px; font-size: 14px; line-height: 1.25; z-index: 4;
+  }
+}
+@media (orientation: landscape) and (max-height: 420px) {   /* Change #28: the shortest phones */
+  .lesson-eyebrow { display: none; }
+  .lesson-momo { height: 52px; width: 44px; }
+  .lesson-momo .actor { width: 44px !important; height: 52px !important; }
+  .lesson-companion { font-size: 15px; }
+}
+
+/* 2026-11-07 (owner): the paste step has no words — the tube sits next to the brush, both shake when Momo speaks and
+   after 10 s with no tap; teeth are an even light-yellow row that turns white; brushing makes LOTS of foam. */
+.bath-paste-tube { position:absolute; bottom:5%; left:41%; width:21%; min-height:48px; border:0; background:transparent; padding:6px; cursor:pointer; touch-action:manipulation; }
+.bath-paste-tube svg { width:100%; display:block; }
+.lesson--bath:not([data-phase="paste"]) .bath-paste-tube { display:none; }
+.is-hinting .bath-paste-tube, .is-hinting .bath-brush-preview { animation:bath-hint-shake .6s ease-in-out 2; }
+@keyframes bath-hint-shake { 0%,100%{translate:0 0;rotate:0deg} 20%{translate:-7px 0;rotate:-5deg} 40%{translate:7px 0;rotate:5deg} 60%{translate:-5px 0;rotate:-3deg} 80%{translate:5px 0;rotate:3deg} }
+.bath-tube-rig { transform-box:fill-box; transform-origin:center; }
+.is-squeezing .bath-tube-rig { animation:bath-squeeze .6s ease-in-out; }
+@keyframes bath-squeeze { 50% { transform:scale(1.06,.72); } }
+.bath-paste { transform-box:fill-box; transform-origin:center bottom; }
+.is-squeezing .bath-brush-preview .bath-paste { animation:bath-paste-pop .5s ease-out .25s both; }
+@keyframes bath-paste-pop { from { transform:scale(.2); } 70% { transform:scale(1.25); } to { transform:scale(1); } }
+.bath-stain { opacity:calc((1 - var(--clean,0)) * .8); transition:opacity .2s; pointer-events:none; }
+.bath-tooth-foam:not(#_) { opacity:min(1, calc(var(--clean,0) * 3)); transform:scale(calc(.8 + var(--clean,0) * .45)); }
+.bath-tooth.is-clean .bath-tooth-foam:not(#_) { opacity:.45; }          /* the white, sparkling tooth shows through */
+.bath-brush-foam { opacity:0; transition:opacity .2s; }
+[data-phase="brush"].is-scrubbing .bath-tool-brush .bath-brush-foam { opacity:1; animation:bath-foam-wobble .4s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+@keyframes bath-foam-wobble { 50% { transform:scale(1.12); } }
+
+/* 2026-11-07 (owner, 2nd pass): no text instructions in the bathroom at any age — Momo says each step (🔊 replays it).
+   The child holds the REAL thing in the picture: brush, soap bar, tap, shower head (slides left/right), towel. */
+.lesson--bath .bath-status, .lesson--bath .bath-meter span, .lesson--bath .lesson-eyebrow, .lesson--bath .lesson-small,
+.lesson--bath .bath-tool { display:none !important; }
+.scene-root--responsive:has(.lesson--bath) .scene-say > span:not(.scene-say__peek), .scene-root--responsive:has(.lesson--bath) .lesson-replay { display:none; }   /* the 🔊 box replays */
+.scene-root--responsive:has(.lesson--bath) .scene-say { cursor:pointer; justify-content:center; }
+.scene-root--responsive:has(.lesson--bath) .scene-say::after { content:"🔊"; font-size:28px; line-height:1; }
+.lesson--bath .bath-help, .lesson--bath .bath-next { font-size:0 !important; min-width:96px; min-height:64px; }
+.lesson--bath .bath-help::after { content:"🤝"; font-size:38px; line-height:1; }
+.lesson--bath .bath-next::after { content:"▶"; font-size:38px; line-height:1; }
+/* bigger brush and tube, easy to find */
+.lesson--bath .bath-brush-preview { left:1%; bottom:2%; width:46%; }
+.lesson--bath .bath-paste-tube { left:52%; bottom:3%; width:34%; }
+.lesson--bath .bath-paste { transform:scale(1.6); }
+/* the real handles */
+.bath-handle { position:absolute; border:0; background:transparent; padding:0; touch-action:none; cursor:grab; display:none; min-width:48px; min-height:48px; border-radius:50%; }
+.bath-soap-bar { left:14%; top:66%; width:20%; }
+.bath-soap-bar svg { width:100%; display:block; }
+.bath-tap-handle { left:59%; top:56%; width:18%; height:16%; box-shadow:0 0 0 4px rgba(255,214,90,.75); }
+.bath-shower-handle { left:calc(43% + var(--shower-dx,0) * (100% / 600)); top:3%; width:20%; height:13%; box-shadow:0 0 0 4px rgba(255,214,90,.75); }
+[data-phase="soap"] .bath-soap-bar, [data-phase="tap"] .bath-tap-handle, [data-phase="wet"] .bath-shower-handle, [data-phase="rinse"] .bath-shower-handle { display:block; }
+[data-phase="soap"].is-holding .bath-soap-bar { opacity:0; }
+.bath-shower-head, .bath-rain { transform:translateX(calc(var(--shower-dx,0) * 1px)); }
+/* the thing to hold shakes when Momo speaks and after 10 s with no touch */
+.is-hinting[data-phase="brush"] .bath-brush-preview, .is-hinting .bath-soap-bar, .is-hinting .bath-tap-handle,
+.is-hinting .bath-shower-handle, .is-hinting[data-phase="dry"] .bath-hanger { animation:bath-hint-shake .6s ease-in-out 2; }
+.bath-tap-handle, .bath-shower-handle { animation:bath-handle-glow 1.6s ease-in-out infinite; }
+@keyframes bath-handle-glow { 50% { box-shadow:0 0 0 9px rgba(255,214,90,.35); } }
+.is-holding .bath-tap-handle, .is-holding .bath-shower-handle { animation:none; }
+
+/* 2026-11-07 (owner, 3rd pass): Momo in the middle of the screen; no ▶ (steps move on by themselves); foam all over;
+   the shower washes it off slowly; wet fur looks wet until the towel dries it. */
+.lesson--bath .bath-next { display:none !important; }
+@media (orientation: landscape) and (max-height: 900px) {
+  .scene-root--responsive .lesson--bath { grid-template-columns: minmax(0,1fr) var(--lesson-art-w) minmax(0,1fr); }
+  .scene-root--responsive .lesson--bath .bath-room { grid-column: 2 !important; }
+  .scene-root--responsive:has(.lesson--bath) .scene-say { right: calc(50% + var(--lesson-art-w) / 2 + 12px); }
+}
+.bath-foam-all { opacity: min(1, var(--foam-all, 0)); transform-box: fill-box; transform-origin: center; transform: scale(calc(.7 + var(--foam-all, 0) * .3)); transition: opacity .35s, transform .35s; }
+.bath-foam, .bath-foam-all { filter: drop-shadow(0 2px 2px rgba(80,140,150,.25)); }
+.bath-momo { filter: saturate(calc(1 + var(--wet-all, 0) * .45)) contrast(calc(1 + var(--wet-all, 0) * .12)); transition: transform .6s, filter .4s; }   /* wet fur: deeper colour; white foam is unaffected */
+.bath-wet-all { opacity: var(--wet-all, 0); transition: opacity .4s; }
+.bath-wet-all path { animation: bath-drip 1.6s ease-in infinite; }
+@keyframes bath-drip { 0% { transform: translateY(-4px); opacity: 0; } 25% { opacity: 1; } 100% { transform: translateY(16px); opacity: 0; } }
+.bath-wet-fur { opacity: var(--wet-all, 0); transition: opacity .4s; }
+
+/* 2026-11-07 (owner): no help button, title or progress bar either — only Momo's bathroom and the 🔊 box */
+.lesson--bath .bath-help, .lesson--bath .lesson-heading, .lesson--bath .bath-meter { display:none !important; }
+
+/* 2026-11-07 (owner): the brush is held by its handle (handle hangs down to the finger), bristles face the teeth (toward the middle) */
+.bath-tool-brush .bath-brush-rig { transform:scaleX(var(--brush-side,1)) rotate(calc(90deg + var(--brush-angle,0deg) * .5)); transform-origin:0 0; }
+[data-phase="tap"] .bath-brush-preview { display:none; }
+/* Momo holds the used toothbrush under the tap; the foam washes off as the tap runs (--wash) */
+.bath-tap-brush { opacity:0; transition:opacity .3s; pointer-events:none; }
+[data-phase="tap"] .bath-tap-brush { opacity:1; }
+.bath-tap-brush .bath-paste { display:none; }
+.bath-tap-brush .bath-brush-foam { opacity:calc(1 - var(--wash,0)); }
+.bath-tap-splash { opacity:0; }
+[data-phase="tap"].is-water .bath-tap-splash { opacity:1; animation:bath-splash .35s ease-out infinite; transform-box:fill-box; transform-origin:50% 100%; }
+[data-phase="tap"].is-water .bath-tap-brush > g { animation:bath-brush-rinse .5s ease-in-out infinite; }
+@keyframes bath-splash { 0% { transform:scale(.6); opacity:1; } 100% { transform:scale(1.3) translateY(-3px); opacity:.2; } }
+@keyframes bath-brush-rinse { 0%,100% { transform:translate(364px,398px) scale(.55); } 50% { transform:translate(364px,400px) scale(.55) rotate(-2deg); } }
+
+/* 2026-11-10 (owner): the bathroom fills the whole screen (the wall and floor are drawn past the picture's edges);
+   no 🔊 box, no step dots; bigger Momo, towel, sink and tap; a hair dryer; the shower pipe follows the head. */
+.scene-root--responsive:has(.lesson--bath) .scene-say, .scene-root--responsive:has(.lesson--bath) .scene-progress { display:none !important; }
+.lesson--bath .bath-art { overflow:visible; }
+@media (orientation: landscape) {
+  .scene-root--responsive .lesson--bath .bath-room:not(#_) {
+    position:fixed; top:0; left:50%; translate:-50% 0; height:100dvh; width:calc(100dvh * 600 / 570); max-width:none; margin:0;
+    border:0; border-radius:0; box-shadow:none; overflow:visible; grid-column:auto !important; grid-row:auto !important; }
+}
+/* bigger sink and tap (the spit stream stays where Momo's mouth is) */
+.bath-sink > :not(.bath-spit), .bath-tap-brush { transform-origin:300px 520px; transform:scale(1.3); }
+/* the tap handle sits on the tap's lever, to the right of the water, so a finger never hides the washing */
+.bath-tap-handle:not(#_) { left:69.8%; top:49.8%; width:14%; height:14%; }
+/* bigger towel on the hanger */
+.bath-hanger:not(#_) { right:4%; top:30%; width:17%; height:32%; }
+/* hair dryer */
+.bath-dryer { opacity:0; pointer-events:none; transform:translate(calc(var(--dryer-x,420) * 1px), 362px); transition:opacity .3s; }
+[data-phase="dryer"] .bath-dryer { opacity:1; }
+.bath-wind { opacity:0; stroke-dasharray:14 12; }
+.is-blowing .bath-wind { opacity:.95; animation:bath-wind .35s linear infinite; }
+@keyframes bath-wind { to { stroke-dashoffset:-26; } }
+.bath-dryer-handle { left:calc(var(--dryer-x,420) * (100% / 600) - 8%); top:50%; width:16%; height:28%; border-radius:24px; }
+[data-phase="dryer"] .bath-dryer-handle { display:block; }
+.is-hinting .bath-dryer-handle { animation:bath-hint-shake .6s ease-in-out 2; }
+.is-hinting[data-phase="dryer"] .bath-dryer { animation:bath-hint-shake .6s ease-in-out 2; transform-box:fill-box; }
+/* Momo leans away from the wind; ears flutter; the mouth blows open when the dryer points at the face */
+.dryer-time .bath-momo { transform-origin:300px 490px; transform:translateX(calc(var(--lean,0) * 1px)) rotate(calc(var(--lean,0) * .25deg)); transition:transform .25s ease-out, filter .4s; }
+.is-blowing .bath-ear { animation:bath-ear-flutter .14s ease-in-out infinite; }
+@keyframes bath-ear-flutter { 50% { transform:rotate(-5deg); } }
+.bath-windmouth { opacity:0; transform-box:fill-box; transform-origin:50% 0; transition:opacity .15s; }
+.is-gust .bath-windmouth { opacity:1; animation:bath-gust .2s ease-in-out infinite; }
+.is-gust .bath-smile { opacity:0 !important; }
+.is-gust .bath-brows { transform:translateY(-6px); }
+@keyframes bath-gust { 50% { transform:scaleY(1.12); } }
+/* the scene camera's will-change made it the box the full-screen room was placed in (62px down); the bathroom never pans */
+.scene-root--responsive:has(.lesson--bath) .scene-camera { will-change:auto; transform:none; }
+
+/* 2026-11-10 (owner, 2nd pass): real-looking water and spit, the dryer parked on the wall, a richer bathroom */
+[data-phase="tap"].is-water .bath-tap-water { animation:bath-flow .5s linear infinite; }   /* moves the highlight down the stream */
+.bath-water-shine { opacity:.85; }
+.is-water .bath-rain path { stroke-dasharray:34 10; stroke-width:3.5; stroke-opacity:.8; }
+.is-spitting .bath-spit { opacity:1; animation:none; }
+.bath-spit-d { transform-box:fill-box; transform-origin:center; opacity:0; }
+.is-spitting .bath-spit-d { animation:bath-spit-drop .9s ease-in infinite; }
+.is-spitting .bath-spit-d:nth-child(2) { animation-delay:.15s; } .is-spitting .bath-spit-d:nth-child(3) { animation-delay:.3s; }
+.is-spitting .bath-spit-d:nth-child(4) { animation-delay:.45s; } .is-spitting .bath-spit-d:nth-child(5) { animation-delay:.6s; }
+@keyframes bath-spit-drop { 0% { opacity:0; transform:translateY(0) scale(.6); } 15% { opacity:1; } 85% { opacity:1; transform:translateY(88px) scale(1); } 100% { opacity:0; transform:translateY(92px) scale(1.3,.5); } }
+.bath-spit-puddle { opacity:0; transform-box:fill-box; transform-origin:center; transition:opacity .4s; }
+.is-spitting .bath-spit-puddle { opacity:1; animation:bath-puddle 1.6s ease-out both; }
+@keyframes bath-puddle { from { transform:scale(.2); } to { transform:scale(1); } }
+.is-spitting .bath-mouth { opacity:1; }
+[data-phase="dryer"] .bath-dryer-parked, .bath-done .bath-dryer-parked { opacity:0; }
+.bath-dryer-parked { transition:opacity .3s; }
+.is-hinting[data-phase="dryer"] .bath-dryer-parked { opacity:0; }
+.bath-duck { transform-box:fill-box; transform-origin:50% 100%; animation:bath-duck-bob 2.4s ease-in-out infinite; }
+@keyframes bath-duck-bob { 50% { transform:translateY(-3px) rotate(-4deg); } }
+.bath-foam-all circle { transform-box:fill-box; transform-origin:center; }
+/* toothbrush and paste rest on the sink's rim (left and right), not on the floor */
+.lesson--bath .bath-brush-preview:not(#_) { left:13%; bottom:29.5%; width:27%; transform:rotate(-4deg); }
+.lesson--bath .bath-paste-tube:not(#_) { left:62%; bottom:30.5%; width:21%; }
+/* the shower's grab area reaches down past its head: at the very top edge a phone's own swipe-down gesture took the touch */
+.bath-shower-handle:not(#_) { top:9%; height:21%; }

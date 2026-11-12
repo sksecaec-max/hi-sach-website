@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Vibrant 2D Rectangle Gradient -->
+    <linearGradient id="rectGrad2D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="rectInnerStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Flat 2D Rectangle Shape -->
+  <rect x="17" y="47" width="166" height="106" rx="16" ry="16" fill="url(#rectGrad2D)"/>
+
+  <!-- Crisp Inner Border Accent -->
+  <rect x="24" y="54" width="152" height="92" rx="11" ry="11" fill="none" stroke="url(#rectInnerStroke)" stroke-width="3"/>
+
+  <!-- Friendly Accent Sparkle -->
+  <circle cx="48" cy="74" r="6" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="60" cy="63" r="3.2" fill="#FFFFFF" opacity="0.85"/>
+</svg>

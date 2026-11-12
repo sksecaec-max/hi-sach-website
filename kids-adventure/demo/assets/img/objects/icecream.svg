@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="ic-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.38"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cone-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E6A857"/>
+      <stop offset="35%" stop-color="#FFD180"/>
+      <stop offset="85%" stop-color="#C68636"/>
+      <stop offset="100%" stop-color="#8D5514"/>
+    </linearGradient>
+    <radialGradient id="scoop-pink" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FF80AB"/>
+      <stop offset="40%" stop-color="#FF4081"/>
+      <stop offset="85%" stop-color="#C2185B"/>
+      <stop offset="100%" stop-color="#880E4F"/>
+    </radialGradient>
+    <radialGradient id="scoop-vanilla" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="45%" stop-color="#FFF59D"/>
+      <stop offset="80%" stop-color="#FBC02D"/>
+      <stop offset="100%" stop-color="#F57F17"/>
+    </radialGradient>
+    <radialGradient id="cherry-grad" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="50%" stop-color="#D50000"/>
+      <stop offset="100%" stop-color="#4A0000"/>
+    </radialGradient>
+    <linearGradient id="ic-spec" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="184" rx="46" ry="11" fill="url(#ic-shadow)"/>
+
+  <!-- Waffle Cone -->
+  <path d="M68 98 L100 180 L132 98 Q100 106 68 98 Z" fill="url(#cone-grad)"/>
+  <!-- Cone Waffle Lines -->
+  <g stroke="#9C6422" stroke-width="1.8" opacity="0.65" stroke-linecap="round">
+    <path d="M72 108 L122 124"/>
+    <path d="M78 122 L115 138"/>
+    <path d="M84 138 L108 150"/>
+    <path d="M92 154 L102 162"/>
+    <path d="M128 108 L78 124"/>
+    <path d="M122 122 L85 138"/>
+    <path d="M116 138 L92 150"/>
+    <path d="M108 154 L98 162"/>
+  </g>
+
+  <!-- Bottom Vanilla Scoop -->
+  <ellipse cx="100" cy="92" rx="36" ry="24" fill="url(#scoop-vanilla)"/>
+  <!-- Ruffles at base of scoop -->
+  <circle cx="70" cy="98" r="9" fill="url(#scoop-vanilla)"/>
+  <circle cx="85" cy="100" r="10" fill="url(#scoop-vanilla)"/>
+  <circle cx="100" cy="101" r="11" fill="url(#scoop-vanilla)"/>
+  <circle cx="115" cy="100" r="10" fill="url(#scoop-vanilla)"/>
+  <circle cx="130" cy="98" r="9" fill="url(#scoop-vanilla)"/>
+
+  <!-- Top Strawberry Swirl Scoop -->
+  <ellipse cx="100" cy="62" rx="34" ry="28" fill="url(#scoop-pink)"/>
+  <circle cx="72" cy="72" r="9" fill="url(#scoop-pink)"/>
+  <circle cx="88" cy="75" r="10" fill="url(#scoop-pink)"/>
+  <circle cx="104" cy="76" r="11" fill="url(#scoop-pink)"/>
+  <circle cx="120" cy="74" r="10" fill="url(#scoop-pink)"/>
+  <circle cx="128" cy="68" r="8" fill="url(#scoop-pink)"/>
+
+  <!-- Specular highlights on ice cream -->
+  <ellipse cx="88" cy="50" rx="14" ry="7" transform="rotate(-20 88 50)" fill="url(#ic-spec)"/>
+  <ellipse cx="88" cy="84" rx="12" ry="5" transform="rotate(-15 88 84)" fill="url(#ic-spec)"/>
+
+  <!-- Sprinkles -->
+  <rect x="80" y="58" width="8" height="3" rx="1.5" fill="#00E676" transform="rotate(25 80 58)"/>
+  <rect x="110" y="52" width="8" height="3" rx="1.5" fill="#FFEA00" transform="rotate(-35 110 52)"/>
+  <rect x="96" y="68" width="8" height="3" rx="1.5" fill="#2979FF" transform="rotate(15 96 68)"/>
+  <rect x="118" y="70" width="7" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(-20 118 70)"/>
+
+  <!-- Cherry on Top -->
+  <circle cx="100" cy="36" r="13" fill="url(#cherry-grad)"/>
+  <ellipse cx="96" cy="32" rx="4" ry="2.5" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Cherry Stem -->
+  <path d="M100 25 Q115 10 124 16" stroke="#558B2F" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+</svg>

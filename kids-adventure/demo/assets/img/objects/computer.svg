@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft Desk Contact Shadow -->
+    <radialGradient id="deskShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#020617" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#0F172A" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Warm Tech Backlight Glow -->
+    <radialGradient id="techBacklight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Brushed Aluminum Stand Gradient -->
+    <linearGradient id="metalStand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="35%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+
+    <!-- Bezel Dark Metallic Gradient -->
+    <linearGradient id="monitorBezel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="10%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Ultra-Vibrant Colorful Screen Wallpaper -->
+    <linearGradient id="screenDisplay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="30%" stop-color="#38BDF8"/>
+      <stop offset="65%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+
+    <!-- Glass Specular Reflection on Screen -->
+    <linearGradient id="screenGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- PC Tower Dark Chassis Gradient -->
+    <linearGradient id="towerChassis" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="60%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- Tower Tempered Glass Window with RGB Lighting -->
+    <linearGradient id="towerGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#8B5CF6" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#EC4899" stop-opacity="0.5"/>
+    </linearGradient>
+
+    <!-- Keyboard Base Gradient -->
+    <linearGradient id="keyboardBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Keycap Metallic Surface Gradient -->
+    <linearGradient id="keySurface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+
+    <!-- Ergonomic Mouse Gradient -->
+    <linearGradient id="mouseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="45%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Desk Pad Glow Border -->
+    <linearGradient id="padGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Wall Glow -->
+  <ellipse cx="100" cy="85" rx="85" ry="55" fill="url(#techBacklight)"/>
+
+  <!-- Desk Surface Contact Shadow -->
+  <ellipse cx="100" cy="180" rx="88" ry="16" fill="url(#deskShadow)"/>
+
+  <!-- ================= Sleek RGB Gaming Desk Mat ================= -->
+  <g id="desk-mat">
+    <rect x="22" y="134" width="156" height="46" rx="8" fill="#090D16"/>
+    <!-- Glowing Edge Stitching -->
+    <rect x="22" y="134" width="156" height="46" rx="8" fill="none" stroke="url(#padGlow)" stroke-width="1.6" opacity="0.8"/>
+  </g>
+
+  <!-- ================= PC TOWER (Standing to the Right) ================= -->
+  <g id="pc-tower" transform="translate(142, 34)">
+    <!-- Tower Body Shadow -->
+    <rect x="2" y="2" width="44" height="96" rx="6" fill="#020617" opacity="0.3"/>
+    <!-- Main Chassis Outer Shell -->
+    <rect x="0" y="0" width="44" height="96" rx="6" fill="url(#towerChassis)"/>
+
+    <!-- Front Bevel Rim -->
+    <path d="M0 0 L44 0 L42 2 L2 2 Z" fill="#64748B"/>
+    <path d="M0 0 L2 2 L2 94 L0 96 Z" fill="#475569"/>
+
+    <!-- Tempered Glass Side Panel -->
+    <rect x="3" y="10" width="28" height="74" rx="3" fill="#020617"/>
+    <rect x="4" y="11" width="26" height="72" rx="2" fill="url(#towerGlass)"/>
+
+    <!-- Dual Glowing RGB Ring Fans inside case -->
+    <!-- Top Fan -->
+    <circle cx="17" cy="32" r="10" fill="none" stroke="#22D3EE" stroke-width="2.5" opacity="0.9"/>
+    <circle cx="17" cy="32" r="4" fill="#0891B2"/>
+    <circle cx="17" cy="32" r="1.5" fill="#FFFFFF"/>
+    <!-- Bottom Fan -->
+    <circle cx="17" cy="62" r="10" fill="none" stroke="#F43F5E" stroke-width="2.5" opacity="0.9"/>
+    <circle cx="17" cy="62" r="4" fill="#BE123C"/>
+    <circle cx="17" cy="62" r="1.5" fill="#FFFFFF"/>
+
+    <!-- Glass Reflection Streak -->
+    <path d="M4 18 L26 11 L24 35 L4 55 Z" fill="#FFFFFF" opacity="0.12"/>
+
+    <!-- Front Panel Controls -->
+    <!-- Power Button with Cyan LED Halo -->
+    <circle cx="36" cy="18" r="3" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
+    <circle cx="36" cy="18" r="1.2" fill="#38BDF8"/>
+    <!-- USB Ports -->
+    <rect x="34" y="26" width="4" height="2" rx="0.5" fill="#38BDF8"/>
+    <rect x="34" y="31" width="4" height="2" rx="0.5" fill="#38BDF8"/>
+    <!-- Front Intake Ventilation Grille Lines -->
+    <line x1="33" y1="44" x2="39" y2="44" stroke="#334155" stroke-width="1.2"/>
+    <line x1="33" y1="48" x2="39" y2="48" stroke="#334155" stroke-width="1.2"/>
+    <line x1="33" y1="52" x2="39" y2="52" stroke="#334155" stroke-width="1.2"/>
+    <line x1="33" y1="56" x2="39" y2="56" stroke="#334155" stroke-width="1.2"/>
+    <line x1="33" y1="60" x2="39" y2="60" stroke="#334155" stroke-width="1.2"/>
+    <line x1="33" y1="64" x2="39" y2="64" stroke="#334155" stroke-width="1.2"/>
+    <line x1="33" y1="68" x2="39" y2="68" stroke="#334155" stroke-width="1.2"/>
+  </g>
+
+  <!-- ================= MODERN FRAMELESS MONITOR ================= -->
+  <!-- Monitor Stand Base & Neck -->
+  <g id="monitor-stand">
+    <!-- Stand Shadow -->
+    <ellipse cx="80" cy="136" rx="28" ry="6" fill="#020617" opacity="0.35"/>
+    <!-- Neck Arm -->
+    <path d="M76 96 L84 96 L85 130 L75 130 Z" fill="url(#metalStand)"/>
+    <!-- Base Plate (Minimalist metallic wedge) -->
+    <path d="M60 134 C60 130, 100 130, 100 134 L98 138 C98 140, 62 140, 62 138 Z" fill="url(#metalStand)"/>
+    <line x1="62" y1="138" x2="98" y2="138" stroke="#475569" stroke-width="1"/>
+  </g>
+
+  <!-- Monitor Display Body -->
+  <g id="monitor-display" transform="translate(18, 26)">
+    <!-- Monitor Outer Frame & Bezel -->
+    <rect x="0" y="0" width="124" height="82" rx="6" fill="url(#monitorBezel)"/>
+    <!-- Top & Side Ultra-Thin Edge Shimmer -->
+    <rect x="1" y="1" width="122" height="1" rx="0.5" fill="#64748B" opacity="0.8"/>
+
+    <!-- Screen Bezel Border -->
+    <rect x="4" y="4" width="116" height="74" rx="3" fill="#020617"/>
+
+    <!-- Active High-Res Display Panel -->
+    <rect x="5" y="5" width="114" height="72" rx="2" fill="url(#screenDisplay)"/>
+
+    <!-- Screen Wallpaper Graphic (Stylized Mountain Sunset + Glowing Code Waves) -->
+    <!-- Soft Distant Mountains -->
+    <path d="M5 60 L32 38 L58 54 L84 32 L119 58 L119 77 L5 77 Z" fill="#4338CA" opacity="0.75"/>
+    <path d="M5 68 L24 48 L52 64 L78 44 L119 68 L119 77 L5 77 Z" fill="#312E81" opacity="0.85"/>
+    <!-- Glowing Sun / Star on Screen -->
+    <circle cx="84" cy="26" r="9" fill="#FDE047"/>
+    <circle cx="84" cy="26" r="14" fill="#FDE047" opacity="0.25"/>
+
+    <!-- Floating Desktop Windows / Code Editor Card -->
+    <g transform="translate(14, 15)">
+      <rect x="0" y="0" width="56" height="36" rx="3" fill="#0F172A" opacity="0.85"/>
+      <!-- Window Titlebar dots -->
+      <circle cx="6" cy="6" r="1.8" fill="#EF4444"/>
+      <circle cx="12" cy="6" r="1.8" fill="#FBBF24"/>
+      <circle cx="18" cy="6" r="1.8" fill="#22C55E"/>
+      <!-- Code lines inside window -->
+      <line x1="6" y1="14" x2="34" y2="14" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="12" y1="20" x2="48" y2="20" stroke="#A78BFA" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="12" y1="26" x2="38" y2="26" stroke="#34D399" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="6" y1="31" x2="22" y2="31" stroke="#F472B6" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- Desktop Dock at Bottom of Screen -->
+    <rect x="36" y="66" width="52" height="9" rx="2.5" fill="#FFFFFF" opacity="0.25"/>
+    <circle cx="43" cy="70.5" r="2.2" fill="#38BDF8"/>
+    <circle cx="51" cy="70.5" r="2.2" fill="#F59E0B"/>
+    <circle cx="59" cy="70.5" r="2.2" fill="#10B981"/>
+    <circle cx="67" cy="70.5" r="2.2" fill="#EC4899"/>
+    <circle cx="75" cy="70.5" r="2.2" fill="#8B5CF6"/>
+
+    <!-- Diagonal Glass Glare across Screen -->
+    <path d="M5 5 L68 5 L18 77 L5 77 Z" fill="url(#screenGlass)"/>
+
+    <!-- Bottom Chin Logo / Dot -->
+    <circle cx="62" cy="80" r="1" fill="#94A3B8"/>
+  </g>
+
+  <!-- ================= ERGONOMIC RGB KEYBOARD ================= -->
+  <g id="keyboard" transform="translate(32, 140)">
+    <!-- Keyboard Shadow -->
+    <rect x="0" y="2" width="98" height="34" rx="4" fill="#020617" opacity="0.4"/>
+    <!-- Keyboard Case Body -->
+    <rect x="0" y="0" width="98" height="34" rx="4" fill="url(#keyboardBase)"/>
+    <!-- Subtle RGB Underglow Glow Ring -->
+    <rect x="2" y="2" width="94" height="30" rx="3" fill="none" stroke="#0284C7" stroke-width="0.8" opacity="0.6"/>
+
+    <!-- Keycaps Matrix -->
+    <!-- Row 1 (Function / Number Row) -->
+    <g fill="url(#keySurface)">
+      <rect x="4" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="13" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="22" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="31" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="40" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="49" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="58" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="67" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="76" y="4" width="7" height="4.5" rx="1"/>
+      <rect x="85" y="4" width="9" height="4.5" rx="1" fill="#475569"/>
+    </g>
+
+    <!-- Row 2 (QWERTY) -->
+    <g fill="url(#keySurface)">
+      <rect x="4" y="10.5" width="9" height="5" rx="1" fill="#475569"/>
+      <rect x="15" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="24" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="33" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="42" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="51" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="60" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="69" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="78" y="10.5" width="7" height="5" rx="1"/>
+      <rect x="87" y="10.5" width="7" height="5" rx="1"/>
+    </g>
+
+    <!-- Row 3 (ASDF) -->
+    <g fill="url(#keySurface)">
+      <rect x="4" y="17.5" width="11" height="5" rx="1" fill="#475569"/>
+      <rect x="17" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="26" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="35" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="44" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="53" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="62" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="71" y="17.5" width="7" height="5" rx="1"/>
+      <rect x="80" y="17.5" width="14" height="5" rx="1" fill="#0284C7"/>
+    </g>
+
+    <!-- Row 4 (Spacebar Row) -->
+    <g fill="url(#keySurface)">
+      <rect x="4" y="24.5" width="10" height="5" rx="1" fill="#475569"/>
+      <rect x="16" y="24.5" width="8" height="5" rx="1"/>
+      <!-- Elongated Spacebar Key -->
+      <rect x="26" y="24.5" width="46" height="5" rx="1.5" fill="#64748B"/>
+      <!-- Accent key line on spacebar -->
+      <line x1="38" y1="27" x2="60" y2="27" stroke="#38BDF8" stroke-width="1" stroke-linecap="round"/>
+      <rect x="74" y="24.5" width="8" height="5" rx="1"/>
+      <rect x="84" y="24.5" width="10" height="5" rx="1" fill="#475569"/>
+    </g>
+  </g>
+
+  <!-- ================= ERGONOMIC PRECISION MOUSE ================= -->
+  <g id="mouse" transform="translate(142, 142)">
+    <!-- Mouse Cast Shadow -->
+    <ellipse cx="11" cy="17" rx="12" ry="15" fill="#020617" opacity="0.4"/>
+
+    <!-- Mouse Body -->
+    <path d="M11 2 C4 2, 0 10, 0 20 C0 28, 4 32, 11 32 C18 32, 22 28, 22 20 C22 10, 18 2, 11 2 Z" fill="url(#mouseGrad)"/>
+
+    <!-- Left/Right Click Separation Seam -->
+    <path d="M11 2 L11 13" stroke="#0F172A" stroke-width="1.2"/>
+    <path d="M1 13 C5 15, 17 15, 21 13" stroke="#0F172A" stroke-width="1"/>
+
+    <!-- Metallic Rubber Scroll Wheel -->
+    <rect x="9.5" y="5" width="3" height="7" rx="1.5" fill="#64748B"/>
+    <rect x="10.2" y="6" width="1.6" height="3" rx="0.8" fill="#38BDF8"/>
+
+    <!-- Glowing Accent LED Stripe on Palm Arch -->
+    <path d="M5 24 C8 26, 14 26, 17 24" fill="none" stroke="#38BDF8" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
+  </g>
+
+  <!-- ================= SPARKS & TECH GLINTS ================= -->
+  <!-- Top Right Spark -->
+  <g transform="translate(186, 26)">
+    <polygon points="0,-6 1.5,-1.5 6,0 1.5,1.5 0,6 -1.5,1.5 -6,0 -1.5,-1.5" fill="#38BDF8"/>
+    <circle cx="0" cy="0" r="1.2" fill="#FFFFFF"/>
+  </g>
+  <!-- Top Left Spark -->
+  <g transform="translate(14, 20)">
+    <polygon points="0,-5 1.2,-1.2 5,0 1.2,1.2 0,5 -1.2,1.2 -5,0 -1.2,-1.2" fill="#FDE047"/>
+    <circle cx="0" cy="0" r="1" fill="#FFFFFF"/>
+  </g>
+</svg>

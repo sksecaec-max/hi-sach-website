@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <filter id="basketDropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="6" flood-color="#261200" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Wicker Body Gradient -->
+    <linearGradient id="wickerBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2A660"/>
+      <stop offset="25%" stop-color="#CA863D"/>
+      <stop offset="60%" stop-color="#A56422"/>
+      <stop offset="100%" stop-color="#6B3908"/>
+    </linearGradient>
+
+    <!-- Braided Rim Gradient -->
+    <linearGradient id="rimBraid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#BA7830"/>
+      <stop offset="25%" stop-color="#F2C288"/>
+      <stop offset="50%" stop-color="#D9974E"/>
+      <stop offset="75%" stop-color="#FCE1BE"/>
+      <stop offset="100%" stop-color="#9E5F20"/>
+    </linearGradient>
+
+    <!-- Woven Pattern -->
+    <pattern id="wickerWeave" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M0 6 Q6 0 12 6 T24 6" stroke="#5E3307" stroke-width="2.5" fill="none" opacity="0.6"/>
+      <path d="M0 18 Q6 12 12 18 T24 18" stroke="#5E3307" stroke-width="2.5" fill="none" opacity="0.6"/>
+      <path d="M6 0 Q12 6 6 12 T6 24" stroke="#FFE1B3" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M18 0 Q24 6 18 12 T18 24" stroke="#FFE1B3" stroke-width="2" fill="none" opacity="0.5"/>
+      <rect x="2" y="2" width="8" height="8" rx="2" fill="#BA7830" opacity="0.5"/>
+      <rect x="14" y="14" width="8" height="8" rx="2" fill="#E8B274" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Ambient Ground Shadow Underneath -->
+  <ellipse cx="120" cy="174" rx="76" ry="8" fill="#241103" opacity="0.25" filter="blur(4px)"/>
+
+  <!-- Basket Front Hull -->
+  <path d="M28 80 
+           C28 80, 52 165, 65 170 
+           C85 174, 155 174, 175 170 
+           C188 165, 212 80, 212 80 
+           C192 98, 48 98, 28 80 Z" 
+        fill="url(#wickerBase)" filter="url(#basketDropShadow)"/>
+
+  <!-- Wicker Weave Texture Overlay -->
+  <path d="M28 80 
+           C28 80, 52 165, 65 170 
+           C85 174, 155 174, 175 170 
+           C188 165, 212 80, 212 80 
+           C192 98, 48 98, 28 80 Z" 
+        fill="url(#wickerWeave)"/>
+
+  <!-- Front Rim Lip (Curved front portion of opening) -->
+  <path d="M28 80 C48 98, 192 98, 212 80 C194 92, 46 92, 28 80 Z" fill="#693908"/>
+  <path d="M26 78 C48 96, 192 96, 214 78 C196 90, 44 90, 26 78 Z" stroke="url(#rimBraid)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Braided highlights -->
+  <path d="M26 78 C48 96, 192 96, 214 78" stroke="#FFF2DB" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.8"/>
+
+  <!-- 3D Warm Edge Highlights -->
+  <path d="M60 166 C80 171, 160 171, 180 166" stroke="#FFD8A8" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  <path d="M34 94 C46 136, 60 160, 68 168" stroke="#FFE5C4" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+</svg>

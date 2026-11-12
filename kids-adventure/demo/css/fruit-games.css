@@ -1,0 +1,860 @@
+/* =========================================================================
+   fruit-games.css — Ultra-realistic 3D Fruit Games presentation
+   Orchard harvest backgrounds, 3D woven baskets, market stalls, and
+   volumetric fruit interactions.
+   ========================================================================= */
+
+/* --- Common Fruit Game Container --- */
+.fruit-game-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  background: #182B14;
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Fredoka', 'Baloo 2', system-ui, sans-serif;
+}
+
+/* --- Orchard Scene Background (Realistic Sunny Park with Focus Spotlight & Depth of Field) --- */
+.orchard-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #142810;
+}
+.orchard-bg-photo {
+  position: absolute;
+  inset: -18px;
+  background: url("../assets/img/sunny-park.svg") center 30% / cover no-repeat;
+  filter: blur(5px) saturate(1.15) brightness(0.92);
+  transform: scale(1.04);
+  pointer-events: none;
+}
+.orchard-spotlight {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Center illumination: softly lights up the play area so baskets and fruits pop */
+    radial-gradient(ellipse 75% 70% at 50% 50%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 245, 200, 0.06) 45%, rgba(8, 20, 6, 0.44) 100%),
+    /* Soft framing vignette */
+    linear-gradient(180deg, rgba(8, 18, 6, 0.30) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(8, 18, 6, 0.45) 100%);
+  pointer-events: none;
+}
+.orchard-sun {
+  position: absolute;
+  top: -80px;
+  right: 18%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 240, 0.95) 0%, rgba(255, 238, 140, 0.65) 28%, rgba(255, 215, 60, 0.28) 55%, rgba(255, 255, 255, 0) 75%);
+  filter: blur(14px);
+  opacity: 0.9;
+  pointer-events: none;
+  animation: sun-pulse 6s ease-in-out infinite alternate;
+}
+.orchard-sunbeams {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(125deg, rgba(255, 250, 210, 0.22) 0%, rgba(255, 245, 180, 0.08) 32%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(145deg, rgba(255, 245, 190, 0.16) 12%, rgba(255, 240, 160, 0.06) 42%, rgba(255, 255, 255, 0) 72%);
+  mix-blend-mode: screen;
+}
+@keyframes sun-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.12); opacity: 0.95; }
+}
+.orchard-hills {
+  display: none !important;
+}
+
+
+/* Floating leaves and orchard petals */
+.orchard-leaf {
+  position: absolute;
+  width: 18px;
+  height: 12px;
+  border-radius: 50% 0 50% 0;
+  background: #84DB23;
+  opacity: 0.55;
+  pointer-events: none;
+  animation: leaf-drift 10s linear infinite;
+}
+@keyframes leaf-drift {
+  0% { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(520px) rotate(360deg) translateX(60px); opacity: 0; }
+}
+
+/* --- Top Header & HUD --- */
+.fg-hud {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+.fg-hud__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2D3748;
+}
+.fg-hud__icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+.fg-hud__goal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF3D6;
+  border: 2px solid #FFD074;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #8C5300;
+  box-shadow: 0 2px 6px rgba(255, 174, 0, 0.2);
+}
+.fg-hud__target-pic {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.fg-hud__target-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* =========================================================================
+   1. FRUIT CATCH ARCADE GAME
+   ========================================================================= */
+.fruit-catch-stage {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Falling 3D Fruit Items */
+.falling-fruit {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.28));
+  will-change: transform;
+}
+.falling-fruit img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* 3D Basket Controller */
+.fruit-basket-actor {
+  position: absolute;
+  bottom: 18px;
+  width: 140px;
+  height: 95px;
+  transform: translateX(-50%);
+  cursor: grab;
+  z-index: 15;
+  transition: transform 0.04s linear;
+  will-change: transform, left;
+}
+.fruit-basket-actor:active {
+  cursor: grabbing;
+}
+.basket-shadow {
+  position: absolute;
+  bottom: -6px;
+  left: 10%;
+  width: 80%;
+  height: 16px;
+  background: radial-gradient(ellipse, rgba(20, 50, 8, 0.45) 0%, rgba(20, 50, 8, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.basket-layer-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.basket-layer-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.basket-layer-front {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+.basket-layer-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(60, 30, 10, 0.25));
+}
+.basket-contents {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 25px;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+.basket-mini-fruit {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+  animation: fruit-plop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes fruit-plop {
+  0% { transform: translateY(-30px) scale(0.3); opacity: 0; }
+  60% { transform: translateY(4px) scale(1.15); }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Basket Catch Bounce Animation */
+.anim-basket-catch {
+  animation: basket-catch-spring 0.32s ease-out;
+}
+@keyframes basket-catch-spring {
+  0% { transform: translateX(-50%) scale(1, 1); }
+  30% { transform: translateX(-50%) scale(1.14, 0.86); }
+  65% { transform: translateX(-50%) scale(0.96, 1.05); }
+  100% { transform: translateX(-50%) scale(1, 1); }
+}
+
+/* Floating Score Particles */
+.fruit-score-pop {
+  position: absolute;
+  z-index: 25;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFB300;
+  text-shadow: 0 2px 0 #FFF, 0 4px 10px rgba(0,0,0,0.3);
+  pointer-events: none;
+  animation: score-float 0.8s ease-out forwards;
+}
+@keyframes score-float {
+  0% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+  25% { transform: translate(-50%, -20px) scale(1.3); opacity: 1; }
+  100% { transform: translate(-50%, -60px) scale(1); opacity: 0; }
+}
+
+/* On-screen touch arrows for accessibility */
+.catch-arrows-bar {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  pointer-events: none;
+  z-index: 18;
+}
+.catch-arrow-btn {
+  pointer-events: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #FFF;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2D3748;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+.catch-arrow-btn:active {
+  transform: scale(0.9);
+  background: #FFE28A;
+}
+
+/* =========================================================================
+   2. FRUIT MARKET EXPLORE GAME
+   ========================================================================= */
+.fruit-market-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  overflow-y: auto;
+  z-index: 10;
+}
+.market-awning {
+  width: 100%;
+  height: 28px;
+  background: repeating-linear-gradient(45deg, #FF453A, #FF453A 20px, #FFFFFF 20px, #FFFFFF 40px);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 14px;
+}
+.market-crates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 18px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+.market-crate-card {
+  position: relative;
+  background: linear-gradient(145deg, #FFFDF8 0%, #F5E8D0 100%);
+  border: 3px solid #E4CDA7;
+  border-radius: 20px;
+  padding: 12px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(100, 70, 30, 0.15), inset 0 2px 0 rgba(255,255,255,0.8);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s, border-color 0.25s;
+}
+.market-crate-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 16px 28px rgba(100, 70, 30, 0.25);
+  border-color: #FFAE1A;
+}
+.market-crate-card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+.market-crate-pic {
+  width: 82px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.market-crate-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.22));
+}
+.market-crate-card:hover .market-crate-pic {
+  transform: scale(1.14) rotate(-3deg);
+}
+.market-crate-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #38240D;
+  text-align: center;
+}
+.market-crate-taste {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7A5726;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 4px;
+}
+.market-crate-explored {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #48BB78;
+  color: #FFF;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 6px rgba(72, 187, 120, 0.4);
+}
+
+/* Modal Popup when tapping a 3D fruit in market */
+.fruit-detail-card {
+  position: relative;
+  background: #FFF;
+  border-radius: 28px;
+  padding: 24px;
+  max-width: 420px;
+  width: 90%;
+  margin: auto;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  text-align: center;
+  animation: fruit-zoom-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes fruit-zoom-in {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.fruit-detail-pic {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 12px;
+  filter: drop-shadow(0 14px 24px rgba(0,0,0,0.25));
+  animation: fruit-float 3s ease-in-out infinite alternate;
+}
+.fruit-detail-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@keyframes fruit-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+.fruit-detail-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1A202C;
+}
+.fruit-detail-tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0 14px;
+}
+.fruit-tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.fruit-tag--taste { background: #FFE8CC; color: #D9480F; }
+.fruit-tag--color { background: #E7F5FF; color: #1971C2; }
+.fruit-detail-fact {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #4A5568;
+  margin-bottom: 20px;
+}
+.fruit-detail-btn {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 100%);
+  color: #FFF;
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 10px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+  transition: transform 0.15s;
+}
+.fruit-detail-btn:active {
+  transform: scale(0.95);
+}
+
+/* =========================================================================
+   3. FIND THE FRUIT QUIZ
+   ========================================================================= */
+.fruit-find-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10;
+}
+.fruit-pedestals-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 15px;
+  max-width: 800px;
+}
+.fruit-pedestal-card {
+  position: relative;
+  width: 145px;
+  height: 165px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 80%, #E9DAC1 0%, #D4C1A3 60%, rgba(212,193,163,0) 70%);
+  cursor: pointer;
+  border-radius: 24px;
+  padding: 8px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fruit-pedestal-card:hover {
+  transform: translateY(-10px) scale(1.06);
+}
+.fruit-pedestal-card:active {
+  transform: translateY(2px) scale(0.97);
+}
+.fruit-pedestal-pic {
+  width: 118px;
+  height: 118px;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,0.25));
+  transition: transform 0.25s;
+}
+.fruit-pedestal-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+.fruit-pedestal-label {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2D3748;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 14px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+.fruit-pedestal-card.is-correct {
+  animation: fruit-celebrate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes fruit-celebrate {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.22) translateY(-20px); }
+  75% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* =========================================================================
+   4. FRUIT BASKET SORTER
+   ========================================================================= */
+.fruit-sorter-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 20px;
+  z-index: 10;
+}
+.sorter-baskets-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  max-width: 820px;
+  margin: 0 auto;
+  width: 100%;
+}
+.sorter-basket-slot {
+  position: relative;
+  flex: 1;
+  max-width: 220px;
+  min-height: 140px;
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 3.5px dashed #CBD5E0;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 8px 10px;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+.sorter-basket-slot.is-hovered {
+  border-color: #FFB300;
+  border-style: solid;
+  background: #FFFDF0;
+  transform: scale(1.08) translateY(-6px);
+  box-shadow: 0 16px 36px rgba(255, 179, 0, 0.42);
+}
+.sorter-basket-badge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+  color: #FFF;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  pointer-events: none;
+}
+.sorter-basket-badge--red { background: #E53E3E; }
+.sorter-basket-badge--yellow { background: #D69E2E; }
+.sorter-basket-badge--purple { background: #805AD5; }
+
+.sorter-basket-img {
+  width: 100px;
+  height: 70px;
+  position: relative;
+  pointer-events: none;
+}
+.sorter-basket-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sorter-basket-stored {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+.sorter-basket-stored img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+.sorter-pool-tray {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 14px 24px;
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.20);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  max-width: 680px;
+  margin: 10px auto;
+  width: 100%;
+  min-height: 94px;
+}
+.sorter-chip-item {
+  width: 76px;
+  height: 76px;
+  cursor: grab;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
+}
+.sorter-chip-item:hover {
+  transform: scale(1.22) translateY(-8px);
+}
+.sorter-chip-item:active,
+.sorter-chip-item.is-active {
+  cursor: grabbing;
+  transform: scale(1.12);
+}
+.sorter-chip-item.dragging {
+  opacity: 0.25;
+  transform: scale(0.85);
+}
+.sorter-chip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.28));
+  pointer-events: none;
+  transition: filter 0.2s;
+}
+.sorter-chip-item:hover img {
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.40));
+}
+
+.sorter-ghost {
+  position: fixed;
+  z-index: 9999;
+  width: 90px;
+  height: 90px;
+  pointer-events: none;
+  margin: 0;
+  transform: translate(-50%, -50%) scale(1.18);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+}
+.sorter-ghost img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.48));
+  pointer-events: none;
+}
+
+/* =========================================================================
+   5. 3D FRUIT MEMORY MATCH
+   ========================================================================= */
+.fruit-memory-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px 24px;
+  z-index: 10;
+  width: 100%;
+}
+
+.mem-grid {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.fruit-game-wrap .mem-card {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 145px;
+  min-height: 100px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  perspective: 1000px;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fruit-game-wrap .mem-card:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.fruit-game-wrap .mem-card:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.fruit-game-wrap .mem-card__inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+}
+
+.fruit-game-wrap .mem-card.flipped .mem-card__inner,
+.fruit-game-wrap .mem-card.done .mem-card__inner {
+  transform: rotateY(180deg);
+}
+
+.fruit-game-wrap .mem-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fruit-game-wrap .mem-face--back {
+  background: linear-gradient(145deg, #7C4DFF 0%, #5330B5 55%, #341680 100%);
+  border: 3.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.4), inset 0 -4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.mem-card-back-badge {
+  font-size: clamp(34px, 7vw, 48px);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.fruit-game-wrap .mem-card:hover .mem-card-back-badge {
+  transform: scale(1.18) rotate(8deg);
+}
+
+.fruit-game-wrap .mem-face--front {
+  background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #F6FAF7 65%, #E1EEE4 100%);
+  border: 3.5px solid #FFFFFF;
+  transform: rotateY(180deg);
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.7);
+  padding: 8px 6px;
+}
+
+.fruit-game-wrap .mem-card.done .mem-face--front {
+  background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #E9FBEF 65%, #C2F3CB 100%);
+  border: 3.5px solid #4CAF50;
+  box-shadow: 0 0 18px rgba(76, 175, 80, 0.65), inset 0 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+.mem-fruit-img {
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mem-fruit-label {
+  margin-top: 4px;
+  font-size: clamp(12px, 2.2vw, 15px);
+  font-weight: 800;
+  color: #243E36;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+}
+
+.fruit-game-wrap .mem-card.done .mem-fruit-img {
+  animation: fruit-bounce 0.65s ease-in-out;
+}
+

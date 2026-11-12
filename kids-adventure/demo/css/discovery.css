@@ -1,0 +1,183 @@
+/* =========================================================================
+   discovery.css — Quick Discoveries + the VideoManager player (kv-*)
+   The clip sits in a soft, organic "viewing window" floating over its own
+   Kido World place, lit with the same warm light as the world art.
+   ========================================================================= */
+
+/* ---------- Discovery screen ---------- */
+.kd {
+  position: relative; min-height: 100%; overflow: hidden;
+  display: flex; justify-content: center; align-items: center;
+  background: #2E6B4A;
+}
+.kd-backdrop { position: absolute; inset: -12px; pointer-events: none; }
+.kd-backdrop svg { width: 100%; height: 100%; display: block; filter: blur(3px) saturate(1.08); transform: scale(1.04); }
+.kd-backdrop * { animation: none !important; }       /* a still backdrop: no CPU spent behind the clip */
+.kd::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(ellipse 70% 60% at 50% 42%, rgba(255,246,214,.25) 0%, rgba(10,36,26,.45) 70%, rgba(10,30,22,.62) 100%);
+}
+.kd-stage {
+  position: relative; z-index: 2; width: 100%; max-width: 980px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 10px 16px calc(22px + var(--kido-sa-bottom));
+}
+.kd-title {
+  margin: 0; max-width: min(100%, 720px); text-align: center;
+  padding: 9px 22px; border-radius: 999px;
+  background: rgba(255,253,248,.95); color: var(--ink);
+  font-size: clamp(18px, 1.6vw + 12px, 28px); font-weight: 800; line-height: 1.15;
+  box-shadow: 0 4px 0 rgba(76,50,168,.14), 0 14px 30px rgba(8,30,20,.28);
+  animation: pop-in .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.kd-slot {
+  position: relative;
+  width: min(100%, calc((100dvh - 300px) * 16 / 9), 900px);
+  min-width: min(100%, 260px);
+}
+/* Leaves framing the window, so the clip belongs to the world. */
+.kd-slot::before, .kd-slot::after {
+  content: ""; position: absolute; z-index: 3; pointer-events: none;
+  width: clamp(54px, 11%, 110px); aspect-ratio: 1;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M8 92 C4 60 24 26 70 10 C74 44 56 80 8 92 Z' fill='%234FB060'/%3E%3Cpath d='M8 92 C30 66 48 44 70 10' fill='none' stroke='%23286B42' stroke-width='3'/%3E%3Cpath d='M20 96 C28 72 52 58 92 58 C82 82 54 98 20 96 Z' fill='%2331945A'/%3E%3C/svg%3E");
+  filter: drop-shadow(0 6px 8px rgba(8,30,20,.35));
+}
+.kd-slot::before { left: -18px; bottom: -16px; }
+.kd-slot::after { right: -18px; top: -18px; transform: rotate(180deg); }
+.kd-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; min-height: 8px; }
+.kd-actions .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 60px; padding: 0 26px; font-size: 20px; animation: pop-in .4s cubic-bezier(.34,1.56,.64,1) both; }
+.kd-actions .kido-icon { width: 22px; height: 22px; }
+.kd-continue { background: linear-gradient(135deg, #FFBE3B 0%, #FF9A1F 55%, #FF7A1A 100%); color: #fff; box-shadow: 0 5px 0 #D46A12, 0 12px 26px rgba(212,106,18,.35); }
+.kd-again { background: rgba(255,253,248,.95); color: var(--ink); }
+.kd-actions .btn:focus-visible { outline: 4px solid #FFFFFF; outline-offset: 3px; }
+
+/* ---------- Picture discovery (no clip available) ---------- */
+.kd-picture__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: kd-kenburns 10s ease-in-out infinite alternate; }
+.kd-picture__fact {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 22px 18px;
+  color: #fff; text-align: center; font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(16px, 1.3vw + 11px, 24px); line-height: 1.2; text-shadow: 0 2px 6px rgba(0,0,0,.45);
+  background: linear-gradient(180deg, transparent 0%, rgba(8,24,16,.72) 70%);
+  animation: screen-in .6s ease .8s both;
+}
+@keyframes kd-kenburns { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.1) translate(-2%, -2%); } }
+
+/* ---------- Question ---------- */
+.kd-ask { width: 100%; }
+.kd-ask[hidden] { display: none; }
+.kd.is-asking .kd-title { font-size: clamp(20px, 1.8vw + 13px, 32px); }
+.kd-options { display: flex; justify-content: center; gap: clamp(10px, 2.5vw, 22px); flex-wrap: wrap; margin-top: 6px; }
+.opt.kd-opt {
+  width: clamp(100px, 28vw, 200px); min-height: 0; aspect-ratio: .9; padding: 6px 4px 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  animation: pop-in .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.opt.kd-opt:nth-child(2) { animation-delay: .1s; }
+.opt.kd-opt:nth-child(3) { animation-delay: .2s; }
+.kd-pic { width: 100%; height: auto; display: block; }
+/* Answer pictures from the shared puzzle art (Change #13): Kido drawings sit whole, photos fill a soft tile. */
+.kd-pic--art { width: 100%; aspect-ratio: 1; display: grid; place-items: center; }
+.kd-pic--art > svg, .kd-pic--art > img { width: 100%; height: 100%; display: block; object-fit: contain; -webkit-user-drag: none; }
+.kd-pic--photo { border-radius: 16px; overflow: hidden; background: #FFFFFF; }
+.kd-pic--photo > img { object-fit: cover; }
+/* Words-only answers (questions for readers): a calm list of wide buttons instead of picture cards. */
+.opt.kd-opt.kd-opt--text { aspect-ratio: auto; width: min(100%, 360px); min-height: 64px; padding: 10px 18px; }
+.kd-options:has(.kd-opt--text) { flex-direction: column; align-items: center; gap: 10px; }
+.opt.kd-opt--text .kd-opt__label { font-size: clamp(17px, .6vw + 14px, 21px); line-height: 1.2; text-align: center; }
+.kd-opt__label { font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 1vw + 12px, 22px); }
+/* Gentle "not this one": the card just steps back — no alarm colour. */
+.opt.kd-opt.is-wrong { background: #EEEAF6; color: var(--ink-soft); border-color: transparent; opacity: .6; }
+.opt.kd-opt:focus-visible { outline: 4px solid #FFFFFF; outline-offset: 3px; }
+
+/* =========================================================================
+   VideoManager player (kv-*) — reusable by any activity
+   ========================================================================= */
+.kv-player { position: relative; width: 100%; outline: none; }
+.kv-player:focus-visible .kv-frame { box-shadow: 0 0 0 6px #FFFFFF, 0 0 0 11px var(--grape), 0 24px 60px rgba(8,30,20,.45); }
+.kv-frame {
+  position: relative; width: 100%; aspect-ratio: var(--kv-ar, 16 / 9); overflow: hidden;
+  border-radius: 40px 32px 42px 34px;
+  background: #0F241A;
+  box-shadow: 0 0 0 6px rgba(255,253,248,.92), 0 0 0 13px rgba(255,255,255,.22),
+              0 24px 60px rgba(8,30,20,.45), 0 0 90px rgba(255,236,170,.35);
+  animation: kv-in .55s cubic-bezier(.2,.8,.3,1.15) both;
+}
+@keyframes kv-in { from { opacity: 0; transform: scale(.9) translateY(14px); } to { opacity: 1; transform: none; } }
+.kv-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #0D1F17; }
+.kv-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.85); }
+.kv-video::cue { font-family: var(--font-body); font-size: 1.1em; background: rgba(20,16,40,.72); }
+
+.kv-loading { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: none; gap: 10px; }
+.kv-loading i { width: 16px; height: 16px; border-radius: 50%; background: #FFD166; animation: kv-dot 1s ease-in-out infinite; }
+.kv-loading i:nth-child(2) { animation-delay: .15s; background: #7FE3A0; }
+.kv-loading i:nth-child(3) { animation-delay: .3s; background: #8FD3FF; }
+.kv-player.is-loading .kv-loading, .kv-player.is-buffering .kv-loading { display: flex; }
+@keyframes kv-dot { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(-10px); opacity: 1; } }
+
+.kv-bigplay {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2;
+  width: clamp(72px, 16%, 104px); aspect-ratio: 1; border-radius: 50%;
+  display: none; place-items: center; font-size: clamp(30px, 6vw, 44px); color: #FFFFFF; padding-left: 4px;
+  background: linear-gradient(135deg, #FFBE3B, #FF7A1A); border: 4px solid rgba(255,255,255,.92);
+  box-shadow: 0 5px 0 #D46A12, 0 14px 30px rgba(0,0,0,.35);
+  animation: kv-pulse 1.8s ease-in-out infinite;
+}
+.kv-player.is-ready .kv-bigplay, .kv-player.is-paused .kv-bigplay { display: grid; }
+@keyframes kv-pulse { 50% { transform: scale(1.07); } }
+
+.kv-end { position: absolute; inset: 0; z-index: 2; display: none; align-items: center; justify-content: center; background: rgba(10,30,22,.35); }
+.kv-player.is-ended .kv-end { display: flex; }
+.kv-replay {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 56px; padding: 0 22px; border-radius: 999px;
+  background: rgba(255,253,248,.95); color: var(--ink); font-family: var(--font-display); font-weight: 800; font-size: 19px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.3);
+}
+.kv-replay .kido-icon { width: 24px; height: 24px; }
+
+.kv-bar {
+  position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 3;
+  display: none; align-items: center; gap: 10px; padding: 5px;
+  border-radius: 999px; background: rgba(16,24,40,.38); backdrop-filter: blur(6px);
+}
+.kv-player.is-playing .kv-bar, .kv-player.is-paused .kv-bar, .kv-player.is-ended .kv-bar, .kv-player.is-ready .kv-bar { display: flex; }
+.kv-bar { transition: background .35s ease; }
+.kv-bar .kv-btn--play, .kv-bar .kv-track, .kv-bar .kv-btn--cc, .kv-skip { transition: opacity .35s ease; }
+.kv-player.is-idle .kv-bar { background: transparent; backdrop-filter: none; }
+.kv-player.is-idle .kv-btn--play, .kv-player.is-idle .kv-track, .kv-player.is-idle .kv-btn--cc,
+.kv-player.is-idle .kv-skip { opacity: 0; pointer-events: none; }
+.kv-btn {
+  width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255,253,248,.94); color: var(--ink); font-size: 20px; font-weight: 800; font-family: var(--font-display);
+}
+.kv-btn .kido-icon { width: 22px; height: 22px; }
+.kv-btn--cc { font-size: 14px; }
+.kv-btn--cc[aria-pressed="false"] { opacity: .6; }
+.kv-player.is-muted .kv-btn--mute { background: #FFE3E8; color: #B4304A; }
+.kv-track { flex: 1 1 auto; height: 8px; border-radius: 99px; background: rgba(255,255,255,.35); overflow: hidden; }
+.kv-fill { display: block; width: 0; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #FFD166, #FF9A1F); transition: width .25s linear; }
+.kv-skip {
+  position: absolute; top: 12px; right: 14px; z-index: 3; display: none; align-items: center; gap: 4px;
+  min-height: 44px; padding: 0 12px 0 16px; border-radius: 999px;
+  background: rgba(16,24,40,.42); color: #FFFFFF; font-family: var(--font-display); font-weight: 700; font-size: 15px;
+}
+.kv-skip .kido-icon { width: 16px; height: 16px; }
+.kv-player.is-playing .kv-skip, .kv-player.is-paused .kv-skip { display: inline-flex; }
+.kv-player button:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 2px; }
+.kv-player.is-error .kv-bar, .kv-player.is-error .kv-bigplay { display: none; }
+
+/* Short landscape phones: keep the window + buttons on one screen. */
+@media (max-height: 460px) {
+  .kd-stage { gap: 8px; padding-top: 4px; }
+  .kd-title { padding: 6px 16px; font-size: 18px; }
+  .kd-slot { width: min(100%, calc((100dvh - var(--hud-h, 64px) - 130px) * 16 / 9), 900px); }   /* Change #28: below the floating HUD + status bar */
+  .kd-actions .btn { min-height: 52px; font-size: 17px; }
+  .opt.kd-opt { width: clamp(90px, 18vw, 150px); }
+}
+
+/* Reduced motion: no entrance / Ken Burns / pulsing; everything still works. */
+html.reduce-motion .kd-title, html.reduce-motion .kv-frame, html.reduce-motion .kd-picture__img,
+html.reduce-motion .kd-picture__fact, html.reduce-motion .kv-bigplay, html.reduce-motion .kd-actions .btn,
+html.reduce-motion .opt.kd-opt { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .kd-title, .kv-frame, .kd-picture__img, .kd-picture__fact, .kv-bigplay, .kd-actions .btn, .opt.kd-opt { animation: none !important; }
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft 3D Floor Shadow -->
+    <radialGradient id="coneFloorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#042F2E" stop-opacity="0.36"/>
+      <stop offset="65%" stop-color="#042F2E" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#042F2E" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Conical Lateral Shading (Directional Light from Left) -->
+    <linearGradient id="coneLateralGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="25%" stop-color="#5EEAD4"/>
+      <stop offset="42%" stop-color="#CCFBF1"/>
+      <stop offset="65%" stop-color="#0D9488"/>
+      <stop offset="88%" stop-color="#0F766E"/>
+      <stop offset="100%" stop-color="#134E4A"/>
+    </linearGradient>
+
+    <!-- Base Curved Underside -->
+    <linearGradient id="coneBaseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#042F2E"/>
+    </linearGradient>
+
+    <!-- Specular Streak down the cone -->
+    <linearGradient id="coneStreak" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="174" rx="66" ry="14" fill="url(#coneFloorShadow)"/>
+
+  <!-- Cone Lateral Surface Body -->
+  <path d="M 100 26
+           L 36 156
+           A 64 18 0 0 0 164 156
+           Z"
+        fill="url(#coneLateralGrad)"/>
+
+  <!-- Base Curved Rim Accent -->
+  <path d="M 36 156 A 64 18 0 0 0 164 156" fill="none" stroke="#134E4A" stroke-width="2"/>
+
+  <!-- Specular Reflection Highlight Line -->
+  <path d="M 100 26 L 76 158" stroke="url(#coneStreak)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Apex Tip Glow -->
+  <circle cx="100" cy="26" r="3" fill="#FFFFFF"/>
+</svg>

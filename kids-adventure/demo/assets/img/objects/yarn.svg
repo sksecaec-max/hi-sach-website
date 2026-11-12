@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Soft 3D Ground Shadow -->
+    <radialGradient id="shadowYarn" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.38"/>
+      <stop offset="70%" stop-color="#1E293B" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 3D Wool Yarn Gradient (Cozy Coral Magenta) -->
+    <radialGradient id="yarnSphere" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#F472B6"/>
+      <stop offset="35%" stop-color="#EC4899"/>
+      <stop offset="70%" stop-color="#DB2777"/>
+      <stop offset="90%" stop-color="#9D174D"/>
+      <stop offset="100%" stop-color="#700735"/>
+    </radialGradient>
+
+    <!-- Knitting Needle Gradient (Polished Wood) -->
+    <linearGradient id="needleWood" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="40%" stop-color="#F59E0B"/>
+      <stop offset="85%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+
+    <!-- Needle Knob (Amber Bead) -->
+    <radialGradient id="needleKnob" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="60%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#A16207"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="180" rx="72" ry="15" fill="url(#shadowYarn)"/>
+
+  <!-- Needle 1 (Diagonal Crossing from top-left to bottom-right) -->
+  <g id="needle1">
+    <line x1="30" y1="25" x2="168" y2="165" stroke="url(#needleWood)" stroke-width="7" stroke-linecap="round"/>
+    <!-- Pointed Tip Bottom-Right -->
+    <polygon points="168,165 174,171 165,174" fill="#78350F"/>
+    <!-- Amber End Knob Top-Left -->
+    <circle cx="28" cy="23" r="10" fill="url(#needleKnob)"/>
+    <circle cx="25" cy="20" r="3" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+
+  <!-- Needle 2 (Diagonal Crossing from top-right to bottom-left) -->
+  <g id="needle2">
+    <line x1="170" y1="25" x2="32" y2="165" stroke="url(#needleWood)" stroke-width="7" stroke-linecap="round"/>
+    <!-- Pointed Tip Bottom-Left -->
+    <polygon points="32,165 26,171 35,174" fill="#78350F"/>
+    <!-- Amber End Knob Top-Right -->
+    <circle cx="172" cy="23" r="10" fill="url(#needleKnob)"/>
+    <circle cx="169" cy="20" r="3" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+
+  <!-- Main 3D Spherical Yarn Ball Body -->
+  <circle cx="100" cy="108" r="56" fill="url(#yarnSphere)"/>
+
+  <!-- Wound Wool Yarn Texture Strands (Volumetric Fiber Grooves) -->
+  <path d="M52 100 C65 72, 120 70, 148 100" stroke="#F472B6" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+  <path d="M50 115 C70 85, 125 85, 150 115" stroke="#9D174D" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M62 82 C85 60, 125 65, 142 90" stroke="#FBCFE8" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M60 130 C80 152, 120 152, 140 130" stroke="#831843" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+  <!-- Cross-Wound Vertical Strands -->
+  <path d="M80 56 C70 85, 72 135, 85 160" stroke="#F472B6" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M102 52 C95 85, 96 138, 106 164" stroke="#FBCFE8" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.95"/>
+  <path d="M122 56 C130 85, 128 135, 118 160" stroke="#9D174D" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+  <!-- Diagonal Overlapping Wrap -->
+  <path d="M65 70 C95 95, 115 125, 135 150" stroke="#F472B6" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+  <path d="M135 70 C110 95, 90 125, 68 148" stroke="#DB2777" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.75"/>
+
+  <!-- Loose Trailing Yarn Thread Spilling Out playfully -->
+  <path d="M72 152 C60 162, 50 158, 42 168 C35 176, 25 174, 18 178" stroke="#EC4899" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M18 178 C12 181, 10 185, 6 186" stroke="#DB2777" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Spherical Specular Gloss Highlight -->
+  <ellipse cx="82" cy="80" rx="16" ry="10" transform="rotate(-25 82 80)" fill="#FFFFFF" opacity="0.4"/>
+</svg>

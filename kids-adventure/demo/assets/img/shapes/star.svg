@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Vibrant 2D Star Gradient -->
+    <linearGradient id="starGrad2D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="starInnerStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Flat 2D Five-Pointed Star Shape -->
+  <polygon points="100,26 122,78 176,82 134,120 148,172 100,142 52,172 66,120 24,82 78,78" fill="url(#starGrad2D)" stroke="#EA580C" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Crisp Inner Border Accent -->
+  <polygon points="100,38 119,82 165,86 129,118 141,162 100,136 59,162 71,118 35,86 81,82" fill="none" stroke="url(#starInnerStroke)" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Friendly Accent Sparkle -->
+  <circle cx="92" cy="74" r="5" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="102" cy="64" r="2.8" fill="#FFFFFF" opacity="0.95"/>
+</svg>

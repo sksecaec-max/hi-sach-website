@@ -1,0 +1,108 @@
+/* =========================================================================
+   space.css — Change #22: the Solar System explorer (js/activities/solarSystem.js)
+   ========================================================================= */
+/* One width for the sky, the card and the buttons: as wide as 720px, but short screens shrink it so all three fit. */
+.ss { padding-bottom: 18px; --ss-w: min(720px, max(300px, calc((100vh - 430px) * 1.78))); }
+.ss-stage {
+  position: relative; width: calc(100% - 2 * var(--gutter)); max-width: var(--ss-w); min-height: 150px; margin: 4px auto 0;
+  border-radius: 26px; overflow: hidden; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  background: radial-gradient(ellipse at 50% 50%, #303684 0%, #171C50 52%, #0B0F2E 100%);
+  box-shadow: 0 10px 26px rgba(28, 22, 80, .28), inset 0 0 0 2px rgba(255, 255, 255, .08);
+}
+.ss-sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ss-orbit { fill: none; stroke: #AABEFF; stroke-opacity: .3; stroke-width: 1.2; }
+.ss-orbit.is-on { stroke: #FFD86B; stroke-opacity: .95; stroke-width: 2.2; }
+.ss-body { position: absolute; left: 0; top: 0; will-change: transform; pointer-events: none; }
+.ss-body > svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.ss-body.is-picked::after {
+  content: ""; position: absolute; inset: -5px; border-radius: 50%;
+  border: 3px solid #FFD86B; box-shadow: 0 0 14px rgba(255, 216, 107, .8);
+  animation: ss-ping 1.6s ease-out infinite;
+}
+.ss-body--saturn.is-picked::after { inset: 20% 22%; }
+.ss-body--sun.is-picked::after { inset: 10%; }
+@keyframes ss-ping { 0% { transform: scale(.92); opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
+
+.ss-info {
+  display: flex; gap: 12px; align-items: flex-start;
+  width: calc(100% - 2 * var(--gutter)); max-width: var(--ss-w); min-height: 96px; margin: 12px auto 0; padding: 12px 14px;
+  border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-sm);
+}
+.ss-info.is-new { animation: ss-in .35s ease-out; }
+@keyframes ss-in { from { opacity: .3; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.ss-info__intro { margin: 0; width: 100%; text-align: center; font-size: 17px; line-height: 1.4; color: var(--ink); }
+.ss-info__art { flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%; background: radial-gradient(circle, #262B6E 0%, #12163F 100%); padding: 6px; }
+.ss-info__art > svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.ss-info__text { flex: 1 1 auto; min-width: 0; }
+.ss-info__text h3 { margin: 0 0 2px; font-family: var(--font-display); font-weight: 800; font-size: 24px; color: var(--grape-deep); }
+.ss-info__text p { margin: 2px 0; font-size: 16px; line-height: 1.35; color: var(--ink); }
+.ss-info__btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.ss-info__btns .btn, .ss-tools .btn { min-height: 48px; padding: 0 18px; font-size: 17px; }
+.ss-info__btns .btn svg, .ss-tools .btn svg { width: 22px; height: 22px; }
+.ss-size { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; margin-top: 8px; }
+.ss-size__b { display: block; }
+.ss-size__b > svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.ss-size small { width: 100%; font-size: 13px; color: var(--ink-soft); }
+
+/* Planet buttons: one row of nine only when the row itself is wide enough for every name (a container query on the
+   row, so short desktop windows and the landscape column behave too); otherwise five then four, centred. */
+.ss-strip {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; container: ss-strip / inline-size;
+  width: calc(100% - 2 * var(--gutter)); max-width: max(var(--ss-w), 480px); margin: 12px auto 0;
+}
+.ss-pick {
+  flex: 0 0 calc((100% - 4 * 6px) / 5);
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-width: 0; min-height: 66px; padding: 6px 2px; border: 2px solid transparent; border-radius: 16px;
+  background: var(--surface); box-shadow: var(--shadow-sm); color: var(--ink);
+  font-family: var(--font-display); font-weight: 700; font-size: 12px; line-height: 1.1;
+}
+.ss-pick__art { display: block; width: 38px; height: 38px; }
+.ss-pick__art > svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.ss-pick__name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ss-pick__n { position: absolute; top: 3px; left: 6px; font-size: 11px; color: var(--grape); }
+.ss-pick.is-on { border-color: var(--mango); background: #FFF6E0; }
+.ss-pick:focus-visible { outline: 3px solid var(--grape); outline-offset: 2px; }
+.ss-tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 12px auto 0; padding: 0 var(--gutter); }
+.ss-tools .btn[hidden] { display: none; }
+@container ss-strip (min-width: 640px) { .ss-pick { flex-basis: calc((100% - 8 * 6px) / 9); } }
+@container ss-strip (max-width: 300px) { .ss-pick { font-size: 11px; } }
+
+@media (max-width: 560px) {
+  .ss-info__art { width: 68px; height: 68px; }
+  .ss-info__text h3 { font-size: 21px; }
+  .ss-info__text p { font-size: 15px; }
+}
+@media (max-width: 420px) {
+  .ss-info { gap: 10px; padding: 10px 12px; }
+  .ss-info__art { width: 52px; height: 52px; padding: 4px; }
+  .ss-info__btns .btn { padding: 0 14px; font-size: 16px; }
+}
+/* Phone landscape: two columns. Left: the sky, with Momo's challenge / the finish button under it.
+   Right: the card (only a long card scrolls, inside itself) above the planet buttons. Everything fits below the top bar. */
+@media (orientation: landscape) and (max-height: 480px) {
+  .ss {
+    display: grid; height: 100%; min-height: 0; box-sizing: border-box; padding: 6px var(--gutter);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto auto;
+    grid-template-areas: "stage info" "stage strip" "tools strip"; gap: 6px 12px;
+  }
+  /* the title sits in the HUD row like every game (responsive.css). With a grid-area, a fixed grid child is
+     placed inside that cell instead, which squeezed the title to ~10px over the card (2026-11-06). */
+  .ss > .game__head { grid-area: auto; }
+  .ss .game__prompt { font-size: 18px; }
+  .ss .ss-status { font-size: 13px; }
+  .ss-stage { grid-area: stage; align-self: center; width: 100%; max-width: none; margin: 0; }
+  .ss-info { grid-area: info; width: 100%; max-width: none; min-height: 0; margin: 0; padding: 8px 10px; gap: 8px; overflow-y: auto; }
+  .ss-info__art { width: 48px; height: 48px; padding: 4px; }
+  .ss-info__text h3 { font-size: 19px; }
+  .ss-info__text p { font-size: 14px; }
+  .ss-info__intro { font-size: 15px; }
+  .ss-info__btns { margin-top: 6px; }
+  .ss-info__btns .btn, .ss-tools .btn { min-height: 44px; padding: 0 12px; font-size: 15px; }
+  .ss-strip { grid-area: strip; align-self: end; width: 100%; max-width: none; margin: 0; }
+  .ss-pick { min-height: 46px; padding: 3px 2px; }
+  .ss-pick__art { width: 22px; height: 22px; }
+  .ss-tools { grid-area: tools; align-self: end; margin: 0; padding: 0; gap: 8px; }
+}
+html.reduce-motion .ss-body.is-picked::after, html.reduce-motion .ss-info.is-new { animation: none; }
+@media (prefers-reduced-motion: reduce) { .ss-body.is-picked::after, .ss-info.is-new { animation: none; } }

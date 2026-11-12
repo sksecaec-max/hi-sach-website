@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shadowCane" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stalkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="40%" stop-color="#22C55E"/>
+      <stop offset="85%" stop-color="#15803D"/>
+      <stop offset="100%" stop-color="#14532D"/>
+    </linearGradient>
+    <linearGradient id="stalkPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="45%" stop-color="#9333EA"/>
+      <stop offset="85%" stop-color="#6B21A8"/>
+      <stop offset="100%" stop-color="#3B0764"/>
+    </linearGradient>
+    <linearGradient id="leafGradCane" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="182" rx="65" ry="12" fill="url(#shadowCane)"/>
+
+  <!-- Left Stalk (Purple Sweet Sugarcane) -->
+  <g transform="translate(62, 35) rotate(-6)">
+    <!-- Segment 1 -->
+    <rect x="0" y="20" width="22" height="34" rx="4" fill="url(#stalkPurple)"/>
+    <ellipse cx="11" cy="54" rx="12" ry="4" fill="#581C87"/>
+    <!-- Segment 2 -->
+    <rect x="0" y="54" width="22" height="34" rx="4" fill="url(#stalkPurple)"/>
+    <ellipse cx="11" cy="88" rx="12" ry="4" fill="#581C87"/>
+    <!-- Segment 3 -->
+    <rect x="0" y="88" width="22" height="34" rx="4" fill="url(#stalkPurple)"/>
+    <ellipse cx="11" cy="122" rx="12" ry="4" fill="#581C87"/>
+    <!-- Segment 4 (Bottom) -->
+    <rect x="0" y="122" width="22" height="26" rx="4" fill="url(#stalkPurple)"/>
+    <!-- Highlight Shimmer -->
+    <line x1="5" y1="20" x2="5" y2="148" stroke="#E9D5FF" stroke-width="2.5" opacity="0.6"/>
+  </g>
+
+  <!-- Right Stalk (Emerald Green Juicy Sugarcane) -->
+  <g transform="translate(105, 30) rotate(8)">
+    <!-- Segment 1 -->
+    <rect x="0" y="25" width="24" height="35" rx="4" fill="url(#stalkGrad)"/>
+    <ellipse cx="12" cy="60" rx="13" ry="4" fill="#14532D"/>
+    <!-- Segment 2 -->
+    <rect x="0" y="60" width="24" height="35" rx="4" fill="url(#stalkGrad)"/>
+    <ellipse cx="12" cy="95" rx="13" ry="4" fill="#14532D"/>
+    <!-- Segment 3 -->
+    <rect x="0" y="95" width="24" height="35" rx="4" fill="url(#stalkGrad)"/>
+    <ellipse cx="12" cy="130" rx="13" ry="4" fill="#14532D"/>
+    <!-- Segment 4 (Bottom) -->
+    <rect x="0" y="130" width="24" height="25" rx="4" fill="url(#stalkGrad)"/>
+    <!-- Highlight Shimmer -->
+    <line x1="5" y1="25" x2="5" y2="155" stroke="#DCFCE7" stroke-width="2.5" opacity="0.7"/>
+  </g>
+
+  <!-- Arching Long Green Blades / Leaves -->
+  <path d="M75 55 C65 25, 30 18, 15 28 C25 36, 50 40, 75 58 Z" fill="url(#leafGradCane)"/>
+  <path d="M110 50 C125 20, 160 15, 185 24 C175 34, 140 40, 110 54 Z" fill="url(#leafGradCane)"/>
+  <path d="M92 45 C95 15, 120 10, 138 12 C128 24, 110 32, 92 48 Z" fill="url(#leafGradCane)"/>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shadowTomato" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.38"/>
+      <stop offset="70%" stop-color="#1E293B" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tomatoBody" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="35%" stop-color="#EE2B2B"/>
+      <stop offset="75%" stop-color="#C51111"/>
+      <stop offset="92%" stop-color="#8E0606"/>
+      <stop offset="100%" stop-color="#550000"/>
+    </radialGradient>
+    <linearGradient id="sepalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="50%" stop-color="#16A34A"/>
+      <stop offset="100%" stop-color="#14532D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="180" rx="72" ry="15" fill="url(#shadowTomato)"/>
+
+  <!-- Tomato 3D Lobed Round Body -->
+  <path d="M42 110 C36 142, 60 172, 100 172 C140 172, 164 142, 158 110 C154 75, 130 65, 100 68 C70 65, 46 75, 42 110 Z"
+        fill="url(#tomatoBody)"/>
+
+  <!-- Subtle Lobed Indentations -->
+  <path d="M72 74 C68 100, 68 140, 75 165" stroke="#991B1B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.35"/>
+  <path d="M128 74 C132 100, 132 140, 125 165" stroke="#991B1B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.35"/>
+
+  <!-- Specular High-Gloss Sheen -->
+  <ellipse cx="76" cy="88" rx="20" ry="12" transform="rotate(-30 76 88)" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="95" cy="85" r="4.5" fill="#FFFFFF" opacity="0.4"/>
+
+  <!-- Green Star Sepals (Calyx) -->
+  <g id="calyx">
+    <!-- Star-shaped Sepals -->
+    <path d="M100 68 L85 45 L94 65 L70 58 L90 70 L68 80 L92 76 L85 95 L98 78 L115 95 L108 76 L132 80 L110 70 L130 58 L106 65 L115 45 Z"
+          fill="url(#sepalGrad)"/>
+    <!-- Stem (Pedicel) -->
+    <path d="M100 68 C98 52, 92 40, 88 32 C93 30, 99 35, 103 48 C105 56, 103 64, 102 68 Z" fill="#15803D"/>
+    <!-- Stem Cut Cap -->
+    <ellipse cx="88" cy="32" rx="4" ry="2.5" fill="#86EFAC"/>
+  </g>
+</svg>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-build="44bcf25c0c15">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#6C4BD6" />
+  <meta name="description" content="Little Explorers: playful learning adventures for children aged 3 to 10." />
+  <meta name="application-name" content="Little Explorers" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Little Explorers" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <title>Little Explorers — Learn &amp; Play</title>
+
+  <!-- Rounded, playful display fonts, self-hosted: no third-party request, works offline (css/fonts.css). -->
+  <link rel="preload" href="assets/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css?v=1" />
+
+  <link rel="stylesheet" href="css/style.css?v=107" />
+  <link rel="stylesheet" href="css/animations.css?v=69" />
+  <link rel="stylesheet" href="css/scene.css?v=61" />
+  <link rel="stylesheet" href="css/practice.css?v=22" />
+  <link rel="stylesheet" href="css/creatures.css?v=55" />
+  <link rel="stylesheet" href="css/whats-animal.css?v=57" />
+  <link rel="stylesheet" href="css/fruit-games.css?v=53" />
+  <link rel="stylesheet" href="css/world.css?v=12" />
+  <link rel="stylesheet" href="css/adventure.css?v=3" />
+  <link rel="stylesheet" href="css/discovery.css?v=7" />
+  <link rel="stylesheet" href="css/puzzle.css?v=18" />
+  <link rel="stylesheet" href="css/space.css?v=6" />
+  <link rel="stylesheet" href="css/story.css?v=11" />
+  <link rel="stylesheet" href="css/achievement.css?v=5" />
+  <link rel="stylesheet" href="css/parent.css?v=5" />
+  <link rel="stylesheet" href="css/responsive.css?v=120" />
+  <link rel="stylesheet" href="css/thinklab.css?v=31" />
+</head>
+<body>
+  <!-- The whole app is rendered into #app by JavaScript.
+       This keeps game logic out of markup so it can be reused in an Android WebView build. -->
+  <div id="app" class="app">
+
+    <!-- Boot splash, hidden once the first screen mounts -->
+    <div id="splash" class="splash" aria-hidden="true">
+      <div class="splash__logo">
+        <span class="splash__mark">Little Explorers</span>
+        <span class="splash__dot"></span>
+      </div>
+      <p class="splash__tag">Learn &amp; Play</p>
+    </div>
+
+    <!-- Persistent top bar (child header). Shown on non-fullscreen screens. -->
+    <header id="topbar" class="topbar" hidden>
+      <button id="btn-back" class="topbar__back" aria-label="Go back">‹</button>
+      <div class="topbar__id">
+        <button id="avatar-btn" class="avatar" aria-label="Your avatar"></button>
+        <div class="topbar__text">
+          <div id="greeting" class="topbar__greeting">Hi!</div>
+          <div id="subgreeting" class="topbar__sub">Ready to play?</div>
+        </div>
+      </div>
+      <div class="topbar__stats">
+        <button id="btn-stars" class="star-count" aria-label="Stars earned. Open my rewards.">
+          <span class="star-count__icon"><svg class="kido-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.6l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.4l-5.4 2.9 1.1-6.1L3.2 9l6.1-.8z" fill="#FFC23D" stroke="#E59A12" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+          <span id="star-total" class="star-count__num">0</span>
+        </button>
+        <button id="btn-music" class="topbar__music js-music-toggle" aria-label="Toggle music" title="Music: On"></button>
+        <button id="btn-momo" class="topbar__music topbar__momo js-momo-toggle" aria-label="Hide Momo" title="Momo: On"></button>
+        <button id="btn-parent" class="topbar__parent" aria-label="Parent area">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm0 2c-3 0-6 1.6-6 4.2V17h12v-2.8C18 11.6 15 10 12 10Z"/><circle cx="19" cy="6" r="3" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Screens mount here -->
+    <main id="screen" class="screen" tabindex="-1"></main>
+
+    <!-- Bottom navigation (child), shown on the home shell -->
+    <nav id="tabbar" class="tabbar" hidden aria-label="Main sections"></nav>
+
+    <!-- Overlay layers -->
+    <div id="fx" class="fx-layer" aria-hidden="true"></div>
+    <div id="toast" class="toast-layer" aria-live="polite"></div>
+    <div id="mascot" class="mascot-layer" hidden></div>
+    <div id="modal" class="modal-layer" hidden></div>
+  </div>
+
+  <!-- ============ CORE (load order matters; classic scripts for file:// WebView safety) ============ -->
+  <script src="js/nativeSpeech.js?v=3"></script>
+  <script src="js/ageConfig.js"></script>
+  <script src="js/icons.js?v=2"></script>
+  <script src="js/data/audioRegistry.js?v=7"></script>
+  <script src="js/data/voiceClips.js?v=8"></script>
+  <script src="js/data/learningConfig.js?v=4"></script>
+  <script src="js/audio.js?v=71"></script>
+  <script src="js/engine/animalSynth.js?v=38"></script>
+  <script src="js/engine/audioManager.js?v=44"></script>
+  <script src="js/progress.js?v=3"></script>
+  <script src="js/rewards.js?v=6"></script>
+  <script src="js/mascot.js?v=42"></script>
+  <script src="js/mascotLife.js?v=2"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/gameEngine.js?v=75"></script>
+
+  <!-- ============ SCENE ENGINE (reusable animated-scene runtime) ============ -->
+  <script src="js/engine/characters.js?v=57"></script>
+  <script src="js/engine/particles.js"></script>
+  <script src="js/engine/voiceEngine.js?v=39"></script>
+  <script src="js/engine/music.js?v=57"></script>
+  <script src="js/engine/sceneEngine.js?v=57"></script>
+  <script src="js/engine/videoManager.js?v=3"></script>
+  <script src="js/engine/puzzleEngine.js?v=10"></script>
+  <script src="js/engine/storyEngine.js?v=6"></script>
+  <script src="js/engine/learning.js?v=4"></script>
+
+  <!-- ============ ACTIVITY DATA + GAMES ============ -->
+  <script src="js/data/content.js?v=76"></script>
+  <script src="js/data/creatures.js?v=75"></script>
+  <script src="js/art/creatureArt.js?v=55"></script>
+  <script src="js/art/worldArt.js?v=72"></script>
+  <script src="js/art/storyPlaces.js?v=1"></script>
+  <script src="js/art/mysteryPlaces.js?v=1"></script>
+  <script src="js/art/storyCast.js?v=1"></script>
+  <script src="js/art/puzzleArt.js?v=10"></script>
+  <script src="js/data/animalFacts.js?v=3"></script>
+  <script src="js/data/whatsAnimal.js?v=3"></script>
+  <script src="js/data/space.js?v=4"></script>
+  <script src="js/data/videos.js?v=7"></script>
+  <script src="js/data/puzzles.js?v=11"></script>
+  <script src="js/data/storyAdventures.js?v=6"></script>
+  <script src="js/data/chiku.js?v=2"></script>
+  <script src="js/data/catalog.js?v=99"></script>
+  <script src="js/activities/wordAdventure.js?v=73b"></script>
+  <script src="js/activities/electronics.js?v=59"></script>
+  <script src="js/activities/miniGames.js?v=69"></script>
+  <script src="js/activities/tracing.js?v=6"></script>
+  <script src="js/activities/bodyTap.js?v=6"></script>
+  <script src="js/activities/soundGames.js?v=55"></script>
+  <script src="js/activities/fruitGames.js?v=56b"></script>
+  <script src="js/activities/discovery.js?v=9"></script>
+  <script src="js/activities/puzzleTypes.js?v=10"></script>
+  <script src="js/activities/solarSystem.js?v=6"></script>
+  <script src="js/data/thinkLab.js?v=12"></script>
+  <script src="js/activities/thinkLab.js?v=9"></script>
+  <script src="js/activities/thinkLab2.js?v=7"></script>
+  <script src="js/activities/thinkLab3.js?v=2"></script>
+  <script src="js/activities/thinkLab4.js?v=4"></script>
+  <script src="js/activities/thinkLab5.js?v=2"></script>
+  <script src="js/activities/thinkLab6.js?v=3"></script>
+
+  <!-- ============ FLAGSHIP SCENES (Scene Engine demos) ============ -->
+  <script src="js/scenes/brushTeeth.js?v=17"></script>
+  <script src="js/scenes/aisForApple.js?v=57"></script>
+  <script src="js/scenes/countApples.js?v=55"></script>
+  <script src="js/scenes/growPlant.js?v=60"></script>
+  <script src="js/scenes/animalSound.js?v=52"></script>
+  <script src="js/scenes/whatsAnimal.js?v=59"></script>
+  <script src="js/scenes/wordRun.js?v=53"></script>
+
+  <!-- ============ SCREENS + BOOTSTRAP ============ -->
+  <script src="js/screens.js?v=79"></script>
+  <script src="js/world.js?v=28"></script>
+  <script src="js/data/moreActivities.js?v=9"></script>
+  <script src="js/adventure.js?v=7"></script>
+  <script src="js/navigation.js?v=63"></script>
+  <script src="js/data/credits.js?v=3"></script>
+  <script src="js/parentInsights.js?v=6"></script>
+  <script src="js/parent.js?v=21"></script>
+  <script src="js/achievement.js?v=3"></script>
+  <script src="js/app.js?v=53"></script>
+  <script src="js/fitStage.js?v=7"></script>
+  <script src="js/pwa.js?v=1"></script>
+  <script src="js/demo.js?v=1"></script>
+</body>
+</html>
+

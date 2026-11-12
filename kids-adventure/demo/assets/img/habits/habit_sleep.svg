@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+  <defs>
+    <!-- Bed soft room shadow -->
+    <radialGradient id="bedShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E1B4B" stop-opacity="0.35"/>
+      <stop offset="65%" stop-color="#1E1B4B" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#1E1B4B" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Night window sky -->
+    <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <!-- Fluffy Pillow 3D -->
+    <linearGradient id="pillowGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <!-- Cozy Quilt Blanket -->
+    <linearGradient id="quiltGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="50%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <!-- Golden Moon Glow -->
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="60%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient Shadow -->
+  <ellipse cx="120" cy="208" rx="85" ry="16" fill="url(#bedShadow)"/>
+
+  <!-- Night window in background -->
+  <rect x="135" y="24" width="70" height="75" rx="14" fill="url(#nightSky)"/>
+  <rect x="135" y="24" width="70" height="75" rx="14" fill="none" stroke="#E2E8F0" stroke-width="3"/>
+  <line x1="170" y1="24" x2="170" y2="99" stroke="#E2E8F0" stroke-width="2.5"/>
+  <line x1="135" y1="62" x2="205" y2="62" stroke="#E2E8F0" stroke-width="2.5"/>
+  <!-- Crescent Moon & Little Stars -->
+  <path d="M185 36 A10 10 0 1 1 175 52 A8 8 0 0 0 185 36 Z" fill="url(#moonGlow)"/>
+  <circle cx="152" cy="42" r="1.5" fill="#FEF08A"/>
+  <circle cx="160" cy="50" r="1.2" fill="#FEF08A"/>
+  <circle cx="148" cy="74" r="1.5" fill="#FEF08A"/>
+
+  <!-- Wooden Bed Frame Back -->
+  <rect x="36" y="80" width="168" height="60" rx="10" fill="#B45309"/>
+  <rect x="42" y="86" width="156" height="50" rx="6" fill="#D97706"/>
+
+  <!-- Mattress & Sheets -->
+  <rect x="40" y="112" width="160" height="74" rx="12" fill="#E2E8F0"/>
+  <rect x="40" y="116" width="160" height="68" rx="10" fill="#F8FAFC"/>
+
+  <!-- Fluffy White Pillows -->
+  <rect x="52" y="102" width="62" height="34" rx="14" fill="url(#pillowGrad)" transform="rotate(-4 83 119)"/>
+  <rect x="124" y="102" width="62" height="34" rx="14" fill="url(#pillowGrad)" transform="rotate(4 155 119)"/>
+
+  <!-- Cozy Star-patterned Blue Blanket -->
+  <path d="M40 134 C40 128, 50 124, 70 124 L170 124 C190 124, 200 128, 200 134 L200 188 C200 196, 192 202, 184 202 L56 202 C48 202, 40 196, 40 188 Z" fill="url(#quiltGrad)"/>
+  <!-- Folded Sheet Rim -->
+  <path d="M40 134 C40 128, 50 124, 70 124 L170 124 C190 124, 200 128, 200 134 L200 144 C190 140, 170 138, 120 138 C70 138, 50 140, 40 144 Z" fill="#F1F5F9"/>
+
+  <!-- Cute ZZZ Sleep bubbles -->
+  <g transform="translate(68, 62)">
+    <text x="0" y="0" font-family="'Baloo 2', 'Nunito', sans-serif" font-weight="900" font-size="14" fill="#93C5FD">z</text>
+    <text x="10" y="-8" font-family="'Baloo 2', 'Nunito', sans-serif" font-weight="900" font-size="19" fill="#60A5FA">Z</text>
+    <text x="24" y="-18" font-family="'Baloo 2', 'Nunito', sans-serif" font-weight="900" font-size="24" fill="#3B82F6">Z</text>
+  </g>
+</svg>

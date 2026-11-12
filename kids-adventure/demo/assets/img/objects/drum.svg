@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="drum-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="drum-shell" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="35%" stop-color="#FF5252"/>
+      <stop offset="70%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#8E0000"/>
+    </linearGradient>
+    <linearGradient id="drum-rim" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CFD8DC"/>
+      <stop offset="30%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#90A4AE"/>
+      <stop offset="100%" stop-color="#546E7A"/>
+    </linearGradient>
+    <radialGradient id="drum-head" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="65%" stop-color="#FFF9C4"/>
+      <stop offset="90%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#D7CCC8"/>
+    </radialGradient>
+    <linearGradient id="stick-wood" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="60%" stop-color="#FFB74D"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="180" rx="66" ry="15" fill="url(#drum-shadow)"/>
+
+  <!-- Drum Shell (Cylinder Body) -->
+  <path d="M38 78 L38 136 C38 158 162 158 162 136 L162 78 Z" fill="url(#drum-shell)"/>
+
+  <!-- Bottom Rim -->
+  <path d="M34 136 C34 158 166 158 166 136 C166 164 34 164 34 136 Z" fill="url(#drum-rim)"/>
+
+  <!-- Zig-zag tension cord ropes and gold lugs -->
+  <g stroke="#FFF9C4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M44 80 L64 144 L88 80 L112 144 L136 80 L156 144"/>
+  </g>
+  <!-- Gold tuning sliders -->
+  <g fill="#FFD700" stroke="#FF8F00" stroke-width="0.8">
+    <circle cx="54" cy="112" r="4"/>
+    <circle cx="76" cy="112" r="4"/>
+    <circle cx="100" cy="112" r="4"/>
+    <circle cx="124" cy="112" r="4"/>
+    <circle cx="146" cy="112" r="4"/>
+  </g>
+
+  <!-- Top Drum Head Membrane -->
+  <ellipse cx="100" cy="78" rx="62" ry="24" fill="url(#drum-head)"/>
+
+  <!-- Top Metallic Chrome Rim -->
+  <ellipse cx="100" cy="78" rx="64" ry="25" fill="none" stroke="url(#drum-rim)" stroke-width="7"/>
+
+  <!-- Drumsticks crossed across drum -->
+  <!-- Stick 1 -->
+  <g transform="rotate(-30 90 70)">
+    <rect x="25" y="67" width="130" height="6.5" rx="3.2" fill="url(#stick-wood)"/>
+    <circle cx="152" cy="70" r="7.5" fill="#FFE0B2"/>
+  </g>
+  <!-- Stick 2 -->
+  <g transform="rotate(28 110 70)">
+    <rect x="45" y="67" width="130" height="6.5" rx="3.2" fill="url(#stick-wood)"/>
+    <circle cx="48" cy="70" r="7.5" fill="#FFE0B2"/>
+  </g>
+</svg>

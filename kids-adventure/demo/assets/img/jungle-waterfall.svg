@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <!-- Original art (2026-10-28): jungle waterfall, drawn in code. Replaces a stock photo. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9BE3F5"/><stop offset=".55" stop-color="#D8F6E6"/><stop offset="1" stop-color="#B9E8B0"/></linearGradient>
+    <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C8A7A"/><stop offset="1" stop-color="#4B5A4C"/></linearGradient>
+    <linearGradient id="fall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8FBFF"/><stop offset=".6" stop-color="#BDEFFF"/><stop offset="1" stop-color="#F4FEFF"/></linearGradient>
+    <linearGradient id="pool" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FC3D9"/><stop offset="1" stop-color="#1F8FA8"/></linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF8D6"/><stop offset="1" stop-color="#FFF8D6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mist" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <circle cx="1180" cy="170" r="260" fill="url(#sun)"/>
+  <!-- far hills -->
+  <path d="M0 470 Q200 330 420 420 T860 380 T1300 410 T1600 360 V1000 H0Z" fill="#8FD18C"/>
+  <path d="M0 540 Q260 430 520 500 T1040 470 T1600 480 V1000 H0Z" fill="#5DB86A"/>
+  <!-- cliff with the fall -->
+  <path d="M560 260 Q600 200 700 190 L930 190 Q1030 200 1060 270 L1110 640 L500 640Z" fill="url(#rock)"/>
+  <path d="M600 250 Q700 210 800 214 L780 640 L540 640Z" fill="#6B7A6A" opacity=".55"/>
+  <path d="M560 260 Q700 168 1060 270 Q900 228 700 230Z" fill="#3E8E47"/>
+  <!-- waterfall -->
+  <path d="M720 214 Q740 420 700 640 L900 640 Q860 420 880 214Z" fill="url(#fall)"/>
+  <g stroke="#9FDDF0" stroke-width="7" stroke-linecap="round" opacity=".8">
+    <path d="M748 240 Q752 420 728 620"/><path d="M790 236 Q796 430 780 630"/><path d="M832 236 Q836 430 830 630"/><path d="M864 240 Q860 420 876 620"/>
+  </g>
+  <!-- pool -->
+  <ellipse cx="800" cy="720" rx="520" ry="130" fill="url(#pool)"/>
+  <g fill="none" stroke="#E8FBFF" stroke-width="5" stroke-linecap="round" opacity=".7">
+    <path d="M560 720 q60 -16 120 0"/><path d="M900 748 q70 -18 140 0"/><path d="M700 790 q50 -12 100 0"/>
+  </g>
+  <ellipse cx="800" cy="650" rx="240" ry="70" fill="url(#mist)"/>
+  <!-- stones -->
+  <g fill="#6E7B6D"><ellipse cx="420" cy="770" rx="70" ry="34"/><ellipse cx="1190" cy="760" rx="86" ry="38"/><ellipse cx="1050" cy="830" rx="50" ry="22"/></g>
+  <!-- jungle trees left -->
+  <path d="M0 1000 V300 Q90 240 170 300 Q250 240 330 320 Q420 300 440 400 Q500 470 430 560 Q470 660 380 720 L380 1000Z" fill="#2E7D3A"/>
+  <path d="M140 1000 L150 520 Q160 470 180 520 L196 1000Z" fill="#6B4423"/>
+  <g fill="#3FA34D"><circle cx="90" cy="360" r="90"/><circle cx="250" cy="330" r="80"/><circle cx="350" cy="440" r="75"/><circle cx="180" cy="470" r="95"/></g>
+  <g fill="#57C063" opacity=".9"><circle cx="70" cy="330" r="40"/><circle cx="240" cy="300" r="36"/><circle cx="340" cy="410" r="30"/></g>
+  <!-- jungle trees right -->
+  <path d="M1600 1000 V280 Q1500 220 1420 290 Q1330 240 1260 330 Q1180 330 1170 420 Q1110 500 1190 580 Q1150 680 1240 730 L1240 1000Z" fill="#2E7D3A"/>
+  <path d="M1410 1000 L1420 500 Q1432 452 1450 500 L1462 1000Z" fill="#6B4423"/>
+  <g fill="#3FA34D"><circle cx="1520" cy="340" r="95"/><circle cx="1350" cy="320" r="80"/><circle cx="1250" cy="440" r="75"/><circle cx="1420" cy="470" r="100"/></g>
+  <g fill="#57C063" opacity=".9"><circle cx="1530" cy="300" r="42"/><circle cx="1360" cy="290" r="34"/><circle cx="1260" cy="410" r="30"/></g>
+  <!-- vines -->
+  <g fill="none" stroke="#2F6F2F" stroke-width="6" stroke-linecap="round">
+    <path d="M300 300 q20 120 -10 240"/><path d="M1300 300 q-24 130 8 250"/>
+  </g>
+  <g fill="#4CAF50"><ellipse cx="290" cy="420" rx="14" ry="8"/><ellipse cx="300" cy="490" rx="14" ry="8"/><ellipse cx="1300" cy="430" rx="14" ry="8"/><ellipse cx="1296" cy="500" rx="14" ry="8"/></g>
+  <!-- front ferns -->
+  <g fill="#1E6B2B">
+    <path d="M0 1000 Q60 860 180 820 Q120 900 140 1000Z"/><path d="M220 1000 Q260 880 380 860 Q300 920 320 1000Z"/>
+    <path d="M1600 1000 Q1540 860 1420 820 Q1480 900 1460 1000Z"/><path d="M1380 1000 Q1340 880 1220 860 Q1300 920 1280 1000Z"/>
+  </g>
+  <g fill="#F472B6"><circle cx="470" cy="860" r="9"/><circle cx="500" cy="880" r="7"/><circle cx="1120" cy="880" r="9"/><circle cx="1150" cy="866" r="7"/></g>
+  <g fill="#FDE047"><circle cx="470" cy="860" r="3"/><circle cx="1120" cy="880" r="3"/></g>
+</svg>

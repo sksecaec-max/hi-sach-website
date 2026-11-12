@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shadowEar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="earOuter" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="45%" stop-color="#FFB74D"/>
+      <stop offset="85%" stop-color="#FB8C00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </radialGradient>
+    <radialGradient id="earInner" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FF8A80"/>
+      <stop offset="50%" stop-color="#F4511E"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="180" rx="60" ry="14" fill="url(#shadowEar)"/>
+
+  <!-- Outer Pinna / Helix -->
+  <path d="M75 160 C50 145, 45 120, 50 85 C55 45, 80 25, 120 25 C155 25, 165 55, 160 90 C155 125, 135 155, 115 165 C95 174, 82 170, 75 160 Z"
+        fill="url(#earOuter)"/>
+
+  <!-- Inner Concha / Fossa -->
+  <path d="M85 130 C75 120, 70 100, 74 75 C78 50, 95 40, 118 42 C135 44, 142 62, 138 85 C134 105, 122 124, 108 132 C98 138, 90 136, 85 130 Z"
+        fill="url(#earInner)"/>
+
+  <!-- Tragus & Anti-Helix Folds (3D highlights) -->
+  <path d="M102 52 C120 54, 126 68, 122 86 C118 102, 106 116, 94 120"
+        stroke="#FFE0B2" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M72 88 C76 80, 84 84, 82 96 C80 108, 70 106, 72 88 Z"
+        fill="#FFA726"/>
+  <!-- Highlight Crest -->
+  <path d="M68 60 C85 36, 120 34, 142 50"
+        stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.55"/>
+</svg>

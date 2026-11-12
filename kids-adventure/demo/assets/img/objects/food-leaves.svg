@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Kido original: a leafy twig (What's That Animal? food — "leaves") -->
+  <defs>
+    <radialGradient id="lv-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.38"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lv-stem" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A0703F"/>
+      <stop offset="50%" stop-color="#7A4E26"/>
+      <stop offset="100%" stop-color="#5A3517"/>
+    </linearGradient>
+    <radialGradient id="lv-leaf-a" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#B9F28A"/>
+      <stop offset="45%" stop-color="#5DBB3F"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </radialGradient>
+    <radialGradient id="lv-leaf-b" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#A5E67A"/>
+      <stop offset="45%" stop-color="#43A047"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </radialGradient>
+    <linearGradient id="lv-spec" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="184" rx="52" ry="11" fill="url(#lv-shadow)"/>
+
+  <!-- Twig -->
+  <path d="M98 182 C96 150 92 118 86 92 C82 74 84 56 92 40" fill="none" stroke="url(#lv-stem)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M90 116 C104 108 116 100 128 86" fill="none" stroke="url(#lv-stem)" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Leaves (back to front) -->
+  <path d="M86 92 C58 92 36 76 30 52 C56 50 80 64 86 92 Z" fill="url(#lv-leaf-b)"/>
+  <path d="M86 92 C70 82 52 70 34 56" fill="none" stroke="#1B5E20" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <path d="M128 86 C142 60 164 48 184 50 C178 78 158 92 128 86 Z" fill="url(#lv-leaf-a)"/>
+  <path d="M128 86 C146 74 162 62 180 54" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <path d="M92 40 C88 20 98 6 114 2 C122 22 112 38 92 40 Z" fill="url(#lv-leaf-a)"/>
+  <path d="M92 40 C100 28 106 16 112 6" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <path d="M94 140 C122 142 148 128 160 106 C132 102 104 114 94 140 Z" fill="url(#lv-leaf-b)"/>
+  <path d="M94 140 C116 130 138 118 156 108" fill="none" stroke="#1B5E20" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <path d="M90 126 C64 132 42 122 30 102 C56 94 82 102 90 126 Z" fill="url(#lv-leaf-a)"/>
+  <path d="M90 126 C70 118 50 110 34 104" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Specular highlights -->
+  <ellipse cx="54" cy="68" rx="12" ry="4" transform="rotate(25 54 68)" fill="url(#lv-spec)"/>
+  <ellipse cx="160" cy="64" rx="11" ry="4" transform="rotate(-25 160 64)" fill="url(#lv-spec)"/>
+  <ellipse cx="54" cy="110" rx="11" ry="4" transform="rotate(15 54 110)" fill="url(#lv-spec)"/>
+  <ellipse cx="132" cy="118" rx="11" ry="4" transform="rotate(-20 132 118)" fill="url(#lv-spec)"/>
+</svg>

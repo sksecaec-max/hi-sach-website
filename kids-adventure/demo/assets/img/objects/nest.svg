@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="nest-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="egg-blue" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="40%" stop-color="#80DEEA"/>
+      <stop offset="85%" stop-color="#26A69A"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </radialGradient>
+    <radialGradient id="egg-speckle" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="45%" stop-color="#80CBC4"/>
+      <stop offset="85%" stop-color="#00897B"/>
+      <stop offset="100%" stop-color="#004D40"/>
+    </radialGradient>
+    <linearGradient id="twig-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8D6E63"/>
+      <stop offset="50%" stop-color="#5D4037"/>
+      <stop offset="100%" stop-color="#3E2723"/>
+    </linearGradient>
+    <linearGradient id="twig-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D7CCC8"/>
+      <stop offset="50%" stop-color="#A1887F"/>
+      <stop offset="100%" stop-color="#6D4C41"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="174" rx="68" ry="16" fill="url(#nest-shadow)"/>
+
+  <!-- Back rim of nest -->
+  <ellipse cx="100" cy="115" rx="58" ry="24" fill="#3E2723"/>
+
+  <!-- Nest Interior Cavity -->
+  <ellipse cx="100" cy="112" rx="46" ry="18" fill="#2E1C14"/>
+
+  <!-- Soft Hay Bedding inside -->
+  <g stroke="#C7A75C" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M72 110 Q98 120 128 112"/>
+    <path d="M68 116 Q100 124 132 115"/>
+    <path d="M80 108 Q100 114 120 109"/>
+  </g>
+
+  <!-- 3 Robin-blue Eggs resting in the nest -->
+  <!-- Left Egg -->
+  <g transform="translate(80, 102) rotate(-18)">
+    <ellipse cx="0" cy="0" rx="15" ry="20" fill="url(#egg-blue)"/>
+    <ellipse cx="-4" cy="-6" rx="5" ry="3" fill="#FFFFFF" opacity="0.65"/>
+    <!-- Speckles -->
+    <circle cx="2" cy="4" r="1" fill="#004D40" opacity="0.6"/>
+    <circle cx="-5" cy="8" r="1.2" fill="#004D40" opacity="0.5"/>
+    <circle cx="5" cy="-2" r="0.9" fill="#004D40" opacity="0.6"/>
+  </g>
+
+  <!-- Right Egg -->
+  <g transform="translate(120, 104) rotate(22)">
+    <ellipse cx="0" cy="0" rx="14" ry="19" fill="url(#egg-speckle)"/>
+    <ellipse cx="-3" cy="-5" rx="5" ry="3" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="1" cy="5" r="1" fill="#004D40" opacity="0.6"/>
+    <circle cx="-4" cy="7" r="1.1" fill="#004D40" opacity="0.5"/>
+  </g>
+
+  <!-- Center Egg (Front most) -->
+  <g transform="translate(100, 112) rotate(4)">
+    <ellipse cx="0" cy="0" rx="16" ry="22" fill="url(#egg-blue)"/>
+    <ellipse cx="-4" cy="-7" rx="6" ry="3.5" fill="#FFFFFF" opacity="0.75"/>
+    <circle cx="3" cy="6" r="1.2" fill="#004D40" opacity="0.7"/>
+    <circle cx="-5" cy="9" r="1" fill="#004D40" opacity="0.5"/>
+    <circle cx="4" cy="-1" r="1.1" fill="#004D40" opacity="0.6"/>
+    <circle cx="-3" cy="2" r="0.9" fill="#004D40" opacity="0.5"/>
+  </g>
+
+  <!-- Front Woven Twigs & Branches (Rich multi-layered depth) -->
+  <path d="M36 112 C44 148 70 166 100 166 C130 166 156 148 164 112 C146 138 126 146 100 146 C74 146 54 138 36 112 Z" fill="url(#twig-dark)"/>
+
+  <!-- Intricate Twigs crossing -->
+  <g stroke="url(#twig-light)" stroke-width="3.5" stroke-linecap="round" fill="none">
+    <path d="M38 116 Q72 152 118 160"/>
+    <path d="M52 130 Q92 165 152 140"/>
+    <path d="M68 145 Q115 168 162 122"/>
+    <path d="M162 116 Q128 155 82 162"/>
+    <path d="M148 132 Q108 165 48 138"/>
+    <path d="M132 146 Q85 168 38 124"/>
+    <path d="M42 120 Q100 156 158 120"/>
+  </g>
+
+  <g stroke="#D7CCC8" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.8">
+    <path d="M45 112 Q100 148 155 114"/>
+    <path d="M58 136 Q100 162 142 136"/>
+    <path d="M30 118 Q55 125 78 120"/>
+    <path d="M170 120 Q145 126 122 122"/>
+  </g>
+
+  <!-- Green little leaf accent -->
+  <path d="M44 135 C38 126 40 118 48 118 C52 126 50 135 44 135 Z" fill="#66BB6A"/>
+</svg>

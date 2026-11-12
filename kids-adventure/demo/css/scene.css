@@ -1,0 +1,939 @@
+/* =========================================================================
+   scene.css — Immersive Scene Engine styling
+   A virtual 1000×640 "stage" scaled to fit any screen. Everything a scene
+   draws lives on layers inside a camera wrapper so we can zoom / pan / shake
+   the whole world while the UI (instruction bubble, progress, close) stays put.
+   Characters are rigged SVGs whose expressions are pure CSS class toggles.
+   ========================================================================= */
+
+/* ---- Full-screen mount (sits above normal screens, its own world) ---- */
+.scene-root {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: #0e0a1f;                 /* letterbox behind the stage */
+  touch-action: none;                  /* we own all gestures */
+  -webkit-user-select: none; user-select: none;
+}
+
+/* Change #28: the stage fits inside the system-bar safe area; its backdrop (--scene-fill, copied from the
+   stage by sceneEngine) and its ground strip (--scene-ground) run edge to edge behind it, under the bars. */
+.scene-root:not(.scene-root--responsive) {
+  box-sizing: border-box;
+  padding: var(--kido-sa-top) var(--kido-sa-right) var(--kido-sa-bottom) var(--kido-sa-left);
+}
+.scene-root:not(.scene-root--responsive)::before, .scene-root:not(.scene-root--responsive)::after { content: ""; position: absolute; left: 0; right: 0; z-index: 0; pointer-events: none; }
+.scene-root:not(.scene-root--responsive)::before {
+  top: 0; bottom: 0;
+  background-image: var(--scene-fill, none); background-size: cover; background-position: center 40%;
+}
+.scene-root:not(.scene-root--responsive)::after { top: var(--scene-ground-top, 100%); bottom: 0; background-image: var(--scene-ground, none); }
+.scene-root:not(.scene-root--responsive) > .scene-stage { z-index: 1; box-shadow: none; border-radius: 0; }
+
+/* ---- The 1000×640 stage, scaled by JS via --scene-scale ---- */
+.scene-stage {
+  position: relative;
+  width: 1000px; height: 640px;
+  flex: 0 0 auto;                      /* never let the flex root shrink the fixed stage; the transform does all fitting */
+  transform: scale(var(--scene-scale, 1));
+  transform-origin: center center;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+/* ---- Camera: everything diegetic moves together ---- */
+.scene-camera {
+  position: absolute; inset: 0;
+  transform-origin: 50% 55%;
+  will-change: transform;
+}
+
+/* ---- Layers (painter's order back→front) ---- */
+.scene-layer { position: absolute; inset: 0; }
+.scene-layer--sky    { z-index: 1; }
+.scene-layer--mid    { z-index: 2; }
+.scene-layer--ground { z-index: 3; }
+.scene-layer--props  { z-index: 4; }
+.scene-layer--actors { z-index: 5; }
+.scene-canvas        { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.scene-layer--ui     { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
+.scene-layer--ui > * { pointer-events: auto; }
+
+/* Diegetic layers are pure PAINT groups: each is a full-stage inset:0 div, so
+   the topmost one (actors, z5) would blanket the whole stage and swallow taps
+   meant for actors sitting in lower layers (Grow-a-Plant's water can lives in
+   `props`, its sun in `sky` — both under actors, so the scene felt dead). Make
+   the layers transparent to pointers and let the actual actors catch them, so
+   a tap falls through empty space to whatever art is really beneath it. */
+.scene-layer:not(.scene-layer--ui) { pointer-events: none; }
+.scene-layer:not(.scene-layer--ui) > * { pointer-events: auto; }
+
+/* ---- Actors: absolutely placed in stage coords, center-anchored ---- */
+.actor {
+  position: absolute;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.actor--emoji { font-size: 96px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.18)); }
+.actor--tappable { cursor: pointer; }
+
+/* Keyboard / switch-access focus ring. A double ring (dark halo + bright core)
+   so it stays visible over both the pale orchard gradients and the darker
+   jungle photo. Only :focus-visible, so touch/mouse taps never show it —
+   invisible on the common path, unmistakable when driving by keyboard. */
+.actor--tappable:focus-visible,
+.scene-btn:focus-visible,
+.scene-close:focus-visible,
+.tray-chip:focus-visible,
+.scene-slot:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0,0,0,.55), 0 0 0 9px #FFE44D;
+  border-radius: 14px;
+}
+/* The scene root takes programmatic focus on mount (to move AT focus into the
+   activity); it is a container, not a control, so never paint a ring on it. */
+.scene-root:focus, .scene-root:focus-visible { outline: none; }
+
+/* Tap invitation: a soft pulsing halo behind interactive things. */
+.tap-ring::after {
+  content: ""; position: absolute; inset: -14%;
+  border-radius: 50%;
+  border: 6px solid rgba(255,255,255,.85);
+  box-shadow: 0 0 0 6px rgba(108,75,214,.25);
+  animation: scene-tap 1.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes scene-tap {
+  0%   { transform: scale(.7); opacity: .9; }
+  70%  { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+/* ---- Scene UI chrome (lives above the camera, never pans) ---- */
+.scene-say {
+  position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px);
+  max-width: 760px; min-height: 56px;
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 26px;
+  background: rgba(255,255,255,.96);
+  border-radius: 26px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.28);
+  font-family: "Baloo 2", "Fredoka", system-ui, sans-serif;
+  font-weight: 700; font-size: 30px; color: #2B2151;
+  opacity: 0; transition: opacity .3s ease, transform .3s ease;
+  text-align: center;
+}
+.scene-say.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.scene-say__peek { font-size: 40px; }
+
+.scene-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 56px; height: 56px; border: none; border-radius: 50%;
+  background: rgba(255,255,255,.92); color: #4E32A8;
+  font-size: 28px; font-weight: 800; cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.scene-close:active { transform: scale(.92); }
+/* Change #28: music + Momo switches, left of Close */
+.scene-ctl { position: absolute; top: 18px; right: 88px; display: flex; gap: 12px; z-index: 10; }
+.scene-ctl__btn {
+  width: 56px; height: 56px; border: none; border-radius: 50%; padding: 0; cursor: pointer;
+  background: rgba(255,255,255,.92); box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  display: grid; place-items: center;
+}
+.scene-ctl__btn .kido-icon { width: 28px; height: 28px; }
+.scene-ctl__btn:active { transform: scale(.92); }
+.scene-root--responsive .scene-ctl { top: calc(8px + var(--kido-sa-top)); right: calc(max(12px, var(--kido-sa-right)) + 62px); gap: 8px; }
+.scene-root--responsive .scene-ctl__btn { width: 52px; height: 52px; }
+/* Momo hidden by the Momo button: the scenes' guide Momo too. Where Momo IS the player (Word Run) or the
+   scene's art (Brush Teeth) he stays: those are not the guide. */
+.momo-off .guide-momo { visibility: hidden; }
+
+/* Speaker replay button (top-left HUD control, mirrored with .scene-close) */
+.scene-speaker-btn,
+.wta-speaker-btn {
+  position: absolute !important;
+  top: 18px !important;
+  left: 18px !important;
+  width: 56px !important;
+  height: 56px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  outline: none !important;
+  z-index: 100 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform .2s cubic-bezier(.34, 1.56, .64, 1) !important;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .22)) !important;
+}
+.scene-speaker-btn svg,
+.wta-speaker-btn svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+.scene-speaker-btn:hover,
+.wta-speaker-btn:hover { transform: scale(1.1) !important; }
+.scene-speaker-btn:active,
+.wta-speaker-btn:active { transform: scale(.92) !important; }
+
+.scene-progress {
+  position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px;
+  z-index: 25;
+}
+.scene-progress__pip {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(255,255,255,.45);
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.6);
+  transition: transform .3s ease, background .3s ease;
+}
+.scene-progress__pip.done { background: #FFB020; transform: scale(1.15); }
+.scene-progress__pip.current { background: #fff; transform: scale(1.25); }
+
+/* ---- Tray: draggable pieces dock ---- */
+.scene-tray {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  display: flex; gap: 18px; padding: 14px 20px;
+  background: rgba(255,255,255,.9); border-radius: 24px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.26);
+}
+.tray-chip {
+  width: 96px; height: 96px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 62px; background: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.16);
+  cursor: grab; touch-action: none;
+  transition: transform .15s ease;
+}
+.tray-chip:active { cursor: grabbing; }
+.tray-chip.dragging { opacity: .35; }
+.tray-chip.used { opacity: 0; pointer-events: none; transform: scale(.4); }
+.drag-ghost {
+  position: fixed; z-index: 90; pointer-events: none;
+  width: 96px; height: 96px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 62px; background: #fff;
+  box-shadow: 0 16px 30px rgba(0,0,0,.3);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* Drop targets / slots drawn on the stage. */
+.scene-slot {
+  position: absolute; border-radius: 18px;
+  border: 4px dashed rgba(255,255,255,.7);
+  background: rgba(255,255,255,.14);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s ease, transform .2s ease;
+}
+.scene-slot.hot { background: rgba(255,255,255,.4); transform: scale(1.06); }
+.scene-slot.filled { border-style: solid; border-color: rgba(56,193,114,.9); }
+
+/* Big friendly primary button reused inside scenes (start / next). */
+.scene-btn {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  padding: 16px 34px; border: none; border-radius: 40px;
+  background: linear-gradient(180deg,#FFC24B,#FFB020);
+  color: #4E32A8; font-family: "Baloo 2",sans-serif; font-weight: 800; font-size: 28px;
+  box-shadow: 0 12px 26px rgba(255,176,32,.5); cursor: pointer;
+}
+.scene-btn:active { transform: translateX(-50%) scale(.95); }
+
+/* Word Adventure HUD bits */
+.wr-hud {
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 20;
+}
+.wr-slot {
+  width: 72px;
+  height: 76px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.24);
+  border: 3px solid rgba(255,255,255,.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Baloo 2",sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+}
+.wr-slot.filled { background: #fff; color: #4E32A8; }
+.wr-slot.celebrate {
+  animation: wr-slot-pop .5s ease-out;
+  background: #FFD700 !important;
+  color: #4E32A8 !important;
+  border-color: #FFF9C4 !important;
+  box-shadow: 0 0 26px rgba(255, 215, 0, .85) !important;
+}
+@keyframes wr-slot-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* Word Adventure: Animal Reveal Card */
+.wr-reveal-card {
+  width: 230px;
+  height: 260px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: linear-gradient(145deg, #ffffff, #f0f4ff);
+  border: 4px solid #FFD700;
+  border-radius: 26px;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.75), 0 16px 36px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 50;
+  user-select: none;
+  touch-action: manipulation;
+  animation: wr-reveal-pulse 2.4s ease-in-out infinite alternate;
+}
+@keyframes wr-reveal-pulse {
+  0% { filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.6)); }
+  100% { filter: drop-shadow(0 0 32px rgba(255, 230, 80, 0.9)); }
+}
+.wr-reveal-pic {
+  width: 100%;
+  height: 180px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f4f6fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.wr-reveal-pic .kido-creature {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wr-reveal-pic .creature-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+.wr-reveal-pic > svg {
+  width: 85%;
+  height: 85%;
+}
+.wr-reveal-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #4E32A8, #7952EC);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(78, 50, 168, 0.35);
+}
+.wr-reveal-sound-btn {
+  font-size: 22px;
+  line-height: 1;
+  animation: wr-speaker-bounce 1s infinite alternate;
+}
+@keyframes wr-speaker-bounce {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.22); }
+}
+.wr-reveal-name {
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* =========================================================================
+   RIGGED CHARACTERS — expressions & poses are pure CSS class toggles.
+   The SVG ships every mouth/brow variant; classes reveal the right one.
+   ========================================================================= */
+.kido-char { width: 100%; height: 100%; overflow: visible; display: block; }
+.kc-fox { filter: drop-shadow(0 6px 14px rgba(61, 20, 0, 0.22)); }
+.kido-char .kc-body { transform-box: fill-box; transform-origin: 50% 90%; animation: kc-breathe 3.2s ease-in-out infinite; }
+.kido-char .kc-arm-l, .kido-char .kc-arm-r { transform-box: fill-box; transform-origin: 50% 0%; }
+.kido-char .kc-tail { transform-box: fill-box; transform-origin: 15% 85%; animation: kc-tail-wag 3.2s ease-in-out infinite; }
+.kido-char .kc-head { transform-box: fill-box; transform-origin: 50% 90%; transition: transform .35s cubic-bezier(.34, 1.56, .64, 1); }
+.kido-char .kc-ear-l, .kido-char .kc-ear-r { transform-box: fill-box; transform-origin: 50% 90%; transition: transform .3s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes kc-tail-wag { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(12deg); } }
+
+/* Blink: eyelids drop briefly on a loop (randomised delay set inline per char). */
+.kido-char .kc-lid { transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); animation: kc-blink 5s infinite; }
+@keyframes kc-blink { 0%,94%,100% { transform: scaleY(0);} 96%,98% { transform: scaleY(1);} }
+
+/* Every mouth/brow hidden by default; a state class shows exactly one. */
+.kido-char .kc-mouth { display: none; }
+.kido-char .kc-brow  { transform-box: fill-box; transform-origin: 50% 50%; transition: transform .2s ease; }
+
+/* idle / happy (default) */
+.kido-char .m-smile { display: block; }
+
+.kido-char.is-happy .kc-mouth { display: none; } .kido-char.is-happy .m-smile { display: block; }
+.kido-char.is-excited .kc-mouth { display: none; } .kido-char.is-excited .m-open { display: block; }
+.kido-char.is-excited .kc-head { transform: scale(1.04); }
+.kido-char.is-excited .kc-ear-l { transform: rotate(-8deg); }
+.kido-char.is-excited .kc-ear-r { transform: rotate(8deg); }
+
+.kido-char.is-celebrating .kc-mouth { display: none; } .kido-char.is-celebrating .m-open { display: block; }
+.kido-char.is-celebrating .kc-head { transform: scale(1.05); }
+.kido-char.is-celebrating .kc-tail { animation: kc-tail-wag 1.2s ease-in-out infinite; }
+
+.kido-char.is-surprised .kc-mouth { display: none; } .kido-char.is-surprised .m-o { display: block; }
+.kido-char.is-surprised .kc-brow { transform: translateY(-10px); }
+.kido-char.is-surprised .kc-head { transform: translateY(-4px) scale(1.03); }
+.kido-char.is-surprised .kc-ear-l { transform: rotate(-14deg) translateY(-4px); }
+.kido-char.is-surprised .kc-ear-r { transform: rotate(14deg) translateY(-4px); }
+
+.kido-char.is-thinking .kc-mouth { display: none; } .kido-char.is-thinking .m-flat { display: block; }
+.kido-char.is-thinking .kc-brow-r { transform: translateY(-8px) rotate(-8deg); }
+.kido-char.is-thinking .kc-head { transform: rotate(5deg); }
+.kido-char.is-thinking .kc-ear-l { transform: rotate(6deg); }
+.kido-char.is-thinking .kc-ear-r { transform: rotate(-10deg); }
+
+.kido-char.is-sad .kc-mouth { display: none; } .kido-char.is-sad .m-frown { display: block; }
+.kido-char.is-sad .kc-brow { transform: translateY(3px) rotate(var(--brow-sad, 8deg)); }
+.kido-char.is-sleeping .kc-mouth { display: none; } .kido-char.is-sleeping .m-flat { display: block; }
+.kido-char.is-sleeping .kc-eye { transform: scaleY(.12); transform-box: fill-box; transform-origin: 50% 50%; }
+.kido-char.is-sleeping .kc-lid { animation: none; }
+
+/* pupils track a little when "looking" (set --look-x/y inline) */
+.kido-char .kc-pupil { transform: translate(var(--look-x,0), var(--look-y,0)); transition: transform .3s ease; }
+
+/* Poses (whole-body). Combine with expressions freely. */
+.kido-char.pose-jump  { animation: kc-jump .6s ease; }
+.kido-char.pose-nod   { animation: kc-nod .5s ease; }
+.kido-char.pose-cheer .kc-arm-l { animation: kc-cheer-l .5s ease-in-out infinite alternate; }
+.kido-char.pose-cheer .kc-arm-r { animation: kc-cheer-r .5s ease-in-out infinite alternate; }
+.kido-char.pose-wave  .kc-arm-r { animation: kc-wave .5s ease-in-out infinite; transform-origin: 50% 0%; }
+.kido-char.pose-run   .kc-body  { animation: kc-run .4s linear infinite; }
+
+@keyframes kc-breathe { 0%,100% { transform: scale(1);} 50% { transform: scale(1.03,.985);} }
+@keyframes kc-jump { 0%{transform:translateY(0)} 30%{transform:translateY(-70px) scaleY(1.08)} 55%{transform:translateY(0) scaleY(.9)} 75%{transform:translateY(0) scaleY(1.03)} 100%{transform:translateY(0)} }
+@keyframes kc-nod { 0%,100%{transform:rotate(0)} 40%{transform:rotate(6deg)} 70%{transform:rotate(-3deg)} }
+@keyframes kc-cheer-l { from{transform:rotate(10deg)} to{transform:rotate(-40deg)} }
+@keyframes kc-cheer-r { from{transform:rotate(-10deg)} to{transform:rotate(40deg)} }
+@keyframes kc-wave { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-38deg)} }
+@keyframes kc-run { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-8px) rotate(2deg)} }
+
+/* Change #17A story moves: a bouncy hop (rabbits, puppies), nose to the ground, an arm raised toward something. */
+.kido-char.pose-hop   { animation: kc-hop .5s ease-in-out infinite; }
+.kido-char.pose-sniff .kc-head { animation: kc-sniff .55s ease-in-out infinite; }
+.kido-char.pose-point .kc-arm-r { transform: rotate(-125deg); transition: transform .3s ease; }
+.kido-char.pose-point-l .kc-arm-l { transform: rotate(125deg); transition: transform .3s ease; }
+@keyframes kc-hop   { 0%,100% { transform: translateY(0) scaleY(1); } 45% { transform: translateY(-18px) scaleY(1.05); } 85% { transform: translateY(0) scaleY(.93); } }
+@keyframes kc-sniff { 0%,100% { transform: rotate(0) translateY(0); } 50% { transform: rotate(7deg) translateY(6px); } }
+/* Floppy ears (Biscuit and his mama) hang from the top, so they swing from there: perk up when excited, droop when sad. */
+.kido-char.kc-dog .kc-ear-l, .kido-char.kc-dog .kc-ear-r { transform-origin: 50% 6%; }
+.kido-char.kc-dog.is-excited .kc-ear-l, .kido-char.kc-dog.is-celebrating .kc-ear-l, .kido-char.kc-dog.is-surprised .kc-ear-l { transform: rotate(24deg); }
+.kido-char.kc-dog.is-excited .kc-ear-r, .kido-char.kc-dog.is-celebrating .kc-ear-r, .kido-char.kc-dog.is-surprised .kc-ear-r { transform: rotate(-24deg); }
+.kido-char.kc-dog.is-sad .kc-ear-l { transform: rotate(-9deg); }
+.kido-char.kc-dog.is-sad .kc-ear-r { transform: rotate(9deg); }
+/* Long rabbit ears flop down to the sides when Ria is sad. */
+.kido-char.kc-rabbit.is-sad .kc-ear-l { transform: rotate(-32deg); }
+.kido-char.kc-rabbit.is-sad .kc-ear-r { transform: rotate(32deg); }
+/* Tuk pulls his head in a little when he's worried. */
+.kido-char.kc-turtle.is-sad .kc-head { transform: translateY(8px) scale(.96); }
+
+/* =========================================================================
+   REALISTIC ENVIRONMENT BACKDROPS & LAYERED DEPTH
+   ========================================================================= */
+/* 1. JUNGLE: layered trees, realistic foliage, vines, sunlight through trees */
+.bg-jungle {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 240, 200, 0.08) 50%, rgba(10, 25, 12, 0.55) 100%),
+    linear-gradient(180deg, rgba(12, 28, 14, 0.35) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(8, 20, 10, 0.6) 100%),
+    url("../assets/img/jungle-waterfall.svg") center 40% / cover no-repeat !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 2. SAVANNA: rolling hills, warm golden sunlight, acacia silhouettes, tall grass */
+.bg-savanna {
+  background:
+    radial-gradient(circle at 75% 25%, rgba(255, 245, 180, 0.85) 0%, rgba(255, 193, 7, 0.4) 30%, rgba(230, 126, 34, 0) 65%),
+    linear-gradient(180deg, #F9A825 0%, #E65100 45%, #BF360C 75%, #4E1402 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 3. OCEAN DEEP: deep azure water, surface light rays, coral reef, rising bubbles */
+.bg-ocean {
+  background:
+    radial-gradient(ellipse 90% 40% at 50% 0%, rgba(144, 224, 239, 0.6) 0%, rgba(0, 180, 216, 0.25) 40%, transparent 80%),
+    linear-gradient(180deg, #0077B6 0%, #023E8A 45%, #03045E 80%, #010228 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 4. FARM: sunny pasture, barn silhouette, split-rail fence, drifting clouds */
+.bg-farm {
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 235, 140, 0.4) 30%, transparent 60%),
+    linear-gradient(180deg, #64B5F6 0%, #BBDEFB 45%, #E8F5E9 75%, #A5D6A7 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 5. FOREST: deep misty forest, dappled sunbeams, mossy stone ground */
+.bg-forest {
+  background:
+    radial-gradient(ellipse 70% 50% at 35% 20%, rgba(255, 255, 200, 0.35) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 75%),
+    linear-gradient(180deg, #1B4332 0%, #2D6A4F 40%, #1A3C2F 75%, #081C15 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 6. SPACE: cosmic nebula, ringed planet, multi-layer twinkling stardust */
+.bg-space {
+  background:
+    radial-gradient(ellipse 80% 60% at 65% 35%, rgba(114, 9, 183, 0.6) 0%, rgba(58, 12, 163, 0.35) 50%, transparent 80%),
+    radial-gradient(ellipse 60% 40% at 20% 70%, rgba(247, 37, 133, 0.3) 0%, transparent 60%),
+    linear-gradient(180deg, #0B091A 0%, #150D32 50%, #05030E 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 7. SCIENCE LAB: clean, warm, child-friendly discovery laboratory */
+.bg-lab {
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 25%, rgba(255, 255, 255, 0.7) 0%, rgba(224, 242, 254, 0.4) 45%, transparent 80%),
+    linear-gradient(180deg, #E0F2FE 0%, #BAE6FD 45%, #7DD3FC 85%, #0284C7 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 8. BATH / MORNING ROUTINE */
+.bg-bath    { background: linear-gradient(180deg, #E0F7FA 0%, #B2EBF2 40%, #80DEEA 80%, #4DD0E1 100%); }
+.bg-morning { background: linear-gradient(180deg, #FFE8B0 0%, #FFCC80 50%, #FFA726 100%); }
+.bg-garden  { background: linear-gradient(180deg, #C8E6C9 0%, #E8F5E9 45%, #A5D6A7 80%, #81C784 100%); }
+.bg-night   { background: linear-gradient(180deg, #1A1235 0%, #2A1B54 50%, #3D2678 100%); }
+
+/* 9. REALISTIC CITY ROAD: Buildings skyline, avenue, and asphalt road */
+.bg-cityroad {
+  background: url("../assets/img/scenes/city-runner-bg.svg") repeat-x bottom center;
+  background-size: auto 100%;
+  animation: city-scene-scroll 32s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes city-scene-scroll {
+  from { background-position-x: 0px; }
+  to { background-position-x: -800px; }
+}
+
+/* ---- Realistic Ground Strips & Foundations ---- */
+.ground-strip { position: absolute; left: 0; right: 0; bottom: 0; height: 155px; pointer-events: none; }
+.ground-green {
+  background: linear-gradient(180deg, #40916C 0%, #2D6A4F 60%, #1B4332 100%);
+  border-top: 8px solid #52B788;
+  box-shadow: 0 -6px 20px rgba(8, 28, 21, 0.35);
+}
+.ground-savanna {
+  background: linear-gradient(180deg, #D4A373 0%, #BC6C25 55%, #8C4A10 100%);
+  border-top: 8px solid #E9C46A;
+  box-shadow: 0 -6px 20px rgba(78, 20, 2, 0.4);
+}
+.ground-ocean {
+  background: linear-gradient(180deg, #03045E 0%, #023E8A 45%, #001233 100%);
+  border-top: 6px solid #0077B6;
+  box-shadow: 0 -8px 24px rgba(1, 2, 40, 0.5);
+}
+.ground-forest {
+  background: linear-gradient(180deg, #2D6A4F 0%, #1B4332 55%, #081C15 100%);
+  border-top: 8px solid #40916C;
+  box-shadow: 0 -6px 22px rgba(8, 28, 21, 0.45);
+}
+.ground-farm {
+  background: linear-gradient(180deg, #52B788 0%, #40916C 60%, #2D6A4F 100%);
+  border-top: 8px solid #74C69D;
+  box-shadow: 0 -4px 16px rgba(45, 106, 79, 0.3);
+}
+.ground-tile  {
+  background: linear-gradient(180deg, #EAD9FF 0%, #CDB4F0 100%);
+  border-top: 8px solid #B79BE0;
+}
+.ground-soil  {
+  background: linear-gradient(180deg, #B07A4E 0%, #7E5230 100%);
+  border-top: 10px solid #6b451f;
+}
+
+/* ---- Ambient Environmental Decor Elements (Layered Depth) ---- */
+/* Foreground Framing Layer */
+.scene-layer--fore {
+  z-index: 6;
+  pointer-events: none !important;
+}
+
+/* Ambient Sunbeams through Canopy */
+.env-sunbeam {
+  position: absolute;
+  top: -20px;
+  width: 140px; height: 600px;
+  background: linear-gradient(180deg, rgba(255, 255, 230, 0.45) 0%, rgba(255, 255, 200, 0.15) 50%, transparent 100%);
+  transform: rotate(-18deg);
+  transform-origin: top center;
+  filter: blur(8px);
+  pointer-events: none;
+  animation: sunbeam-shift 5s ease-in-out infinite alternate;
+}
+.env-sunbeam--2 {
+  left: 380px; width: 180px;
+  animation-delay: 1.5s;
+  animation-duration: 6.2s;
+}
+.env-sunbeam--3 {
+  left: 640px; width: 130px;
+  animation-delay: 2.8s;
+  animation-duration: 4.8s;
+}
+
+/* Ocean Rising Bubbles */
+.env-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.85) 0%, rgba(200,240,255,0.4) 60%, rgba(100,200,255,0.2) 100%);
+  border: 1px solid rgba(255,255,255,0.6);
+  pointer-events: none;
+  animation: bubble-rise-subtle 5s ease-in-out infinite;
+}
+
+/* Space Twinkling Stars */
+.env-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #FFFFFF;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(255,255,255,0.85);
+  animation: star-twinkle 2.8s ease-in-out infinite alternate;
+}
+
+/* Framing Jungle Canopy Vines (Foreground) */
+.env-vine-fore {
+  position: absolute;
+  top: 0;
+  width: 160px; height: 180px;
+  pointer-events: none;
+  animation: leaf-sway 4s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+.env-vine-fore--left { left: 0; }
+.env-vine-fore--right { right: 0; transform-origin: top right; }
+
+/* Sun decor helper */
+.deco-sun  { border-radius: 50%; background: radial-gradient(circle at 40% 40%, #FFF3B0, #FFC93C); box-shadow: 0 0 60px rgba(255,201,60,.7); }
+
+/* =========================================================================
+   REDUCED MOTION — calm everything, keep meaning
+   ========================================================================= */
+.reduce-motion .kido-char .kc-body,
+.reduce-motion .kido-char .kc-lid,
+.reduce-motion .tap-ring::after,
+.reduce-motion .kido-char.pose-run .kc-body,
+.reduce-motion .kido-char.pose-cheer .kc-arm-l,
+.reduce-motion .kido-char.pose-cheer .kc-arm-r,
+.reduce-motion .kido-char.pose-wave .kc-arm-r,
+.reduce-motion .kido-char.pose-hop,
+.reduce-motion .kido-char.pose-sniff .kc-head { animation: none !important; }
+.reduce-motion .scene-say { transition: opacity .2s linear; }
+
+/* High-contrast: firm up text bubbles + slots. */
+.high-contrast .scene-say { background: #fff; color: #000; border: 3px solid #000; }
+.high-contrast .scene-slot { border-color: #000; }
+
+/* =========================================================================
+   ORCHARD & 3D FRUIT HARVEST STYLES (Realistic Sunny Park Background)
+   ========================================================================= */
+.bg-orchard {
+  position: relative;
+  overflow: hidden;
+  background: #142810 !important;
+}
+.bg-orchard::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: 
+    /* Center illumination: softly lights up the play area so interactive fruits pop */
+    radial-gradient(ellipse 75% 70% at 50% 50%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 245, 200, 0.06) 45%, rgba(8, 20, 6, 0.44) 100%),
+    /* Soft framing vignette */
+    linear-gradient(180deg, rgba(8, 18, 6, 0.30) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(8, 18, 6, 0.45) 100%),
+    url("../assets/img/sunny-park.svg") center 30% / cover no-repeat;
+  filter: blur(10px) saturate(1.1);
+  transform: scale(1.08);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Hide cartoon hills so real sunny park trees and grass shine through */
+.bg-orchard .orchard-hills,
+.bg-orchard .orchard-hills-2 {
+  display: none !important;
+}
+
+/* Floating Soft Orchard Clouds */
+.orchard-cloud {
+  display: none !important;
+}
+@keyframes floatCloud {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(40px); }
+}
+
+/* Wooden Harvest Table / Picnic Pedestal */
+.orchard-table {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 620px;
+  height: 170px;
+  background: linear-gradient(180deg, #D49C65 0%, #B87D45 35%, #8C5624 100%);
+  border-radius: 36px 36px 0 0;
+  box-shadow: 0 -4px 18px rgba(90,50,15,0.25), inset 0 3px 0 rgba(255,255,255,0.3);
+  border-top: 6px solid #E8B985;
+  pointer-events: none;
+}
+.orchard-table::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: rgba(80,40,10,0.2);
+  border-radius: 2px;
+}
+
+/* Orchard Speech Bubble adjustment so it never covers the basket */
+.bg-orchard .scene-say {
+  bottom: 14px;
+  font-size: 25px;
+  padding: 10px 22px;
+  border-radius: 20px;
+  max-width: 640px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+  border: 2px solid rgba(255,255,255,0.9);
+  z-index: 10;
+}
+.bg-orchard .scene-say__peek img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* 3D Fruit Items */
+.fruit-card-3d {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border-radius: 28px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.10), inset 0 0 0 3px #FFFFFF;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  will-change: transform;
+}
+.fruit-card-3d:hover {
+  transform: translate(-50%, -50%) scale(1.08) translateY(-6px);
+  box-shadow: 0 22px 44px rgba(45, 20, 80, 0.24), 0 0 0 4px #FFC107;
+}
+.fruit-card-3d:active {
+  transform: translate(-50%, -50%) scale(0.94);
+}
+.fruit-card-3d .fruit-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* Letter badge for Alphabet games */
+.fruit-letter-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 52px;
+  height: 52px;
+  padding: 0 10px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1;
+  color: #3D1C8C;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25), inset 0 2px 0 #FFFFFF;
+  border: 3px solid #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  pointer-events: none;
+}
+
+/* 3D Basket & Dynamic Filling System */
+.basket-composite {
+  position: absolute;
+  width: 220px;
+  height: 165px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.basket-back-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.basket-contents-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+}
+.basket-front-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+.basket-front-layer img,
+.basket-back-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Fruits that are stacked inside the basket */
+.basket-stacked-fruit {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  transform: translate(-50%, -50%);
+  animation: fruitDropSettle 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  z-index: 2;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
+}
+.basket-stacked-fruit img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+@keyframes fruitDropSettle {
+  0% {
+    transform: translate(-50%, -120%) scale(1.15);
+    opacity: 0.8;
+  }
+  65% {
+    transform: translate(-50%, -40%) scale(0.9, 1.1);
+  }
+  85% {
+    transform: translate(-50%, -55%) scale(1.05, 0.95);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Basket Catch Elastic Jiggle */
+.basket-composite.basket-jiggle {
+  animation: basketCatchJiggle 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes basketCatchJiggle {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  30% { transform: translate(-50%, -46%) scale(1.08, 0.92); }
+  65% { transform: translate(-50%, -53%) scale(0.96, 1.04); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Basket Count Badge */
+.basket-counter-badge {
+  position: absolute;
+  bottom: 22px;
+  right: 12px;
+  z-index: 4;
+  background: linear-gradient(135deg, #FF5722 0%, #D82607 100%);
+  color: #fff;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(180,30,10,0.5), inset 0 2px 0 rgba(255,255,255,0.4);
+  border: 3px solid #fff;
+  animation: badgePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes badgePop {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Floating Fruit Idle Bob Animation */
+@keyframes fruitFloatBob {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-10px); }
+}
+.fruit-floating {
+  animation: fruitFloatBob 2.4s ease-in-out infinite alternate;
+}
+
+
+/* QA 2026-11-10: on phones the fixed 1000x640 stage is scaled to ~0.6, which shrank Close / music / Momo and the
+   speaker buttons to 34 px. They are scaled back up so they never show smaller than ~48 px (unchanged on tablets). */
+.scene-root:not(.scene-root--responsive) .scene-stage { --hud-k: max(1, calc(0.86 / var(--scene-scale, 1))); }
+.scene-root:not(.scene-root--responsive) .scene-close { scale: var(--hud-k); transform-origin: top right; }
+.scene-root:not(.scene-root--responsive) .scene-ctl { scale: var(--hud-k); transform-origin: top right; right: calc(30px + 56px * var(--hud-k)); }
+.scene-root:not(.scene-root--responsive) .scene-speaker-btn, .scene-root:not(.scene-root--responsive) .wta-speaker-btn { scale: var(--hud-k); }

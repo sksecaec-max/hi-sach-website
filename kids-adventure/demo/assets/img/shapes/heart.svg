@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Vibrant 2D Heart Gradient -->
+    <linearGradient id="heartGrad2D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB7185"/>
+      <stop offset="100%" stop-color="#BE123C"/>
+    </linearGradient>
+    <linearGradient id="heartInnerStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Flat 2D Heart Shape -->
+  <path d="M 100 58
+           C 80 22, 24 24, 24 78
+           C 24 122, 70 152, 100 176
+           C 130 152, 176 122, 176 78
+           C 176 24, 120 22, 100 58 Z"
+        fill="url(#heartGrad2D)" stroke="#BE123C" stroke-width="2"/>
+
+  <!-- Crisp Inner Border Accent -->
+  <path d="M 100 66
+           C 82 36, 34 38, 34 80
+           C 34 116, 75 142, 100 164
+           C 125 142, 166 116, 166 80
+           C 166 38, 118 36, 100 66 Z"
+        fill="none" stroke="url(#heartInnerStroke)" stroke-width="3"/>
+
+  <!-- Friendly Accent Sparkle -->
+  <circle cx="68" cy="68" r="5.5" fill="#FFFFFF" opacity="0.75"/>
+  <circle cx="78" cy="58" r="3" fill="#FFFFFF" opacity="0.9"/>
+</svg>

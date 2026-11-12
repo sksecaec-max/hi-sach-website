@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="watch-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1B120C" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#1B120C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B120C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="strap-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF5722"/>
+      <stop offset="40%" stop-color="#FF7043"/>
+      <stop offset="80%" stop-color="#E64A19"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <radialGradient id="case-bezel" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#90A4AE"/>
+      <stop offset="40%" stop-color="#455A64"/>
+      <stop offset="85%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#102027"/>
+    </radialGradient>
+    <radialGradient id="dial-screen" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="60%" stop-color="#181818"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="glass-glare" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="100" cy="180" rx="48" ry="12" fill="url(#watch-shadow)"/>
+
+  <!-- Watch Strap (Top & Bottom) -->
+  <path d="M78 20 L122 20 L120 70 L80 70 Z" fill="url(#strap-grad)"/>
+  <path d="M80 130 L120 130 L122 180 L78 180 Z" fill="url(#strap-grad)"/>
+
+  <!-- Strap Stitches -->
+  <g stroke="#FFAB91" stroke-width="1.5" stroke-dasharray="3,3" fill="none">
+    <line x1="82" y1="22" x2="83" y2="68"/>
+    <line x1="118" y1="22" x2="117" y2="68"/>
+    <line x1="83" y1="132" x2="82" y2="178"/>
+    <line x1="117" y1="132" x2="118" y2="178"/>
+  </g>
+
+  <!-- Crown button on right -->
+  <rect x="146" y="93" width="7" height="14" rx="2" fill="#78909C"/>
+
+  <!-- Watch Case Bezel (Squircle 3D) -->
+  <rect x="52" y="52" width="96" height="96" rx="28" fill="url(#case-bezel)"/>
+
+  <!-- Bezel inner ring -->
+  <rect x="56" y="56" width="88" height="88" rx="24" fill="#37474F"/>
+
+  <!-- Dial Screen -->
+  <rect x="60" y="60" width="80" height="80" rx="20" fill="url(#dial-screen)"/>
+
+  <!-- Watch Dial Numerals / Ticks & Digital Time -->
+  <circle cx="100" cy="100" r="3" fill="#00E676"/>
+  <!-- Hour & Minute hands -->
+  <line x1="100" y1="100" x2="100" y2="76" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="100" y1="100" x2="118" y2="100" stroke="#00E676" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Second hand (red dot) -->
+  <line x1="100" y1="100" x2="86" y2="114" stroke="#FF5252" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Smartwatch display time badge -->
+  <text x="100" y="128" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#B0BEC5">10:10</text>
+
+  <!-- Glass Curved Glare -->
+  <path d="M64 64 C92 64 136 78 136 106 C120 76 88 70 64 82 Z" fill="url(#glass-glare)"/>
+</svg>

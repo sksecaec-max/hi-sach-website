@@ -1,0 +1,804 @@
+/* =========================================================================
+   Kido — Responsive Design (Landscape-First Architecture)
+   The entire application is architected for widescreen landscape:
+   tablets, laptops, desktop monitors, interactive displays, and landscape phones.
+   ========================================================================= */
+
+:root {
+  --maxw: 1200px;
+  --gutter: clamp(16px, 2.5vw, 32px);
+}
+
+/* --- App Container: Widescreen Landscape --- */
+.app {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(43, 33, 81, .18);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 48%, var(--bg-bot) 100%);
+}
+
+/* Widescreen meadow background backdrop on very wide displays (>1400px) */
+@media (min-width: 1400px) {
+  body {
+    background: #eef2ff;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,176,32,.22), transparent 45%),
+      radial-gradient(circle at 85% 30%, rgba(255,107,138,.22), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(56,193,114,.22), transparent 50%),
+      linear-gradient(160deg, #d9c6ff, #ffd7e6);
+  }
+}
+
+/* --- Persistent Top Bar in Landscape --- */
+.topbar {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  /* Change #28: keep the status-bar allowance (this rule reset it to a flat 10px, so on Android the header
+     buttons sat under the clock and battery icons) */
+  padding: calc(var(--kido-sa-top) + 10px) max(var(--gutter), var(--kido-sa-right)) 10px max(var(--gutter), var(--kido-sa-left));
+}
+
+/* --- Global Stage & Screen in Landscape --- */
+.stage {
+  max-width: var(--maxw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px var(--gutter) 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* --- Answer Options in Landscape --- */
+.options {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  gap: clamp(12px, 2vw, 24px);
+  justify-content: center;
+  box-sizing: border-box;
+}
+.options.cols-1 {
+  grid-template-columns: minmax(260px, 480px);
+  justify-content: center;
+}
+.options.cols-2 {
+  grid-template-columns: repeat(2, minmax(200px, 340px));
+  justify-content: center;
+}
+.options.cols-2:has(.opt--number),
+.game--orchard .options.cols-2:has(.opt--number) {
+  grid-template-columns: repeat(2, minmax(110px, 145px)) !important;
+  max-width: 310px !important;
+  margin: 0 auto;
+}
+.options.cols-2:has(.opt--fruit-group),
+.game--orchard .options.cols-2:has(.opt--fruit-group),
+.options.cols-2:has(.count-mini-group),
+.game--orchard .options.cols-2:has(.count-mini-group) {
+  grid-template-columns: repeat(2, minmax(140px, 290px)) !important;
+  max-width: 620px !important;
+  margin: 0 auto;
+}
+.options.cols-3 {
+  grid-template-columns: repeat(3, minmax(180px, 280px));
+  justify-content: center;
+}
+.options.cols-4 {
+  grid-template-columns: repeat(4, minmax(150px, 220px));
+  justify-content: center;
+}
+/* APK QA: on narrow phones the fixed column minimums above (2 × 200px, 3 × 180px, 4 × 150px) were wider than
+   the screen, so answer cards hung off both edges (Body Parts at 320px). Same columns, allowed to shrink. */
+@media (max-width: 679px) {
+  .options.cols-1 { grid-template-columns: minmax(0, 480px); }
+  .options.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .options.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .options.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .options.cols-2:has(.opt--fruit-group), .game--orchard .options.cols-2:has(.opt--fruit-group),
+  .options.cols-2:has(.count-mini-group), .game--orchard .options.cols-2:has(.count-mini-group) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+.opt {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.opt--pic {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 1.8vw, 14px);
+}
+.opt--number {
+  width: 100%;
+  max-width: 145px !important;
+  max-height: 140px !important;
+  aspect-ratio: 1.05 / 1 !important;
+  min-height: 0 !important;
+  margin: 0 auto;
+}
+
+
+/* --- Category Grids in Landscape --- */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  max-width: var(--maxw);
+  margin: 16px auto 0;
+}
+
+/* --- Soundboard in Landscape --- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: clamp(12px, 2vw, 18px);
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+/* --- Match Game in Landscape --- */
+.match {
+  max-width: var(--maxw);
+  display: flex;
+  flex-direction: row;
+  gap: clamp(18px, 3vw, 40px);
+  justify-content: center;
+  align-items: flex-start;
+}
+.match__pool {
+  flex: 1 1 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+.match__targets {
+  flex: 1 1 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* --- Shadow Match in Landscape --- */
+.shadow-stage {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 18px 24px;
+}
+.shadow-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.shadow-scroll {
+  flex: 1 1 58%;
+  max-width: 540px;
+}
+.shadow-tray {
+  flex: 1 1 42%;
+  max-width: 360px;
+}
+/* Change #28: phones held sideways — the game title row is compact and the scroll is sized by the
+   screen's height, so the shadows and the animals fit one screen with no scrolling. */
+@media (orientation: landscape) and (max-height: 900px) {
+  body.in-gameplay .game__head { gap: 2px; padding-top: 2px; }
+  body.in-gameplay .game__prompt { font-size: clamp(20px, 3.6vh, 28px); }
+  .shadow-stage { padding: 6px 16px 10px; }
+  .shadow-scroll { flex: 0 0 auto; min-height: 0; height: calc(100dvh - var(--hud-h, 64px) - 84px); width: auto; max-width: 60%; }
+  .shadow-tray { align-self: center; }
+  .shadow-spot { width: min(84px, 17vh); height: min(84px, 17vh); }
+  /* drag-to-match games (Animal Babies, Shape Sorter...): pictures sized by the height, one tray row */
+  body.in-gameplay .match__pool { gap: 10px; align-content: center; }
+  body.in-gameplay .match__pool > .chip { max-width: calc(50% - 5px); }
+  body.in-gameplay .match__pool > .chip small { white-space: normal; text-align: center; line-height: 1.1; }
+  body.in-gameplay .match .chip { font-size: min(62px, 12vh); min-width: 0; min-height: 44px; padding: 6px 10px; }   /* word chips stay a 44 px tap target */
+  body.in-gameplay .match .slot { min-height: 0; padding: 6px; }
+  body.in-gameplay .match .slot__key, body.in-gameplay .match .slot__drop { font-size: min(60px, 12vh); min-height: 0; }
+  /* memory cards: the 4-across board is as wide as two (or, with 9+ cards, three) rows of cards are tall */
+  body.in-gameplay .memory { max-width: min(720px, calc((var(--fit-h) - 24px) * 2)); gap: 10px; margin-top: 0; }
+  body.in-gameplay .memory:has(> :nth-child(9)) { max-width: min(720px, calc((var(--fit-h) - 34px) / 3 * 4 + 30px)); }
+  /* fruit games: the orchard fills the screen instead of a fixed 480px stage */
+  body.in-gameplay .fruit-game-wrap { min-height: 0; }
+}
+
+/* Change #28 (Android phone landscape, e.g. 800x360 with a status bar): every question game fits one
+   screen. --fit-h is the height left for the playable area after the system bar, the floating HUD and the
+   one-line game title. Pictures, option cards, boards and arcade fields are sized from it, so the title,
+   the question and every answer stay visible together; nothing is merely shrunk below a child's tap size
+   (option cards stay >= ~110px). :not(#_) only lifts these over the older !important column rules. */
+@media (orientation: landscape) and (max-height: 900px) {
+  body.in-gameplay { --fit-h: min(440px, calc(100dvh - var(--hud-h, 64px) - 14px)); }   /* capped: tablets keep cards a sensible size */
+  /* the HUD bar is max 1200px and centred: on wider screens its buttons move in, and the title row must follow */
+  body.in-gameplay { --hud-x: max(0px, (100vw - 1200px) / 2); }
+  /* The game's title line (question, round dots, live status) sits IN the HUD row, between the HUD's buttons and
+     Momo, where that row was empty, so the playing area gets the full height below it. The grey hint line and
+     Momo's speech bubble go: Momo says the instruction aloud. Puzzles' question row and discoveries' title too. */
+  body.in-gameplay .game__head:not(#_), body.in-gameplay .pz-head:not(#_), body.in-gameplay .kd-title:not(#_) {
+    position: fixed; z-index: 19; top: calc(var(--kido-sa-top) + 6px); min-height: 52px; height: auto; margin: 0;
+    left: calc(var(--hud-x) + max(16px, var(--kido-sa-left)) + 270px); right: calc(var(--hud-x) + max(10px, var(--kido-sa-right)) + 66px); width: auto; max-width: none;
+    display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 8px; padding: 0;
+  }
+  body.in-gameplay .game__head .game__prompt, body.in-gameplay .pz-ask:not(#_), body.in-gameplay .kd-title:not(#_) {
+    font-size: 16px; line-height: 1.15; min-width: 0; flex-wrap: nowrap; max-height: none;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+  }
+  body.in-gameplay .game__head .game__prompt { padding-top: 4px; padding-bottom: 4px; }
+  body.in-gameplay .pz-ask:not(#_) { padding: 4px 14px; }
+  body.in-gameplay .kd-title:not(#_) { padding: 4px 14px; justify-content: center; text-align: center; }
+  body.in-gameplay .pz-round:not(#_) { width: 44px; height: 44px; font-size: 20px; }
+  body.in-gameplay .game__head .game__hint { display: none; }
+  body.in-gameplay .game__head .game__prompt { flex: 0 0 auto; max-width: 62%; }   /* the title first */
+  body.in-gameplay .game__head .game__progress { margin: 0; flex: 0 0 auto; }
+  body.in-gameplay .game__head .arcade__status {   /* the live status gives way to the title: smaller, up to 2 lines */
+    margin: 0; flex: 1 1 0; min-width: 0; font-size: 13px; line-height: 1.2;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+  }
+  body.in-gameplay .mascot-bubble:not(#_) { display: none; }
+  body.in-gameplay .stage { flex: 0 0 auto; gap: 12px; padding: 4px var(--gutter) 8px; }
+  /* the question picture beside the answers instead of above them */
+  body.in-gameplay .stage:has(> .showcase), body.in-gameplay .stage:has(> .count-row) { flex-direction: row; justify-content: center; }
+  body.in-gameplay .showcase { font-size: min(150px, calc(var(--fit-h) - 16px)); }
+  body.in-gameplay .showcase .kido-creature { width: min(210px, calc(var(--fit-h) - 16px)) !important; height: min(210px, calc(var(--fit-h) - 16px)) !important; }
+  /* answer cards: one row, each as tall as the space allows */
+  body.in-gameplay .options:not(#_) {
+    grid-auto-flow: column; grid-template-columns: none !important; grid-auto-columns: minmax(0, var(--fit-h));
+    width: auto; max-width: 100% !important; flex: 0 1 auto; min-width: 0; justify-content: center; gap: 12px !important;
+  }
+  body.in-gameplay .options .opt--pic { max-width: none; width: 100%; max-height: var(--fit-h); font-size: min(84px, calc(var(--fit-h) * .42)); }
+  body.in-gameplay .options .opt--staged:not(#_) { height: min(210px, var(--fit-h)) !important; }
+  body.in-gameplay .options .opt--number:not(#_) { width: 100%; height: auto; }
+  body.in-gameplay .options:has(.opt--number):not(#_) { grid-auto-columns: minmax(0, min(145px, calc(var(--fit-h) * .7))); flex: 1 1 0; }
+  body.in-gameplay .stage:has(> .count-row) > .count-row { max-width: 50%; flex: 0 1 auto; }
+  body.in-gameplay .options:has(.opt--fruit-group):not(#_), body.in-gameplay .options:has(.count-mini-group):not(#_) { grid-auto-columns: minmax(0, 290px); }
+  /* "tap to hear" boards are a collection: one row that swipes sideways */
+  body.in-gameplay .board {
+    grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: min(190px, calc(var(--fit-h) * .78));
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
+    justify-content: safe center; padding: 4px 4px 10px; max-width: 100%;
+  }
+  body.in-gameplay .board-tile { scroll-snap-align: start; min-height: 0; height: calc(var(--fit-h) - 18px); }
+  body.in-gameplay .board::-webkit-scrollbar { height: 8px; }
+  body.in-gameplay .board::-webkit-scrollbar-track { background: transparent; }
+  body.in-gameplay .board::-webkit-scrollbar-thumb { background: rgba(108, 75, 214, .3); border-radius: 8px; }
+  body.in-gameplay .board-tile__emoji { flex: 1 1 auto; min-height: 0; width: auto; height: 100%; max-width: 100%; }
+  body.in-gameplay .board--abc .board-tile__emoji { width: 100%; aspect-ratio: auto; }
+  body.in-gameplay .abc-card__L { font-size: min(52px, calc(var(--fit-h) * .17)); }
+  /* concept quizzes: the picture on the left, the two coloured answers beside it */
+  body.in-gameplay .stage:has(> .cls-showcase) { flex: 1 1 auto; flex-direction: row; align-items: center; justify-content: center; gap: 28px; }
+  body.in-gameplay .cls-showcase { margin: 0; }
+  body.in-gameplay .cls-item__pic { font-size: min(140px, calc(var(--fit-h) * .5)); }
+  body.in-gameplay .cls-item__pic img { width: min(170px, calc(var(--fit-h) * .6)); height: min(170px, calc(var(--fit-h) * .6)); }
+  body.in-gameplay .cls-item__pic .kido-creature { width: min(170px, calc(var(--fit-h) * .6)); height: min(170px, calc(var(--fit-h) * .6)); }
+  body.in-gameplay .options:has(.opt--good, .opt--hot, .opt--cold, .opt--sky):not(#_) { grid-auto-flow: row; grid-template-columns: 1fr !important; grid-auto-columns: auto; width: min(320px, 40vw); margin: 0; gap: 18px !important; }
+  body.in-gameplay .options .opt--good, body.in-gameplay .options .opt--bad, body.in-gameplay .options .opt--hot, body.in-gameplay .options .opt--cold, body.in-gameplay .options .opt--sky { min-height: min(96px, calc(var(--fit-h) * .3)); }
+  body.in-gameplay .options:has(.opt--sky) .opt:not(#_) { min-height: min(80px, calc(var(--fit-h) * .26)); }   /* three answers stacked */
+  body.in-gameplay .more-svg { width: min(170px, calc(var(--fit-h) * .6)); height: min(170px, calc(var(--fit-h) * .6)); }
+  body.in-gameplay .cnt-grid { font-size: min(52px, calc(var(--fit-h) * .15)); }
+  body.in-gameplay .board-emoji { font-size: min(90px, calc(var(--fit-h) * .3)); }
+  /* Chiku: the photo takes the height, the name card sits beside it */
+  body.in-gameplay .chiku-stage { flex-direction: row; justify-content: center; align-items: center; gap: 22px; }
+  body.in-gameplay .chiku-holder { width: auto; }
+  body.in-gameplay .chiku-scene { width: min(55vw, calc((var(--fit-h) - 6px) * var(--ar))); }
+  body.in-gameplay .chiku-card { width: min(300px, 34vw); }
+  body.in-gameplay .cls-item__pic .chiku-crop, body.in-gameplay .cls-item__pic .chiku-photo { width: min(170px, calc(var(--fit-h) * .6)); height: min(170px, calc(var(--fit-h) * .6)); }
+  body.in-gameplay .story-page .cls-item__pic:not(#_) { font-size: min(60px, calc(var(--fit-h) * .2)); white-space: nowrap; letter-spacing: 2px; }
+  /* tracing: the letter board takes the height, the buttons sit beside it */
+  body.in-gameplay .trace { flex-direction: row; justify-content: center; gap: 18px; }
+  body.in-gameplay .trace__box { width: auto; height: calc(var(--fit-h) - 8px); }
+  body.in-gameplay .trace__tools { flex-direction: column; }
+  /* counting / ordering rows */
+  body.in-gameplay .count-row { flex-wrap: nowrap; min-height: 0; margin: 0; max-width: 58%; }
+  body.in-gameplay .count-row .count-fruit-wrap { height: min(115px, calc(var(--fit-h) * .5)); width: auto; }
+  body.in-gameplay .count-row .count-fruit-img { width: min(115px, calc(var(--fit-h) * .5)); height: min(115px, calc(var(--fit-h) * .5)); }
+  /* 4–6 fruits: two rows of three, sized from the height AND the half width they get (one row of six
+     overflowed onto the answers on a 360px-tall phone) */
+  body.in-gameplay .count-row:has(> :nth-child(4)):not(#_) {
+    --cf: min(115px, calc((var(--fit-h) - 12px) / 2), calc(((100vw - var(--kido-sa-left) - var(--kido-sa-right)) / 2 - 24px) / 3));
+    flex-wrap: wrap; gap: 12px; max-width: calc(var(--cf) * 3 + 24px);
+  }
+  body.in-gameplay .count-row:has(> :nth-child(4)):not(#_) .count-fruit-wrap,
+  body.in-gameplay .count-row:has(> :nth-child(4)):not(#_) .count-fruit-img { width: var(--cf); height: var(--cf); }
+  /* More or Less: two rows of small fruits per card, sized from the height */
+  body.in-gameplay .count-fruit-img--mini:not(#_) { width: min(76px, calc((var(--fit-h) - 60px) / 3)) !important; height: min(76px, calc((var(--fit-h) - 60px) / 3)) !important; }
+  body.in-gameplay .count-mini-group { max-width: none; padding: 4px; gap: 6px; }
+  body.in-gameplay .opt:has(.count-mini-group):not(#_) { padding-top: 6px !important; padding-bottom: 6px !important; min-height: 0 !important; }
+  body.in-gameplay .seq { gap: 10px; }
+  body.in-gameplay .seq__box { width: min(76px, calc(var(--fit-h) * .38)); height: min(76px, calc(var(--fit-h) * .38)); }
+  /* build-it games: the picture frame takes the height, the parts sit beside it */
+  body.in-gameplay .assembly { flex-direction: row; align-items: stretch; max-width: none; }
+  body.in-gameplay .assembly__frame { flex: 1 1 auto; min-height: 0; height: calc(var(--fit-h) - 8px); }
+  body.in-gameplay .assembly > .match__pool { flex: 0 0 auto; width: min(240px, 30%); flex-direction: column; flex-wrap: nowrap; justify-content: center; }
+  /* arcade fields */
+  body.in-gameplay .ttt { width: min(340px, var(--fit-h)) !important; height: min(340px, var(--fit-h)) !important; }
+  body.in-gameplay .bubble-field { height: var(--fit-h); }
+  /* Bubble Pop: bubbles sized for a phone's short sky (they were 86px in a ~250px field, so 3 filled its height) */
+  body.in-gameplay .bubble { width: 60px; height: 60px; }
+  body.in-gameplay .bubble__content { font-size: 32px; }
+  body.in-gameplay .bubble__content img, body.in-gameplay .bubble__content .creature-img { width: 36px; height: 36px; }
+  body.in-gameplay .bubble::before { top: 7px; left: 10px; width: 15px; height: 8px; }
+  body.in-gameplay .bubble::after { bottom: 6px; right: 10px; width: 10px; height: 6px; }
+  body.in-gameplay .bubble-ring { width: 64px; height: 64px; }
+  body.in-gameplay .game--safari .sound-game-stage { padding: 4px 16px 8px; gap: 10px; }
+  body.in-gameplay .game--safari .sound-game-stage:has(> .options) { flex-direction: row; }
+  /* explore boards: the board swipes on the left; the tapped picture's card beside it */
+  body.in-gameplay .stage:has(> .board):has(> :nth-child(2)) {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(170px, 28%); grid-template-rows: minmax(0, 1fr) auto;
+    align-items: center; column-gap: 14px; row-gap: 8px;
+  }
+  body.in-gameplay .stage:has(> .board):has(> :nth-child(2)) > .board { grid-row: 1 / span 2; grid-column: 1; }
+  body.in-gameplay .stage:has(> .board) > #sb-info { grid-column: 2; margin: 0 !important; padding: 8px 10px !important; max-width: none !important; }
+  /* picture question (Body Parts): the picture sized by the height */
+  body.in-gameplay .stage > .showcase { max-height: var(--fit-h); flex: 0 0 auto; }
+  body.in-gameplay .body-showcase-real { height: calc(var(--fit-h) - 14px); width: calc((var(--fit-h) - 14px) * .78); margin: 0; }
+  /* build-it parts: two columns beside the picture */
+  body.in-gameplay .assembly > .match__pool {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); align-content: stretch;
+    width: min(270px, 36%); height: calc(var(--fit-h) - 8px); gap: 8px; min-height: 0;
+  }
+  body.in-gameplay .assembly .chip { min-width: 0; min-height: 0; width: 100%; max-width: none; padding: 4px 6px; }
+  /* Copy the Beat: the keys take the height that is left */
+  body.in-gameplay .piano-chassis { padding: 8px 12px 10px; }
+  body.in-gameplay .piano-bed { padding: 8px 10px 10px; }
+  body.in-gameplay .piano-key { height: max(84px, calc(var(--fit-h) - 112px)); }
+  /* Word Run: the street fills the whole screen, under the floating HUD too; the letter boxes (the word itself,
+     filling in) sit in the HUD row beside its buttons, where the space was empty. The title and tip lines go
+     (Momo says both aloud) and the hero is chosen before the run. The hero is a fifth of the screen height. */
+  body.in-gameplay .runner__scene { position: absolute; inset: 0; height: auto; min-height: 0; margin: 0; border-radius: 0; box-shadow: none; }
+  body.in-gameplay .runner__head { display: none; }
+  body.in-gameplay .runner__word {
+    position: absolute; z-index: 6; top: calc(var(--kido-sa-top) + 12px);
+    left: calc(max(16px, var(--kido-sa-left)) + 290px); right: calc(max(10px, var(--kido-sa-right)) + 66px);
+    width: max-content; max-width: calc(100% - max(16px, var(--kido-sa-left)) - max(10px, var(--kido-sa-right)) - 356px);
+    padding: 4px 8px; gap: 5px; flex-wrap: nowrap; pointer-events: none;
+    background: rgba(255, 255, 255, .85); border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+  }
+  body.in-gameplay .run-box:not(#_) { flex: 0 1 34px; min-width: 0; height: 40px; padding: 0 2px; font-size: 24px; border-width: 2px; }
+  body.in-gameplay .runner__char { width: min(85px, calc(100dvh * .2)); height: min(85px, calc(100dvh * .2)); }
+  body.in-gameplay .run-letter { width: 60px; height: 60px; margin-left: -30px; font-size: 30px; }
+  body.in-gameplay .run-rock { width: 40px; height: 40px; margin-left: -20px; }   /* in scale with the hero */
+  body.in-gameplay .runner__pick { padding-top: var(--hud-h); gap: 10px; }
+  body.in-gameplay .runner__pick-row { flex-wrap: nowrap; gap: 8px; }
+  body.in-gameplay .runner__pick-card { width: min(124px, calc((100vw - var(--kido-sa-left) - var(--kido-sa-right) - 80px) / 7)); }   /* seven heroes in one row */
+  body.in-gameplay .runner__pick-card:not(#_) { font-size: min(14px, 1.9vw); white-space: nowrap; padding: 8px 4px 10px; border-radius: 18px; }
+  body.in-gameplay .runner__pick-badge { display: none; }   /* names only: seven cards are narrow */
+  body.in-gameplay .runner__pick-art { width: min(100%, 120px, calc(100dvh - var(--hud-h) - 130px)); height: auto; aspect-ratio: 1; }
+  body.in-gameplay .shadow-scroll { height: calc(var(--fit-h) - 30px); }
+  /* fruit games: the full-width title bar took a row and covered the basket labels, so it goes; only the goal /
+     counter stays, as a pill in the HUD row left of where Momo docks. Baskets, fruits, pedestals and cards are
+     sized from the height left. */
+  body.in-gameplay .fruit-game-wrap { --fg-h: min(440px, calc(100dvh - var(--hud-h, 64px) - 8px)); }
+  body.in-gameplay .fg-hud {
+    position: absolute; top: calc(var(--kido-sa-top) + 14px); right: calc(max(10px, var(--kido-sa-right)) + 62px);
+    padding: 0; background: none; border: 0; box-shadow: none; backdrop-filter: none; pointer-events: none;
+  }
+  body.in-gameplay .fg-hud__title { display: none; }
+  body.in-gameplay .fg-hud__goal { padding: 4px 14px; font-size: 16px; }
+  body.in-gameplay .fruit-market-stage { padding: 8px 16px; overflow: hidden; }
+  body.in-gameplay .market-crates-grid {
+    grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: min(150px, calc(var(--fg-h) * .62));
+    height: calc(var(--fg-h) - 16px); max-width: 100%; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity; padding: 2px 2px 8px; gap: 12px;
+  }
+  body.in-gameplay .market-crate-card { min-height: 0; scroll-snap-align: start; overflow: hidden; }
+  body.in-gameplay .fruit-find-stage { padding: 6px 16px; }
+  body.in-gameplay .fruit-pedestals-row { margin-top: 6px; gap: 16px; flex-wrap: nowrap; }
+  body.in-gameplay .fruit-pedestal-card { height: min(165px, calc(var(--fg-h) - 64px)); width: min(145px, calc((var(--fg-h) - 64px) * .88)); }
+  body.in-gameplay .fruit-sorter-stage { padding: 6px 16px 8px; gap: 8px; justify-content: center; }
+  body.in-gameplay .sorter-basket-slot { min-height: 0; height: calc((var(--fg-h) - 30px) * .56); }
+  body.in-gameplay .sorter-pool-tray { padding: 6px 14px; gap: 12px; }
+  body.in-gameplay .sorter-chip-item { width: min(76px, calc((var(--fg-h) - 30px) * .3)); height: min(76px, calc((var(--fg-h) - 30px) * .3)); }
+  body.in-gameplay .fruit-memory-stage { padding: 6px 16px; }
+  body.in-gameplay .fruit-memory-stage .mem-grid { max-width: calc((var(--fg-h) - 20px) * 2); gap: 8px; }
+  body.in-gameplay .fruit-memory-stage .mem-card { min-height: 0; }   /* the 100px floor overflowed a 360px-tall phone */
+  body.in-gameplay .fruit-memory-stage .mem-grid:has(> :nth-child(9)) { max-width: calc((var(--fg-h) - 24px) / 3 * 4); }
+  body.in-gameplay .shadow-tray .chip { font-size: min(56px, 10vh); min-width: 0; min-height: 0; padding: 4px 8px; }
+  body.in-gameplay .shadow-tray { gap: 8px; padding: 6px; }
+  /* sound quizzes (Who Am I?): the Play button beside one row of answer cards */
+  body.in-gameplay .sound-game-options:not(#_) { margin: 0 !important; max-width: none !important; width: auto !important; gap: 12px !important; }
+  body.in-gameplay .sound-game-options .opt--animal-card:not(#_) { min-height: 0 !important; aspect-ratio: auto !important; height: calc(var(--fit-h) - 16px); }
+  body.in-gameplay .board-tile { height: calc(var(--fit-h) - 32px); }
+  /* (also the separate result screen that scenes and lessons finish on, where the header is in the flow) */
+  /* finish screen: the reward on the left, Today's Adventure and the next steps on the right */
+  .screen > .result { flex-direction: row; align-items: center; justify-content: center; gap: 28px; max-width: none; padding-top: 2px; padding-bottom: max(4px, var(--kido-sa-bottom)); }   /* gameplay keeps its HUD offset (style.css) */
+  .result__hero, .result__more { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; }
+  .result__hero { flex: 0 1 38%; flex-direction: row !important; flex-wrap: wrap; justify-content: center; align-content: center; column-gap: 8px; }
+  .result__hero > :not(.badge) { flex: 0 0 100%; display: flex; justify-content: center; }   /* full-width rows; new badges share one row */
+  .result__hero > .result__msg { display: block; text-align: center; }
+  .result__more { flex: 0 1 56%; }
+  .result__emoji { font-size: 44px; line-height: 1; }
+  .result__title { font-size: 24px; margin: 0; line-height: 1.15; }
+  .result__stars { margin: 0; }
+  .result__stars span { font-size: 28px; }
+  .result__msg { margin: 0; font-size: 15px; line-height: 1.25; }
+  .result__stickers { margin-top: 2px; gap: 8px; }
+  .reveal-sticker { width: 84px; padding: 6px 6px 5px; }
+  .reveal-sticker__emoji { font-size: 32px; }
+  .result .badge { margin-top: 2px !important; flex-direction: column; padding: 4px 8px; gap: 0; max-width: 136px; }
+  .result .badge__icon { font-size: 26px; line-height: 1.1; }
+  .result .badge__name { font-size: 11px; line-height: 1.15; text-align: center; }
+  .result__hero:has(.badge):has(.result__stickers) .result__emoji { display: none; }   /* the new badge takes the trophy's place */
+  .adv-trail--compact { --adv-m: 46px; margin: 4px 0 2px; }
+  .result__actions { flex-direction: row; justify-content: center; max-width: none; margin-top: 8px; gap: 8px; }
+  .result__actions .btn { width: auto; flex: 1 1 0; min-width: 0; min-height: 52px; padding: 6px 10px; font-size: 16px; line-height: 1.15; white-space: normal; }
+}
+
+/* --- Runner (Word Run) in Landscape --- */
+.runner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+}
+.runner__scene {
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  min-height: 340px;
+}
+
+/* --- Assembly & Sequence in Landscape --- */
+.assembly {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.seq {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* --- Arcade & Memory in Landscape --- */
+.arcade {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.memory {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.bubble-field {
+  max-width: 960px;
+  margin: 0 auto;
+  height: clamp(340px, 58vh, 480px);
+}
+
+/* --- Age Selector in Landscape --- */
+.age__grid {
+  grid-template-columns: repeat(3, minmax(200px, 260px));
+  max-width: var(--maxw);
+  justify-content: center;
+  gap: clamp(14px, 2.5vw, 28px);
+}
+/* Change #19 (mobile): on a phone held upright, three 200px cards overflowed the screen and the
+   first-run age picker was cut off at both edges. Two flexible columns fit every phone from 320px. */
+@media (max-width: 679px) {
+  .age__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+/* APK: the age picker is always shown in landscape (Android). Seven ages in 4 + 3 columns fit one screen
+   (three rows overflowed a landscape tablet); short landscape phones get compact cards. */
+@media (orientation: landscape) and (min-width: 600px) {
+  .age__grid { grid-template-columns: repeat(4, minmax(0, 220px)); }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .age { padding-top: calc(var(--kido-sa-top) + 6px); padding-bottom: max(4px, var(--kido-sa-bottom)); }
+  .age .splash__logo { font-size: 26px; line-height: 1; margin: 0; }
+  .age__title { font-size: 24px; margin-top: 0; }
+  .age__sub { margin: 2px 0 6px; font-size: 14px; }
+  .age__grid { gap: 8px; }
+  .age-card { padding: 8px 6px 8px; gap: 2px; }
+  .age-card__face { font-size: 28px; }
+  .age-card__age { font-size: 20px; }
+  .age-card__label { font-size: 12px; }
+}
+
+/* --- Story in Landscape: Tablet Storybook Split --- */
+.story {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  height: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.story__stage {
+  border-radius: var(--r-lg) 0 0 var(--r-lg);
+  margin: 12px 0 12px 12px;
+}
+.story__card {
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  margin: 12px 12px 12px 0;
+  justify-content: center;
+}
+
+/* --- Navigation Tab Bar & Header in Landscape --- */
+.tabbar {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  box-shadow: 0 -6px 25px rgba(76,50,168,.14);
+}
+.topbar {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  /* Change #28: keep the status-bar allowance (this rule reset it to a flat 10px, so on Android the header
+     buttons sat under the clock and battery icons) */
+  padding: calc(var(--kido-sa-top) + 10px) max(var(--gutter), var(--kido-sa-right)) 10px max(var(--gutter), var(--kido-sa-left));
+}
+
+/* --- Celebration / Result --- */
+.result {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* --- High-contrast support --- */
+html.high-contrast {
+  --ink: #1a1330;
+  --ink-soft: #3a2f63;
+  --surface: #ffffff;
+  --grape: #4a28c0;
+}
+html.high-contrast .opt,
+html.high-contrast .cat-tile,
+html.high-contrast .card { border: 2px solid var(--ink); }
+
+/* Change #31 (Galaxy Tab S6, 1138x639): on tall landscape screens one row of explore cards made each card
+   ~410 px tall and 190 px wide with a small picture adrift in it. Two rows of squarer cards instead. */
+@media (orientation: landscape) and (min-height: 560px) and (max-height: 900px) {
+  body.in-gameplay .board {
+    grid-template-rows: repeat(2, auto);
+    grid-auto-columns: min(200px, calc((var(--fit-h) - 30px) / 2 * .86));
+  }
+  body.in-gameplay .board-tile { height: calc((var(--fit-h) - 30px) / 2); }
+  /* ...and every game uses the extra height: a taller fit cap, and the playing area centred, not stuck at the top */
+  body.in-gameplay { --fit-h: min(560px, calc(100dvh - var(--hud-h, 64px) - 14px)); }
+  body.in-gameplay .game { justify-content: center; }
+  /* phone-sized caps grow on the big screen */
+  body.in-gameplay .seq__box:not(#_) { width: min(120px, calc(var(--fit-h) * .22)); height: min(120px, calc(var(--fit-h) * .22)); }
+  body.in-gameplay .stage > .match__pool .chip .chiku-crop:not(#_), body.in-gameplay .seq__box .chiku-crop:not(#_) { width: min(104px, calc(var(--fit-h) * .19)); }
+  body.in-gameplay .stage > .match__pool > .chip:not(#_) { font-size: min(64px, calc(var(--fit-h) * .12)); }
+  body.in-gameplay .count-row .count-fruit-wrap:not(#_) { height: min(160px, calc(var(--fit-h) * .3)); }
+  body.in-gameplay .count-row .count-fruit-img:not(#_) { width: min(160px, calc(var(--fit-h) * .3)); height: min(160px, calc(var(--fit-h) * .3)); }
+  body.in-gameplay .cls-item__pic img:not(#_), body.in-gameplay .cls-item__pic .kido-creature:not(#_),
+  body.in-gameplay .cls-item__pic .chiku-crop:not(#_), body.in-gameplay .cls-item__pic .chiku-photo:not(#_) { width: min(240px, calc(var(--fit-h) * .45)); height: min(240px, calc(var(--fit-h) * .45)); }
+  body.in-gameplay .cls-item__pic:not(#_) { font-size: min(180px, calc(var(--fit-h) * .34)); }
+  body.in-gameplay .options:has(.opt--good, .opt--hot, .opt--cold, .opt--sky):not(#_) { width: min(400px, 36vw); }
+  body.in-gameplay .options .opt--good:not(#_), body.in-gameplay .options .opt--bad:not(#_), body.in-gameplay .options .opt--hot:not(#_),
+  body.in-gameplay .options .opt--cold:not(#_), body.in-gameplay .options .opt--sky:not(#_) { min-height: min(120px, calc(var(--fit-h) * .22)); font-size: 30px; }
+}
+
+/* Change #31 (Galaxy Tab S6 held upright, 711x1066): phone-sized caps left small pictures, buttons and tiles in a
+   lot of empty space. Phones held upright are narrower than 600 px and keep their sizes. */
+@media (orientation: portrait) and (min-width: 600px) {
+  .cls-item__pic img:not(#_), .cls-item__pic .kido-creature:not(#_), .cls-item__pic .chiku-crop:not(#_), .cls-item__pic .chiku-photo:not(#_) { width: 240px; height: 240px; }
+  .cls-item__pic:not(#_) { font-size: 170px; }
+  .options:has(.opt--good, .opt--hot, .opt--cold, .opt--sky):not(#_) { max-width: 640px; }
+  .options .opt--good:not(#_), .options .opt--bad:not(#_), .options .opt--hot:not(#_), .options .opt--cold:not(#_), .options .opt--sky:not(#_) { min-height: 110px; font-size: 30px; }
+  .seq__box:not(#_) { width: 112px; height: 112px; font-size: 60px; }
+  .chip .chiku-crop:not(#_) { width: 100px; } .seq__box .chiku-crop:not(#_) { width: 96px; }
+  .count-fruit-img:not(#_) { width: 150px; height: 150px; }
+  .trace__box:not(#_) { width: min(86vw, 620px, 58vh); }
+  .ttt:not(#_) { max-width: min(78vw, 560px); }
+}
+
+/* Tablets and other tall landscape screens: bigger shadow spots (the 84 px cap is sized for phones held sideways). */
+@media (orientation: landscape) and (min-height: 560px) {
+  .shadow-spot { width: min(128px, 20vh); height: min(128px, 20vh); }
+}
+
+/* ---- 2026-11-02: game titles and instructions a child (and parent) can read ----
+   The landscape HUD row held the title at 16 px and the live status at 13 px, even on tablets. Now the title
+   is a clear white pill (tap it: Momo says the instruction again; js/mascotLife.js), the status is bigger, and
+   Tablets (tall landscape) get bigger text and a bigger Momo. */
+@media (orientation: landscape) and (max-height: 900px) {
+  body.in-gameplay .game__head .game__prompt:not(#_), body.in-gameplay .pz-ask:not(#_), body.in-gameplay .kd-title:not(#_) {
+    font-size: 19px; line-height: 1.2; color: var(--ink); background: var(--surface);
+    padding: 6px 14px; border-radius: 18px; border: 2px solid rgba(108,75,214,.22);
+    box-shadow: 0 3px 0 rgba(43,33,81,.10), 0 6px 14px rgba(43,33,81,.12);
+  }
+  body.in-gameplay .game__head .arcade__status:not(#_) {
+    font-size: 16px; color: var(--grape-deep); background: rgba(255,255,255,.88); border-radius: 14px; padding: 4px 10px;
+  }
+  body.in-gameplay .game__head .arcade__status:empty { display: none; }
+}
+@media (orientation: landscape) and (min-height: 560px) {
+  body.in-gameplay .game__head:not(#_), body.in-gameplay .pz-head:not(#_), body.in-gameplay .kd-title:not(#_) {
+    min-height: 64px; right: calc(var(--hud-x) + max(10px, var(--kido-sa-right)) + 96px);
+  }
+  body.in-gameplay .game__head .game__prompt:not(#_), body.in-gameplay .pz-ask:not(#_), body.in-gameplay .kd-title:not(#_) {
+    font-size: clamp(22px, 2.2vw, 30px); padding: 8px 18px; border-radius: 22px;
+  }
+  body.in-gameplay .game__head .arcade__status:not(#_) { font-size: clamp(18px, 1.7vw, 24px); }
+  body.in-gameplay .actor.mascot-momo:not(#_) { width: 76px !important; height: 92px !important; }
+}
+/* the instruction can be heard again: a speaker mark once Momo has said something on this screen */
+body.in-gameplay.has-replay .game__head .game__prompt, body.in-gameplay.has-replay .pz-ask, body.in-gameplay.has-replay .kd-title { cursor: pointer; }
+body.in-gameplay.has-replay .game__head .game__prompt::after, body.in-gameplay.has-replay .pz-ask::after {
+  content: " \1F50A"; font-size: .8em; opacity: .75;
+}
+/* Momo turns to face the way he walks (individual transform properties compose with his pose animations) */
+.mascot-momo.face-left { scale: -1 1; }
+
+/* ---- 2026-11-07 (owner: "some text is too small on mobile") ----
+   Phones (landscape height <= 480 or portrait width <= 480): no reading text below 14px. Found by a text-size audit
+   of the home map, every place list and all 251 activities at 800x360. Tablets keep their sizes. */
+@media (max-height: 480px), (max-width: 480px) {
+  .kw-plate:not(#_) { font-size: clamp(14px, calc(17px * var(--kw-s, 1)), 17px); }   /* map place names (were 12px) */
+  .kw-root .kw-continue__text small:not(#_) { font-size: 14px; }                       /* "Discover: …" (13px) */
+  .topbar__sub:not(#_) { font-size: 15px; }                                           /* "Pick an adventure!" (13px) */
+  .build-slot:not(#_) { font-size: 15px; line-height: 1.05; text-align: center;      /* "Left Pillar" (13px) */
+    place-items: start center; padding-top: 4px; }   /* label at the top: the walls' centre is where the door slot sits */
+  .trace__btn span:not(#_) { font-size: 15px; }                                       /* "Hear" (13px) */
+  .pn-rule span:not(#_) { font-size: 14px; }                                          /* picnic rule cards (11px) */
+  .lesson-small:not(#_) { font-size: 14px; }                                          /* brush/bath note (12px) */
+  .ss-pick__name:not(#_) { font-size: 14px; }                                         /* planet buttons (12px) */
+  .ss-pick__n:not(#_) { font-size: 13px; min-width: 18px; }                           /* planet order badge (11px) */
+  .rb-charger small:not(#_) { font-size: 14px; }                                      /* "Charger" (12px) */
+  .piano-key__solfege:not(#_) { font-size: 15px; }                                    /* "Do Re Mi" (13px) */
+  .market-crate-taste:not(#_) { font-size: 14px; }                                    /* "Crisp & Sweet" (12px) */
+  .chiku-flip:not(#_) { font-size: 15px; }                                            /* "Look at the face" (13px) */
+  .sd-pick span:not(#_) { font-size: 14px; }                                          /* Garden Sudoku fruit names (13px) */
+  /* portrait phones (360x800) */
+  .cat-tile__tag:not(#_), .cat-tile__badge:not(#_), .badge-sparkle:not(#_) { font-size: 14px; }   /* list tags, "Play" (11px) */
+  .lesson-eyebrow:not(#_), .pk-kicker:not(#_), .pk-row__title:not(#_) { font-size: 14px; }       /* 12-13px */
+  .mem-fruit-label:not(#_) { font-size: 14px; }                                                  /* fruit memory cards (12px) */
+}
+
+/* ---- 2026-11-07 (owner): ages 2-5 can't read sentences — pictures and Momo's voice instead ----
+   html.is-little = the age band has showText: false (2-3, 3-4, 4-5); js/ageConfig.js applyLook(). Every hidden line is
+   still spoken by Momo, and the question can be heard again by tapping its speaker. From age 5-6 nothing changes. */
+html.is-little .topbar__sub,
+html.is-little .cat-tile__tag,
+html.is-little .cat-tile__play-btn span,
+html.is-little .game__hint,
+html.is-little .arcade__status.is-wordy,
+html.is-little .kw-bubble,
+html.is-little .mascot-bubble,
+html.is-little .chiku-card__fact,
+html.is-little .pn-rule span,             /* picnic rule cards keep their two animals and the ✕ / ♥ */
+html.is-little .garden-observation,
+html.is-little .lesson-small { display: none !important; }
+html.is-little .cat-tile__badge { font-size: 0 !important; padding: 2px 8px; }            /* just the star / sparkle */
+html.is-little .cat-tile__badge > span { font-size: 20px; }
+/* the question at the top: a big "tap to hear" speaker instead of words */
+html.is-little body.in-gameplay .game__head .game__prompt:not(#_),
+html.is-little body.in-gameplay .pz-ask:not(#_) { font-size: 0 !important; min-width: 64px; min-height: 52px; padding: 4px 16px; cursor: pointer; justify-content: center; }
+html.is-little body.in-gameplay .game__head .game__prompt:not(#_)::after,
+html.is-little body.in-gameplay .pz-ask:not(#_)::after { content: "🔊"; font-size: 32px; opacity: 1; line-height: 1; }
+html.is-little body.in-gameplay .game__head .game__prompt:not(#_) > *,
+html.is-little body.in-gameplay .pz-ask:not(#_) > * { font-size: 0 !important; }
+/* scene games' speech box: its picture and a speaker (tap = hear it again), no sentence */
+html.is-little .scene-say > span:not(.scene-say__peek) { display: none; }
+html.is-little .scene-say { cursor: pointer; gap: 10px; }
+html.is-little .scene-say::after { content: "🔊"; font-size: 30px; line-height: 1; }
+
+/* 2026-11-07 (owner): Good Habits pictures were small in big cards — they now fill the card (phone and tablet).
+   Get Ready! step pictures fill their boxes, and the boxes grow with the screen. */
+.opt--pic:has(.habit-opt-card) { container-type: inline-size; }
+.habit-opt-card__img:not(#_) { width: min(74cqw, calc(var(--fit-h, 60vh) * .6)); height: min(74cqw, calc(var(--fit-h, 60vh) * .6)); border-radius: 28px; }
+.habit-step-img { width: 86%; height: 86%; object-fit: cover; border-radius: 18px; box-shadow: 0 4px 10px rgba(0,0,0,.12); pointer-events: none; }
+.seq__box:has(.habit-step-img), .seq__track:has(~ .match__pool .habit-step-img) .seq__box,
+.chip:has(.habit-step-img) { width: min(170px, 21vw, calc(var(--fit-h, 60vh) * .36)) !important; height: min(170px, 21vw, calc(var(--fit-h, 60vh) * .36)) !important; min-width: 0; min-height: 0; padding: 0; }
+/* a picture answer card shows its emoji/drawing at the card's size, not a fixed 84 px in the middle of a big card */
+body.in-gameplay .options .opt--pic { container-type: inline-size; }
+body.in-gameplay .options .opt--pic > .opt__glyph { font-size: 52cqw; line-height: 1.1; }   /* 52% of its own card's width (QA 2026-11-10: was sized from an outer box and overflowed small cards) */
+body.in-gameplay .options .opt--pic > svg:not(#_) { width: 70%; height: 70%; }
+/* drag-to-match games: the tray and the answer boxes sit together in the middle (not at the two screen edges), so the
+   play area grows to fill the screen (js/fitStage.js) */
+body.in-gameplay .match:not(#_) { width: auto; max-width: 100%; margin: 0 auto; align-items: center; }
+body.in-gameplay .match > .match__pool:not(#_) { flex: 0 1 auto; max-width: 42%; }
+body.in-gameplay .match > .match__targets:not(#_) { flex: 0 1 auto; grid-template-columns: repeat(2, auto); }
+/* Who am I / Who makes this sound: the photo fills most of its card */
+body.in-gameplay .opt--animal-card .opt__pic-wrap:not(#_) { height: 74% !important; }
+/* counting games: the group to count and the number answers sit side by side in the middle, each item bigger */
+body.in-gameplay .stage:has(.cnt-grid) > .options:not(#_) { flex: 0 1 auto; width: auto; }
+body.in-gameplay .cnt-grid:not(#_) { font-size: min(96px, calc(var(--fit-h) * .19)); }
+body.in-gameplay .cnt-grid--many:not(#_) { font-size: min(80px, calc(var(--fit-h) * .15)); }
+
+/* 2026-11-08: Balance Scale and Picture Patterns (js/data/moreActivities.js) */
+.bs-scale { width: min(420px, 44vw); height: auto; display: block; }
+.bs-pair { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.bs-pair .bs-scale { width: min(400px, 40vw, calc((var(--fit-h, 60vh) - 40px) * .76)); }
+.bs-beam { stroke: #8B5A2B; stroke-width: 8; stroke-linecap: round; }
+.bs-post { fill: #A16207; } .bs-base { fill: #78350F; } .bs-pin { fill: #FACC15; stroke: #78350F; stroke-width: 2; }
+.bs-rope { stroke: #92400E; stroke-width: 2; } .bs-pan { fill: #FDE68A; stroke: #B45309; stroke-width: 3; }
+.bs-ask { font: 800 34px var(--font-display, sans-serif); fill: #FF7A45; text-anchor: middle; }
+.bs-group { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; align-items: center; width: 100%; height: 100%; }
+.bs-group img { width: 40%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.pat-row { display: flex; gap: 8px; align-items: center; }
+.pat-row img { width: min(92px, 11vw, calc(var(--fit-h, 60vh) * .2)); aspect-ratio: 1; object-fit: cover; border-radius: 14px; box-shadow: 0 3px 8px rgba(0,0,0,.15); }
+.pat-row b { font: 800 clamp(34px, 6vw, 56px) var(--font-display, sans-serif); color: #FF7A45; }
+/* three answer buttons under one picture (Land/Water/Air, Where Do I Live?) share the height on short screens */
+body.in-gameplay .options:has(> .opt:nth-child(3)):has(.opt--good, .opt--hot, .opt--cold, .opt--sky) > .opt:not(#_) { min-height: min(110px, calc((var(--fit-h, 60vh) - 40px) / 3)) !important; padding-top: 4px; padding-bottom: 4px; }
+/* phones held sideways: the two scales side by side, the pattern above its answers (2026-11-10 phone check) */
+@media (orientation: landscape) and (max-height: 500px) {
+  body.in-gameplay .bs-pair:not(#_) { flex-direction: row; gap: 8px; }
+  body.in-gameplay .bs-pair .bs-scale:not(#_) { width: min(220px, 25vw); }
+  body.in-gameplay .stage:has(.bs-pair) .options:not(#_) { flex: 0 0 auto; grid-template-columns: repeat(2, minmax(64px, 84px)) !important; grid-auto-flow: row; grid-auto-columns: auto; }
+  body.in-gameplay .stage:has(.bs-pair) .opt--number:not(#_) { height: min(84px, calc((var(--fit-h, 60vh) - 40px) / 2)); }
+  body.in-gameplay .stage:has(.pat-row):not(#_) { flex-direction: column; gap: 8px; }
+  body.in-gameplay .pat-row img:not(#_) { width: min(84px, 10vw, calc((var(--fit-h, 60vh) - 60px) / 2.4)); }
+  body.in-gameplay .stage:has(.pat-row) .options:not(#_) { grid-auto-columns: minmax(0, min(110px, calc((var(--fit-h, 60vh) - 60px) / 2))); }
+}
+
+/* 2026-11-10 (owner): every theme's activity shelf — no subtitle, no names under the pictures (the button keeps its
+   name for screen readers), the space under the top bar used, and each picture big and fully visible in its card. */
+.shelf-page > .section-title small, .shelf-page .cat-tile__name, .shelf-page .cat-tile__top { display: none !important; }
+.wrap.shelf-page { padding-top: 4px; }
+.shelf-page > .section-title { font-size: clamp(18px, 2.6vw, 26px); line-height: 1.1; }
+.shelf-page .cat-grid:not(#_) { margin-top: 4px; gap: 12px; grid-auto-columns: clamp(150px, calc((100cqh - 48px) / var(--shelf-rows) * .96), 320px); }
+.shelf-page .cat-tile:not(#_) { padding: 8px; gap: 0; }
+.shelf-page .cat-tile__meta:not(#_) { padding: 0; min-height: 0; height: 0; }
+.shelf-page .cat-tile__preview:not(#_) { background: none; box-shadow: none; padding: 0; height: 100%; }
+.shelf-page .cat-tile__medal:not(#_) { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 20px; box-shadow: none; }
+.shelf-page .cat-tile .cat-tile__preview--art .cat-tile__img:not(#_) { width: 88%; height: 88%; }
+.shelf-page .cat-tile__glyph:not(#_) { font-size: min(120px, calc((100cqh - 60px) / var(--shelf-rows) * .55)); }
+.shelf-page .cat-tile__play-btn:not(#_) { top: auto; bottom: 10px; right: 10px; width: 34px; height: 34px; opacity: .92; }
+
+/* QA 2026-11-10: a play area scaled up by js/fitStage.js keeps its unscaled layout box, which made the game page scroll
+   by 20-200 px on phones. The fitted content itself is checked to be on screen, so the page does not scroll then. */
+body.in-gameplay .screen:has([data-fit]) { overflow: hidden; }
+/* QA 2026-11-10: long questions (riddles, "Your teacher says…") were cut off after two lines on phones */
+@media (orientation: landscape) and (max-height: 559px) {
+  body.in-gameplay .game__head .game__prompt.is-long:not(#_) { font-size: 15px; line-height: 1.16; -webkit-line-clamp: 3; padding: 4px 12px; max-width: 66%; }
+}
+/* QA 2026-11-10: small controls the phone audit found — "Look at the face" (38 px tall) and the narrow bridge pillar
+   slots (38 px wide; the pillar shape stays narrow, the touch area reaches 8 px further each side) */
+.chiku-flip:not(#_) { min-height: 48px; }
+.build-slot::before { content: ""; position: absolute; inset: -8px; }
+/* QA 2026-11-11: Memory Match with 3 columns (ages 2-4) used the 4-column width, so its cards were too tall and the bottom
+   row ran off a phone screen. The board is as wide as its rows of cards are tall, for 3 or 4 columns. */
+@media (orientation: landscape) and (max-height: 900px) {
+  body.in-gameplay .memory:not(:has(> :nth-child(9))):not(#_) { max-width: min(720px, calc((var(--fit-h) - 24px) / 2 * var(--mem-cols, 4))); }   /* two rows; 3-row boards keep their rule above */
+}
+/* QA 2026-11-11: text under 12 px — the Solar System picker's numbers (11 px) and the lessons' category caption (10 px,
+   "MOMO'S LITTLE GARDEN · …", redundant with the picture: removed like the bathroom's) */
+.ss-pick__n:not(#_) { font-size: 13px; }
+.lesson .lesson-eyebrow { display: none; }
+/* QA 2026-11-11: small phones held sideways (≈667x375): questions of any length get three lines instead of two */
+@media (orientation: landscape) and (max-height: 400px) and (max-width: 760px) {
+  body.in-gameplay .game__head .game__prompt:not(#_), body.in-gameplay .pz-ask:not(#_) { font-size: 15px; line-height: 1.16; -webkit-line-clamp: 3; padding: 3px 10px; max-width: 66%; }
+  body.in-gameplay .game__head .game__prompt.is-long:not(#_) { font-size: 14px; max-width: 74%; }
+}
+/* tablets: a long riddle gets a third line at a slightly smaller size instead of "…" */
+@media (orientation: landscape) and (min-height: 560px) {
+  body.in-gameplay .game__head .game__prompt.is-long:not(#_) { -webkit-line-clamp: 3; font-size: clamp(18px, 1.8vw, 24px); }
+}
+/* device retest 2026-11-11 (OnePlus 800x360): Fruit Memory with 6 cards (3 columns) used the 4-column width and its
+   second row ran off the screen; Shape Sorter's third row of holes was 12 px too low */
+@media (orientation: landscape) and (max-height: 559px) {
+  body.in-gameplay .fruit-memory-stage .mem-grid:not(:has(> :nth-child(7))):not(#_) { max-width: calc((var(--fg-h) - 20px) * 1.5); }
+  body.in-gameplay .match .match__targets:not(#_) { gap: 8px; }
+  body.in-gameplay .match .slot:not(#_) { padding: 4px; }
+}
+/* phones up to 900 px wide (800x360): long questions also get the third line */
+@media (orientation: landscape) and (max-height: 400px) and (min-width: 761px) and (max-width: 900px) {
+  body.in-gameplay .game__head .game__prompt.is-long:not(#_), body.in-gameplay .game__head .game__prompt:not(#_) { -webkit-line-clamp: 3; font-size: 15px; line-height: 1.16; padding: 3px 10px; }
+}
+/* device retest 2026-11-11: on a phone held upright (Rewards turns portrait) the "Hi Friend! / Pick an adventure!"
+   greeting had ~30 px left and showed as "H…" / "Pi…". It is decorative, so it gives way to the buttons there. */
+@media (orientation: portrait) and (max-width: 480px) {
+  .topbar__text:not(#_) { display: none; }
+}

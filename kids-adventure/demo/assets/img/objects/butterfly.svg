@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="shadowButterfly" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wingOrange" cx="45%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="30%" stop-color="#FB923C"/>
+      <stop offset="70%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#9A3412"/>
+    </radialGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="50%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="100" cy="180" rx="65" ry="10" fill="url(#shadowButterfly)"/>
+
+  <!-- Left Forewing -->
+  <path d="M96 90 C85 45, 30 25, 20 60 C12 85, 45 125, 96 110 Z" fill="url(#wingOrange)"/>
+  <!-- Left Hindwing -->
+  <path d="M96 105 C75 110, 45 130, 48 155 C52 172, 85 170, 96 128 Z" fill="url(#wingOrange)"/>
+
+  <!-- Right Forewing -->
+  <path d="M104 90 C115 45, 170 25, 180 60 C188 85, 155 125, 104 110 Z" fill="url(#wingOrange)"/>
+  <!-- Right Hindwing -->
+  <path d="M104 105 C125 110, 155 130, 152 155 C148 172, 115 170, 104 128 Z" fill="url(#wingOrange)"/>
+
+  <!-- Wing Black Veins & Borders -->
+  <!-- Left Wing Border -->
+  <path d="M20 60 C12 85, 45 125, 96 110 C96 90, 85 45, 20 60" stroke="#0F172A" stroke-width="5" fill="none"/>
+  <path d="M48 155 C52 172, 85 170, 96 128" stroke="#0F172A" stroke-width="4.5" fill="none"/>
+  <!-- Left Veins -->
+  <path d="M96 95 Q60 70 30 65 M96 98 Q55 90 40 105 M96 115 Q70 135 60 155" stroke="#0F172A" stroke-width="2.5" fill="none"/>
+
+  <!-- Right Wing Border -->
+  <path d="M180 60 C188 85, 155 125, 104 110 C104 90, 115 45, 180 60" stroke="#0F172A" stroke-width="5" fill="none"/>
+  <path d="M152 155 C148 172, 115 170, 104 128" stroke="#0F172A" stroke-width="4.5" fill="none"/>
+  <!-- Right Veins -->
+  <path d="M104 95 Q140 70 170 65 M104 98 Q145 90 160 105 M104 115 Q130 135 140 155" stroke="#0F172A" stroke-width="2.5" fill="none"/>
+
+  <!-- White Jewel Dots on Wing Edges -->
+  <circle cx="26" cy="62" r="3" fill="#FFFFFF"/>
+  <circle cx="34" cy="85" r="2.5" fill="#FFFFFF"/>
+  <circle cx="50" cy="115" r="3" fill="#FFFFFF"/>
+  <circle cx="62" cy="162" r="2.5" fill="#FFFFFF"/>
+
+  <circle cx="174" cy="62" r="3" fill="#FFFFFF"/>
+  <circle cx="166" cy="85" r="2.5" fill="#FFFFFF"/>
+  <circle cx="150" cy="115" r="3" fill="#FFFFFF"/>
+  <circle cx="138" cy="162" r="2.5" fill="#FFFFFF"/>
+
+  <!-- Butterfly Torso & Abdomen -->
+  <g id="body">
+    <ellipse cx="100" cy="115" rx="6.5" ry="32" fill="url(#bodyGrad)"/>
+    <ellipse cx="100" cy="80" rx="7.5" ry="10" fill="url(#bodyGrad)"/>
+    <!-- Head -->
+    <circle cx="100" cy="66" r="6" fill="#0F172A"/>
+
+    <!-- Antennae with Droplet Knobs -->
+    <path d="M98 64 Q80 40 70 36" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <circle cx="69" cy="35" r="3" fill="#FB923C"/>
+    <path d="M102 64 Q120 40 130 36" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <circle cx="131" cy="35" r="3" fill="#FB923C"/>
+  </g>
+</svg>
