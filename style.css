@@ -460,11 +460,8 @@ body.cursor-ready input,body.cursor-ready select,body.cursor-ready textarea{curs
 .mock--tablet{max-width:290px;padding:7px;border-radius:16px;background:#0B0F18;
   border:1px solid var(--border-strong);box-shadow:var(--shadow)}
 .mock--tablet img{display:block;width:100%;height:auto;border-radius:10px}
-.mock__link{display:block;position:relative;border-radius:10px;overflow:hidden;text-decoration:none;cursor:pointer}
-.mock__play-overlay{position:absolute;inset:0;background:rgba(11,15,24,0.65);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;opacity:0;transition:opacity .25s ease;border-radius:10px}
-.mock__link:hover .mock__play-overlay,.mock__link:focus .mock__play-overlay{opacity:1}
-.mock__play-overlay svg{fill:#22D3EE;filter:drop-shadow(0 2px 8px rgba(34,211,238,0.5))}
-.mock__play-text{font-size:.85rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.mock__link{display:block;position:relative;border-radius:10px;overflow:hidden;text-decoration:none;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
+.mock__link:hover{transform:scale(1.02);box-shadow:0 8px 28px rgba(34,211,238,0.25)}
 .app-icon-link{position:absolute;left:1.1rem;bottom:1.1rem;width:64px;height:64px;border-radius:16px;z-index:2;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;text-decoration:none}
 .app-icon-link:hover{transform:scale(1.1) rotate(-3deg);box-shadow:0 8px 24px rgba(34,211,238,0.35)}
 .app-icon-link .app-icon{position:static;width:100%;height:100%}
